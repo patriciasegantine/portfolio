@@ -6,13 +6,21 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: '#2c3e50',
-        secondary: '#34495e',
-        background: '#f8f9fa',
-        accent: '#7f8c8d',
+        primary: {
+          DEFAULT: '#18181b',
+          light: '#27272a',
+          dark: '#09090b',
+        },
+        secondary: {
+          DEFAULT: '#71717a',
+          light: '#a1a1aa',
+        },
+        background: '#fafafa',
+        surface: '#ffffff',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
