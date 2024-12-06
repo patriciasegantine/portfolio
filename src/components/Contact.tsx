@@ -1,121 +1,171 @@
-'use client'
-
-import React, { useState, FormEvent } from 'react'
+import React from 'react'
+import { Github, Linkedin, Mail, MapPin, Send } from 'lucide-react'
 
 const Contact: React.FC = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-    
-    try {
-      // Simulação de envio de formulário
-      // Substitua por sua lógica real de envio
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, message }),
-      })
-      
-      if (response.ok) {
-        setSubmitStatus('success')
-        // Limpar formulário
-        setName('')
-        setEmail('')
-        setMessage('')
-      } else {
-        setSubmitStatus('error')
-      }
-    } catch (error) {
-      console.error('Erro no envio:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
+  const contactInfo = [
+    {
+      icon: <Mail className="w-6 h-6"/>,
+      label: 'Email',
+      value: 'patricia.segantine@email.com',
+      href: 'mailto:patricia.segantine@email.com'
+    },
+    {
+      icon: <MapPin className="w-6 h-6"/>,
+      label: 'Location',
+      value: 'São Paulo, Brazil',
+      href: '#'
     }
-  }
+  ]
+  
+  const socialLinks = [
+    {
+      icon: <Github className="w-5 h-5"/>,
+      label: 'GitHub',
+      href: 'https://github.com/patriciasegantine'
+    },
+    {
+      icon: <Linkedin className="w-5 h-5"/>,
+      label: 'LinkedIn',
+      href: 'https://linkedin.com/in/patriciasegantine'
+    }
+  ]
   
   return (
-    <section id="contact" className="py-16 bg-gray-100">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8 text-dark">
-          Contato
-        </h2>
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md"
-        >
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 mb-2">
-              Nome
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-              disabled={isSubmitting}
-            />
+    <section id="contact" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 mb-4">
+              Let's Connect
+            </h2>
+            <p className="text-secondary dark:text-zinc-300">
+              Feel free to reach out for collaborations or just a friendly hello
+            </p>
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-              disabled={isSubmitting}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-gray-700 mb-2">
-              Mensagem
-            </label>
-            <textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md"
-              rows={4}
-              required
-              disabled={isSubmitting}
-            ></textarea>
-          </div>
-          {submitStatus === 'success' && (
-            <div className="mb-4 text-green-600 text-center">
-              Mensagem enviada com sucesso!
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Form */}
+            <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-8 shadow-sm">
+              <form className="space-y-5">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-secondary dark:text-zinc-300 mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50
+                             border border-zinc-200 dark:border-zinc-700
+                             text-primary-dark dark:text-zinc-100
+                             focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600
+                             transition-colors"
+                    placeholder="Your name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-secondary dark:text-zinc-300 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50
+                             border border-zinc-200 dark:border-zinc-700
+                             text-primary-dark dark:text-zinc-100
+                             focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600
+                             transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-secondary dark:text-zinc-300 mb-1">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50
+                             border border-zinc-200 dark:border-zinc-700
+                             text-primary-dark dark:text-zinc-100
+                             focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600
+                             transition-colors resize-none"
+                    placeholder="Your message..."
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3
+                           bg-zinc-800 dark:bg-zinc-700 rounded-lg
+                           text-white font-medium
+                           hover:bg-zinc-700 dark:hover:bg-zinc-600
+                           focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600
+                           transition-colors"
+                >
+                  <Send className="w-4 h-4"/>
+                  Send Message
+                </button>
+              </form>
             </div>
-          )}
-          {submitStatus === 'error' && (
-            <div className="mb-4 text-red-600 text-center">
-              Erro ao enviar mensagem. Tente novamente.
+            
+            {/* Contact Info */}
+            <div className="space-y-8">
+              {/* Direct Contact */}
+              <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-6 shadow-sm space-y-6">
+                {contactInfo.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
+                                  text-secondary dark:text-zinc-300
+                                  group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700
+                                  transition-colors">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-secondary dark:text-zinc-400">
+                        {item.label}
+                      </p>
+                      <p
+                        className="text-primary-dark dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+                        {item.value}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              
+              {/* Social Links */}
+              <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-6 shadow-sm">
+                <h3 className="text-primary-dark dark:text-zinc-100 font-medium mb-4">
+                  Follow Me
+                </h3>
+                <div className="flex gap-3">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
+                               text-secondary dark:text-zinc-300
+                               hover:bg-zinc-200 dark:hover:bg-zinc-700
+                               transition-colors"
+                      aria-label={social.label}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-          )}
-          <button
-            type="submit"
-            className={`w-full py-3 rounded-md transition-colors ${
-              isSubmitting
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-primary text-white hover:bg-blue-700'
-            }`}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
-          </button>
-        </form>
+          </div>
+        </div>
       </div>
     </section>
   )
