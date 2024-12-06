@@ -4,7 +4,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="flex items-center justify-center min-h-screen pt-16 bg-white dark:bg-zinc-800 transition-colors"
+      className="flex items-center justify-center min-h-screen pt-16 bg-white dark:bg-zinc-900/95 transition-colors"
     >
       <div className="flex flex-col md:flex-row items-center gap-12">
         <div className="relative w-64 h-64 md:w-80 md:h-80">
