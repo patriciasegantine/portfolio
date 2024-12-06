@@ -3,16 +3,49 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --text-color: #2c3e50;
+    --background-color: #f8f9fa;
+    --accent-color: #7f8c8d;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: white;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+}
+
+.icon {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: var(--secondary-color);
+}
+
+@layer components {
+    .profile-image-container {
+        @apply relative;
+    }
+
+    .profile-image-container::after {
+        content: '';
+        @apply absolute -inset-0.5 rounded-full bg-zinc-100 -z-10;
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(-6deg);
+    }
+    50% {
+        transform: scale(1.05) rotate(-6deg);
+    }
 }

@@ -9,10 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#3B82F6',
-        'secondary': '#10B981',
-        'dark': '#1F2937'
-      }
+        primary: '#2c3e50',
+        secondary: '#34495e',
+        background: '#f8f9fa',
+        accent: '#7f8c8d',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],
