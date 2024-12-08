@@ -14,7 +14,7 @@ const About: React.FC = () => {
     <section id="about" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors">
       
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 mb-6 mt-8">
               About Me

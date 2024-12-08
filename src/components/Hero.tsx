@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
             className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-tr from-zinc-200/60 via-zinc-300/40 to-transparent dark:from-zinc-600/40 dark:via-zinc-700/20 dark:to-transparent">
             <div className="w-full h-full rounded-full bg-white dark:bg-zinc-800 p-[2px]">
               <img
-                src="/profile.jpg"
+                src="/assets/img/profile.jpg"
                 alt="Profile"
                 className="w-full h-full object-cover rounded-full ring-1 ring-zinc-100 dark:ring-zinc-700"
               />

@@ -46,7 +46,6 @@ const Header: React.FC = () => {
             </Link>
           ))}
           
-          {/* Theme Toggle */}
           <button
             onClick={() => setIsDark(!isDark)}
             className="p-2 text-secondary hover:text-primary transition-colors dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -60,7 +59,6 @@ const Header: React.FC = () => {
           </button>
         </div>
         
-        {/* Mobile Menu Button */}
         <div className="flex items-center gap-4 md:hidden">
           <button
             onClick={() => setIsDark(!isDark)}
@@ -84,7 +82,6 @@ const Header: React.FC = () => {
         </div>
       </nav>
       
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden py-4 px-4 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800">
           {navItems.map(({label, href}) => (
