@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --text-color: #2c3e50;
+    --background-color: #f8f9fa;
+    --accent-color: #7f8c8d;
+
+    --bg-color-light: #ffffff;
+    --bg-color-dark: #18181b;
+    --dark-100: #f4f4f5; /* zinc-100 */
+    --dark-300: #d1d5db; /* zinc-300 */
+    --dark-400: #9ca3af; /* zinc-400 */
+    --dark-900: #18181b; /* zinc-900 */
+}
+
+.dark {
+    --bg-color-light: #18181b;
+    --bg-color-dark: #ffffff;
+    --dark-100: #27272a; /* zinc-800 */
+    --dark-300: #4b5563; /* zinc-600 */
+    --dark-400: #6b7280; /* zinc-500 */
+    --dark-900: #f4f4f5; /* zinc-100 */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.icon {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: var(--secondary-color);
+}
+
+@layer components {
+    .profile-image-container {
+        @apply relative;
+    }
+
+    .profile-image-container::after {
+        content: '';
+        @apply absolute -inset-0.5 rounded-full bg-zinc-100 -z-10;
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(-6deg);
+    }
+    50% {
+        transform: scale(1.05) rotate(-6deg);
+    }
+}
