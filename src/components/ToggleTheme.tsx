@@ -21,7 +21,7 @@ const ToggleTheme: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 text-secondary hover:text-primary transition-colors dark:text-zinc-400 dark:hover:text-zinc-100"
+      className="p-2 text-secondary hover:text-primary transition-colors duration-custom dark:text-zinc-400 dark:hover:text-zinc-100"
       aria-label="Toggle theme"
     >
       {resolvedTheme === 'dark'

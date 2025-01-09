@@ -9,6 +9,9 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
+      transitionDuration: {
+        'custom': '700ms',
+      },
       colors: {
         primary: {
           DEFAULT: '#18181b',
