@@ -11,7 +11,6 @@ import {
   SiTypescript
 } from "react-icons/si";
 import ProjectCard from "@/components/ProjectCard";
-import Image from "next/image";
 
 
 const Projects: React.FC = () => {
@@ -41,29 +40,14 @@ const Projects: React.FC = () => {
         </h2>
         
         <div className="max-w-6xl mx-auto mb-20">
-          <div
-            className="group relative rounded-xl overflow-hidden bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md transition-all duration-custom">
-            <div className="aspect-video overflow-hidden relative">
-              {featuredProject.image &&
-                <Image
-                  src={featuredProject.image}
-                  alt={featuredProject.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 group-hover:scale-105"
-                />
-              }
-            </div>
-            
-            <div className="p-8">
-              <h3 className="text-2xl font-medium text-primary-dark dark:text-zinc-50 mb-4">
-                {featuredProject.title}
-              </h3>
-              <p className="text-secondary dark:text-zinc-300 mb-6">
-                {featuredProject.description}
-              </p>
-            </div>
-          </div>
+          <ProjectCard
+            image={featuredProject.image}
+            title={featuredProject.title}
+            description={featuredProject.description}
+            technologies={featuredProject.technologies}
+            github={featuredProject.github}
+            website={featuredProject.website}
+          />
         </div>
       
       </div>
