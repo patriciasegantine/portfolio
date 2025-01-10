@@ -1,35 +1,11 @@
-import React from 'react'
-import { ProjectList } from "@/components/ProjectList";
-import { FeaturedProject } from "@/components/FeaturedProject";
-import {
-  SiNextdotjs,
-  SiNodedotjs,
-  SiReact,
-  SiReactquery,
-  SiShadcnui,
-  SiTailwindcss,
-  SiTypescript
-} from "react-icons/si";
+import React from 'react';
 import ProjectCard from "@/components/ProjectCard";
-
+import { ProjectKey, projects } from "@/data/projects";
 
 const Projects: React.FC = () => {
-  const featuredProject = {
-    title: "Nexus - Task Dashboard",
-    description: "Nexus is a web platform for task management that evolves from a personal system to a complete agile management tool. Focused on simplicity and efficiency, it allows users and small teams to manage their activities through intuitive Kanban boards..",
-    image: "https://via.placeholder.com/600x400?text=Coming+Soon",
-    technologies: [
-      {icon: SiReact, name: 'React'},
-      {icon: SiNextdotjs, name: 'Next.js'},
-      {icon: SiTypescript, name: 'TypeScript'},
-      {icon: SiTailwindcss, name: 'Tailwind'},
-      {icon: SiShadcnui, name: 'Shadcn/ui'},
-      {icon: SiReactquery, name: "React Query"},
-      {icon: SiNodedotjs, name: "Node.js"}
-    ],
-    github: "https://github.com/patriciasegantine/dashboard-analytics-frontend.git",
-    website: "https://github.com/patriciasegantine/dashboard-analytics-frontend.git"
-  }
+  const featuredProjectKey = ProjectKey.Nexus
+  const featuredProject = projects?.find(project => project?.key === featuredProjectKey)
+  const filteredProjects = projects?.filter(project => project?.key !== featuredProjectKey)
   
   return (
     <section id="projects"
@@ -39,20 +15,35 @@ const Projects: React.FC = () => {
           Projects
         </h2>
         
-        <div className="max-w-6xl mx-auto mb-20">
-          <ProjectCard
-            image={featuredProject.image}
-            title={featuredProject.title}
-            description={featuredProject.description}
-            technologies={featuredProject.technologies}
-            github={featuredProject.github}
-            website={featuredProject.website}
-          />
+        {featuredProject && (
+          <div className="max-w-6xl mx-auto mb-20">
+            <ProjectCard
+              image={featuredProject.image}
+              title={featuredProject.title}
+              description={featuredProject.description}
+              technologies={featuredProject.technologies}
+              github={featuredProject.github}
+              website={featuredProject.website}
+            />
+          </div>
+        )}
+        
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {filteredProjects.map((project) => (
+            <ProjectCard
+              key={project.key}
+              image={project?.image}
+              title={project.title}
+              description={project.description}
+              technologies={project.technologies}
+              github={project.github}
+              website={project.website}
+            />
+          ))}
         </div>
-      
       </div>
     </section>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

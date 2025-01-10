@@ -1,29 +1,46 @@
-import React from 'react'
-import Image from 'next/image'
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+import Image from 'next/image';
+import React from 'react';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { ImageIcon } from "lucide-react";
 
 interface ProjectCardProps {
-  image: string
-  title: string
-  description: string
-  technologies: { icon: React.ComponentType, name: string }[]
-  github: string
-  website: string
+  image?: string | null
+  title: string;
+  description: string;
+  technologies: { icon: React.ComponentType<{ className: string }>, name: string }[];
+  github: string;
+  website: string;
 }
 
+const ImagePlaceholder = ({ className = "" }: { className?: string }) => (
+  <div className={`relative w-full h-full ${className}`}>
+    <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700">
+      <div className="absolute inset-0 opacity-20 dark:opacity-30"
+           style={{
+             backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.1) 1px, transparent 0)`,
+             backgroundSize: '20px 20px'
+           }}
+      />
+    </div>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <ImageIcon className="w-10 h-10 text-zinc-400 dark:text-zinc-500 opacity-50" />
+    </div>
+  </div>
+)
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, technologies, github, website }) => {
-  
   return (
-    <div className="group relative rounded-xl overflow-hidden bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md transition-all duration-custom">
+    <div className="group relative rounded-xl overflow-hidden bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md transition-all duration-custom border border-gray-200 dark:border-zinc-700">
       <div className="aspect-video overflow-hidden relative">
-        {image &&
-          <Image
+        {image
+          ? <Image
             src={image}
             alt={title}
             layout="fill"
             objectFit="cover"
             className="transition-transform duration-500 group-hover:scale-105"
-          />}
+          />
+          : <ImagePlaceholder/>}
       </div>
       
       <div className="p-8">
@@ -34,11 +51,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, te
           {description}
         </p>
         
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex flex-wrap items-center gap-4 mb-6">
           {technologies.map((tech, index) => (
             <div key={index} className="flex items-center gap-1">
               {React.createElement(tech.icon as React.ComponentType<{ className: string }>, { className: "w-5 h-5 text-secondary dark:text-zinc-300" })}
-              <span className="text-sm text-secondary dark:text-zinc-300">{tech.name}</span>
+              <span className="hidden lg:inline text-sm text-secondary dark:text-zinc-300">{tech.name}</span>
             </div>
           ))}
         </div>
@@ -73,4 +90,4 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, te
   )
 }
 
-export default ProjectCard
+export default ProjectCard;
