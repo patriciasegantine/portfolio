@@ -1,11 +1,16 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
+  preset: 'ts-jest', // Usar ts-jest como preset
+  testEnvironment: 'jsdom', // Ambiente de testes no navegador (útil para React)
   transform: {
-    '^.+\\.(ts|tsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': '@swc/jest', // Usar SWC para compilar TS/TSX
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], // Arquivo de setup de testes
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    // Mapeando o alias @ para a pasta src
+    '^@/(.*)$': '<rootDir>/src/$1', // Adapte isso conforme o seu projeto
   },
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
+
+export default config;
