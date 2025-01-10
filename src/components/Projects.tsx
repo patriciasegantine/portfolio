@@ -8,8 +8,7 @@ const Projects: React.FC = () => {
   const filteredProjects = projects?.filter(project => project?.key !== featuredProjectKey)
   
   return (
-    <section id="projects"
-             className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors duration-custom">
+    <section id="projects" data-testid="projects-section" className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 text-center mb-16 mt-8">
           Projects

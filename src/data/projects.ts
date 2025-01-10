@@ -11,11 +11,11 @@ import {
 } from "react-icons/si";
 
 export enum ProjectKey {
-  Nexus,
-  SimpleEcommerce,
-  InteractiveQuiz,
-  NewsPortal,
-  DataAnalysisDashboard
+  Nexus = "Nexus",
+  SimpleEcommerce = "SimpleEcommerce",
+  InteractiveQuiz = "InteractiveQuiz",
+  NewsPortal = "NewsPortal",
+  DataAnalysisDashboard = "DataAnalysisDashboard"
 }
   
   export const projects = [
