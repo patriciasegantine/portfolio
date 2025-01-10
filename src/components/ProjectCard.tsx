@@ -13,7 +13,7 @@ interface ProjectCardProps {
 }
 
 const ImagePlaceholder = ({ className = "" }: { className?: string }) => (
-  <div className={`relative w-full h-full ${className}`}>
+  <div className={`relative w-full h-full ${className}`} data-testid="image-placeholder">
     <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700">
       <div className="absolute inset-0 opacity-20 dark:opacity-30"
            style={{
@@ -26,19 +26,18 @@ const ImagePlaceholder = ({ className = "" }: { className?: string }) => (
       <ImageIcon className="w-10 h-10 text-zinc-400 dark:text-zinc-500 opacity-50" />
     </div>
   </div>
-)
+);
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, technologies, github, website }) => {
   return (
-    <div className="group relative rounded-xl overflow-hidden bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md transition-all duration-custom border border-gray-200 dark:border-zinc-700">
+    <div data-testid="project-card" className="group relative rounded-xl overflow-hidden transition-colors-custom bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md border border-gray-200 dark:border-zinc-700">
       <div className="aspect-video overflow-hidden relative">
         {image
           ? <Image
+            className="transition-transform duration-500 group-hover:scale-105"
             src={image}
             alt={title}
-            layout="fill"
-            objectFit="cover"
-            className="transition-transform duration-500 group-hover:scale-105"
+            fill
           />
           : <ImagePlaceholder/>}
       </div>
