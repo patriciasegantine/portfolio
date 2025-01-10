@@ -20,8 +20,14 @@ const NavMenu: React.FC<NavMenuProps> = ({
                                            isMobile = false,
                                            onItemClick,
                                          }) => {
+  const mobileClasses = 'mobile-menu-class block md:hidden py-4 px-4';
+  const desktopClasses = 'hidden md:flex items-center space-x-6';
+  
   return (
-    <div className={isMobile ? 'block md:hidden py-4 px-4' : 'hidden md:flex items-center space-x-6'}>
+    <div
+      data-testid="nav-menu"
+      className={isMobile ? mobileClasses : desktopClasses}
+    >
       {navItems.map(({label, href}) => (
         <Link
           key={label}
