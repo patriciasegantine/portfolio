@@ -16,7 +16,7 @@ const HeroSocialLinks: React.FC = () => {
   ]
   
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-4" data-testid="hero-social-links">
       {socialLinks.map((link) => (
         <a
           key={link.name}

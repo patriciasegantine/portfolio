@@ -3,7 +3,7 @@ import React from 'react'
 const HeroIntro: React.FC = () => {
   return (
     <>
-      <div className="flex items-center gap-2 text-secondary dark:text-zinc-400">
+      <div className="flex items-center gap-2 text-secondary dark:text-zinc-400" data-testid="hero-intro">
         <span className="w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
         <span>Hi there, I&apos;m</span>
       </div>

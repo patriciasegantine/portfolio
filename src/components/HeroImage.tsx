@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const HeroImage: React.FC = () => {
   return (
-    <div className="relative w-64 h-64 md:w-80 md:h-80">
+    <div className="relative w-64 h-64 md:w-80 md:h-80" data-testid="hero-image">
       <div
         className="absolute inset-0 bg-zinc-100/50 dark:bg-zinc-700/30 rounded-full -rotate-6 transform transition-all duration-custom group-hover:rotate-6"/>
       
