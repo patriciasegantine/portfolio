@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
-import { X } from 'lucide-react';
+import { ChevronUp, X } from 'lucide-react';
 import NavMenu from './NavMenu';
 
 interface MobileMenuProps {
@@ -15,7 +15,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                                  navItems,
                                                }) => {
   const handleSwipe = (_event: PointerEvent, info: PanInfo) => {
-    if (info.offset.y > 50) {
+    if (info.offset.y < -50) {
       setIsMobileMenuOpen(false);
     }
   };
@@ -23,12 +23,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.classList.add('overflow-hidden');
+      document.body.style.position = 'fixed';
+      document.body.style.inset = '0';
     } else {
       document.body.classList.remove('overflow-hidden');
+      document.body.style.position = '';
+      document.body.style.inset = '';
     }
     
     return () => {
       document.body.classList.remove('overflow-hidden');
+      document.body.style.position = '';
+      document.body.style.inset = '';
     };
   }, [isMobileMenuOpen]);
   
@@ -40,7 +46,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           initial={{y: '-100%'}}
           animate={{y: 0}}
           exit={{y: '-100%'}}
-          transition={{duration: 0.6, ease: 'easeInOut'}}
+          transition={{
+            duration: 0.6,
+            ease: 'easeInOut',
+          }}
           onPanEnd={handleSwipe}
         >
           <button
@@ -53,9 +62,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           <NavMenu
             isMobile
-            onItemClick={() => setIsMobileMenuOpen(false)}
+            onItemClick={() => {
+              setIsMobileMenuOpen(false);
+            }}
             navItems={navItems}
           />
+          <div className="absolute bottom-0 inset-x-0 flex items-center justify-center animate-bounce">
+            <ChevronUp className="w-6 h-6 text-gray-500 dark:text-gray-400"/>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
