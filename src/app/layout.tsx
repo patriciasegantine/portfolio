@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import './globals.css'
+import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({subsets: ['latin']})
 
 export const metadata: Metadata = {
   title: 'Patricia Segantine - Web Developer',
@@ -21,10 +22,11 @@ export default function RootLayout({
     <html lang="en-GB">
     <body className={`${inter.className} min-h-screen bg-gray-50 text-dark`}>
     <ThemeProvider attribute="class">
-      <Header />
+      <Header/>
       <main>
         {children}
       </main>
+      <Footer/>
     </ThemeProvider>
     </body>
     </html>
