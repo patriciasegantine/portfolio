@@ -7,7 +7,7 @@ const mockProject = {
   image: '/test-image.png',
   title: 'Test Project',
   description: 'This is a test project description.',
-  technologies: [{ icon: FaReact, name: 'React' }],
+  technologies: [{icon: FaReact, name: 'React'}],
   github: 'https://github.com/test',
   website: 'https://test.com',
 };
@@ -27,13 +27,13 @@ describe('ProjectCard Component', () => {
   
   it('should render the GitHub link', () => {
     render(<ProjectCard {...mockProject} />);
-    const githubLink = screen.getByRole('link', { name: 'GitHub' });
+    const githubLink = screen.getByRole('link', {name: 'GitHub'});
     expect(githubLink).toHaveAttribute('href', 'https://github.com/test');
   });
   
   it('should render the website link', () => {
     render(<ProjectCard {...mockProject} />);
-    const websiteLink = screen.getByRole('link', { name: 'Visit Site' });
+    const websiteLink = screen.getByRole('link', {name: 'Visit Site'});
     expect(websiteLink).toHaveAttribute('href', 'https://test.com');
   });
   
@@ -50,7 +50,7 @@ describe('ProjectCard Component', () => {
   });
   
   it('should render the placeholder if no image is provided', () => {
-    const { image, ...projectWithoutImage } = mockProject;
+    const projectWithoutImage = {...mockProject, image: undefined};
     render(<ProjectCard {...projectWithoutImage} />);
     const placeholder = screen.getByTestId('image-placeholder');
     expect(placeholder).toBeInTheDocument();
