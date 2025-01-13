@@ -41,7 +41,7 @@ const About: React.FC = () => {
             <h3 className="text-xl font-medium text-primary-dark dark:text-zinc-50 text-center mt-8 mb-16">
               When I&apos;m Not Coding
             </h3>
-            <div className="grid grid-cols-3 md:grid-cols-5 gap-5">
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-5">
               {personalInterests.map((interest, index) => (
                 <div
                   key={index}
@@ -55,7 +55,7 @@ const About: React.FC = () => {
                   <span className="text-secondary dark:text-zinc-300 mb-3
                                 transition-transform duration-300
                                 group-hover:scale-110">
-                    {interest.icon}
+                    {React.createElement(interest.icon, {className: "w-6 h-6 md:w-7 md:h-7"})}
                   </span>
                   <span className="text-primary-dark dark:text-zinc-100 text-sm text-center">
                     {interest.label}
