@@ -1,17 +1,10 @@
 import React from 'react'
-import { Coffee, Music, Plane, Tent, Users } from 'lucide-react'
+import { personalInterests } from "@/data/personalInterests";
 
 const About: React.FC = () => {
-  const personalInterests = [
-    {icon: <Coffee className="w-6 h-6 md:w-7 md:h-7"/>, label: 'Coffee'},
-    {icon: <Music className="w-6 h-6 md:w-7 md:h-7"/>, label: 'Music'},
-    {icon: <Plane className="w-6 h-6 md:w-7 md:h-7"/>, label: 'Travel'},
-    {icon: <Tent className="w-6 h-6 md:w-7 md:h-7"/>, label: 'Camping'},
-    {icon: <Users className="w-6 h-6 md:w-7 md:h-7"/>, label: 'Family Time'},
-  ]
   
   return (
-    <section id="about" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors-custom">
+    <section id="about" data-testid="about" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors-custom">
       
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto ">
