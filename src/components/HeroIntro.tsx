@@ -18,7 +18,9 @@ const HeroIntro: React.FC = () => {
       </p>
       
       <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
-        Crafting sophisticated digital solutions while transforming complexity into seamless experiences.
+        Building modern front-end applications with React, Next.js, and TypeScript to deliver clean, scalable, and
+        high-performance user experiences.
+      
       </p>
     </>
   )

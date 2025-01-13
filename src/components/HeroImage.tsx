@@ -11,10 +11,10 @@ const HeroImage: React.FC = () => {
         className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-tr from-zinc-200/60 via-zinc-300/40 to-transparent dark:from-zinc-600/40 dark:via-zinc-700/20 dark:to-transparent">
         <div className="w-full h-full rounded-full bg-white dark:bg-zinc-800 p-[2px]">
           <Image
-            src="/assets/img/hero.jpg"
+            src="https://github.com/patriciasegantine.png"
             alt="Profile"
             fill
-            className="rounded-full ring-1 ring-zinc-100 dark:ring-zinc-700"
+            className="rounded-full ring-1 ring-zinc-100 dark:ring-zinc-700 "
           />
         </div>
       </div>
