@@ -1,7 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import Hero from "@/components/Hero/Hero";
 
-jest.mock('../SociaisLinks/SocialLinks', () => () => <div data-testid="social-links"/>);
+jest.mock('../SociaisLinks/SocialLinks', () => {
+  const MockSocialLinks = () => <div data-testid="social-links"/>;
+  MockSocialLinks.displayName = 'MockSocialLinks';
+  return MockSocialLinks;
+});
 
 describe('Hero Component', () => {
   it('should render a section with the ID "home"', () => {
