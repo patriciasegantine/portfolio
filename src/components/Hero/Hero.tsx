@@ -1,7 +1,7 @@
 import React from 'react'
 import SocialLinks from "@/components/SociaisLinks/SocialLinks";
-import HeroImage from "@/components/HeroImage";
-import HeroIntro from "@/components/HeroIntro";
+import HeroImage from "@/components/HeroImage/HeroImage";
+import HeroIntro from "@/components/HeroIntro/HeroIntro";
 
 const Hero: React.FC = () => {
   return (

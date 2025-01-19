@@ -12,7 +12,7 @@ const HeroImage: React.FC = () => {
         <div className="w-full h-full rounded-full bg-white dark:bg-zinc-800 p-[2px]">
           <Image
             src="https://github.com/patriciasegantine.png"
-            alt="Profile"
+            alt="Profile picture of Patricia Segantine"
             fill
             className="rounded-full ring-1 ring-zinc-100 dark:ring-zinc-700 "
           />
