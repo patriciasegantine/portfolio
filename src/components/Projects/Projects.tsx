@@ -39,7 +39,8 @@ const Projects: React.FC = () => {
       const data: Project[] = await response.json();
       setProjects(data)
     } catch (error) {
-      throw new Error(`Error fetching projects: ${error}`);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch projects.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -62,6 +63,7 @@ const Projects: React.FC = () => {
       id="projects"
       data-testid="projects-section"
       className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom"
+      aria-label="Projects"
     >
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 text-center mb-16 mt-8">
