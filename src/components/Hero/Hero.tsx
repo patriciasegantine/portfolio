@@ -1,7 +1,7 @@
 import React from 'react'
-import HeroImage from './HeroImage'
-import HeroIntro from './HeroIntro'
-import HeroSocialLinks from './HeroSocialLinks'
+import SocialLinks from "@/components/SociaisLinks/SocialLinks";
+import HeroImage from "@/components/HeroImage/HeroImage";
+import HeroIntro from "@/components/HeroIntro/HeroIntro";
 
 const Hero: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
         
         <div className="flex-1 flex flex-col gap-6 text-center md:text-left items-center md:items-start">
           <HeroIntro/>
-          <HeroSocialLinks/>
+          <SocialLinks showLabel={true}/>
         </div>
       </div>
     </section>
