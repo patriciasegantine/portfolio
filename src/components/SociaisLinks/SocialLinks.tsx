@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { FaExclamationCircle, FaGithub, FaLink, FaLinkedin, FaSpinner } from 'react-icons/fa';
+import { FaGithub, FaLink, FaLinkedin } from 'react-icons/fa';
+import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
+import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
 
 type SocialLink = {
   name: string;
@@ -35,7 +37,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({showLabel = false}) => {
       const data: SocialLink[] = await response.json();
       setSocialLinks(data);
     } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
+      const errorMessage = e instanceof Error ? e.message : 'Failed to fetch social links.';
       setError(errorMessage);
     } finally {
       setIsLoading(false);
@@ -46,26 +48,13 @@ const SocialLinks: React.FC<SocialLinksProps> = ({showLabel = false}) => {
     fetchSocialLinks();
   }, []);
   
-  if (isLoading) {
-    return (
-      <div className="loading flex justify-center items-center gap-2" data-testid="loading">
-        <FaSpinner className="icon w-6 h-6 animate-spin text-zinc-700 dark:text-zinc-200"/>
-        <span className="text-zinc-700 dark:text-zinc-200">Loading social links...</span>
-      </div>
-    );
-  }
-  
-  if (error) {
-    return (
-      <div className="error flex justify-center items-center gap-2 text-center" data-testid="error">
-        <FaExclamationCircle className="icon w-6 h-6 text-red-600 dark:text-red-400"/>
-        <span className="text-red-600 dark:text-red-400">{error}</span>
-      </div>
-    );
-  }
-  
   return (
     <div className="flex gap-4" data-testid="social-links">
+      
+      {isLoading && <LoadingComponent message="Loading social links..."/>}
+      
+      {error && <ErrorComponent message={error}/>}
+      
       {socialLinks.map((social) => (
         <a
           key={social.name}
