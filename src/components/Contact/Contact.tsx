@@ -1,6 +1,7 @@
 import React from "react";
 import ContactForm from "@/components/ContactForm/ContactForm";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
+import ContactSocialLinks from "@/components/ContactSocialLinks/ContactSocialLinks";
 
 const Contact: React.FC = () => {
   return (
@@ -22,7 +23,10 @@ const Contact: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <ContactForm/>
             
-            <ContactInfo/>
+            <div className="space-y-8">
+              <ContactInfo/>
+              <ContactSocialLinks/>
+            </div>
           </div>
         </div>
       </div>
