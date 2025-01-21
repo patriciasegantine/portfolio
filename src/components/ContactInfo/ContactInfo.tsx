@@ -13,10 +13,7 @@ interface ContactInfoType {
   href: string;
 }
 
-interface ContactInfoProps {
-}
-
-const ContactInfo: React.FC<ContactInfoProps> = ({}) => {
+const ContactInfo: React.FC = () => {
   const [contactInfo, setContactInfo] = useState<ContactInfoType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

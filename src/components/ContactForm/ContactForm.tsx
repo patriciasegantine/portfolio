@@ -1,10 +1,11 @@
-interface ContactFormProps {
-}
+import React from "react";
 
-export const ContactForm = ({}: ContactFormProps) => {
+const ContactForm: React.FC = () => {
   return (
     <div>
       ContactForm
     </div>
   );
 };
+
+export default ContactForm;
