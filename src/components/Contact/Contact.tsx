@@ -1,4 +1,6 @@
 import React from "react";
+import { ContactForm } from "@/components/ContactForm/ContactForm";
+import ContactInfo from "@/components/ContactInfo/ContactInfo";
 
 const Contact: React.FC = () => {
   return (
@@ -15,6 +17,12 @@ const Contact: React.FC = () => {
             <p className="text-secondary dark:text-zinc-300">
               Feel free to reach out for collaborations or just a friendly hello
             </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <ContactForm/>
+            
+            <ContactInfo/>
           </div>
         </div>
       </div>
