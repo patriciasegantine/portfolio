@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { z } from "zod";
 import FormInput from "@/components/FormInput/FormInput";
+import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
 
 type FormValues = z.infer<typeof contactSchema>;
@@ -22,15 +23,35 @@ const ContactForm: React.FC = () => {
     setFormValues((prev) => ({...prev, [id]: value}));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const fetchSendEmail = (formValues: { name: string; email: string; message: string }) =>
+    new Promise((resolve) => {
+      console.log("Simulating API call with:", formValues);
+      setTimeout(() => {
+        resolve("Email sent successfully!");
+      }, 2000);
+    });
+  
+  const resetForm = () => {
+    setFormValues(DEFAULT_FORM_VALUES);
+    setErrors({});
+    setHasAttemptedSubmit(false);
+    setIsLoading(false);
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setHasAttemptedSubmit(true);
     
     try {
       contactSchema.parse(formValues);
-      console.log("Form submitted successfully:", formValues);
-      
       setErrors({});
+      setIsLoading(true);
+      
+      const response = await fetchSendEmail(formValues);
+      console.log(response);
+      setIsLoading(false);
+      resetForm()
+      
     } catch (err: any) {
       if (err.errors) {
         const validationErrors: { [key: string]: string } = {};
@@ -39,6 +60,7 @@ const ContactForm: React.FC = () => {
         });
         setErrors(validationErrors);
       }
+      setIsLoading(false);
     }
   };
   
@@ -92,15 +114,7 @@ const ContactForm: React.FC = () => {
           <p id="message-error" className={ERROR_TEXT_CLASS}>{errors.message}</p>
         )}
         
-        <button
-          type="submit"
-          className={`relative w-full inline-flex items-center justify-center gap-2 px-6 py-3
-              rounded-lg text-white font-medium transition-colors
-              focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-600
-              ${isLoading ? "opacity-75 cursor-not-allowed bg-zinc-500 dark:bg-zinc-600" :
-            "bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600"}`}>
-          Send Message
-        </button>
+        <SubmitButton isLoading={isLoading}/>
       </form>
     </div>
   );
