@@ -9,6 +9,10 @@ interface FormInputProps {
   rows?: number;
   minLength?: number;
   maxLength?: number;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  ariaInvalid?: boolean | "true" | "false";
+  ariaDescribedBy?: string;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -20,6 +24,10 @@ const FormInput: React.FC<FormInputProps> = ({
                                                rows,
                                                minLength,
                                                maxLength,
+                                               value,
+                                               onChange,
+                                               ariaInvalid,
+                                               ariaDescribedBy,
                                              }) => {
   const baseClasses =
     "w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50 " +
@@ -32,12 +40,16 @@ const FormInput: React.FC<FormInputProps> = ({
     minLength,
     maxLength,
     placeholder,
+    value,
+    "aria-invalid": ariaInvalid,
+    "aria-describedby": ariaDescribedBy
   };
   
   const TextareaInput = (
     <textarea
       rows={rows}
       className={`${baseClasses} resize-none ${className}`}
+      onChange={(e) => onChange && onChange(e)}
       {...inputAttributes}
     />
   );
@@ -46,6 +58,7 @@ const FormInput: React.FC<FormInputProps> = ({
     <input
       type={type}
       className={`${baseClasses} ${className}`}
+      onChange={(e) => onChange && onChange(e)}
       {...inputAttributes}
     />
   );
