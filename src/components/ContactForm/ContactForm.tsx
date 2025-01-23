@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from "react";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import FormInput from "@/components/FormInput/FormInput";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
+import { useFetchSendEmail } from "@/hook/useFetchSendEmail";
 
 type FormValues = z.infer<typeof contactSchema>;
 
@@ -16,26 +17,29 @@ const ContactForm: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(DEFAULT_FORM_VALUES);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  
+  const {isLoading, fetchSendEmail} = useFetchSendEmail();
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {id, value} = e.target;
     setFormValues((prev) => ({...prev, [id]: value}));
   };
   
-  const fetchSendEmail = (formValues: { name: string; email: string; message: string }) =>
-    new Promise((resolve) => {
-      console.log("Simulating API call with:", formValues);
-      setTimeout(() => {
-        resolve("Email sent successfully!");
-      }, 2000);
+  const mapValidationErrors = (err: ZodError): { [key: string]: string } => {
+    const validationErrors: { [key: string]: string } = {};
+    
+    err.errors.forEach((error) => {
+      if (error.path.length) {
+        validationErrors[error.path[0] as string] = error.message;
+      }
     });
+    
+    return validationErrors;
+  };
   
   const resetForm = () => {
     setFormValues(DEFAULT_FORM_VALUES);
-    setErrors({});
     setHasAttemptedSubmit(false);
-    setIsLoading(false);
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,22 +49,18 @@ const ContactForm: React.FC = () => {
     try {
       contactSchema.parse(formValues);
       setErrors({});
-      setIsLoading(true);
       
       const response = await fetchSendEmail(formValues);
       console.log(response);
-      setIsLoading(false);
-      resetForm()
       
-    } catch (err: any) {
-      if (err.errors) {
-        const validationErrors: { [key: string]: string } = {};
-        err.errors.forEach((error: any) => {
-          validationErrors[error.path[0]] = error.message;
-        });
+      resetForm();
+    } catch (err: unknown) {
+      if (err instanceof ZodError) {
+        const validationErrors = mapValidationErrors(err);
         setErrors(validationErrors);
+      } else {
+        console.error("Erro inesperado:", err);
       }
-      setIsLoading(false);
     }
   };
   
