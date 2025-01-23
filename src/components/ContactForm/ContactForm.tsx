@@ -5,9 +5,11 @@ import { z, ZodError } from "zod";
 import FormInput from "@/components/FormInput/FormInput";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
-import { useFetchSendEmail } from "@/hook/useFetchSendEmail";
+import useFetchSendEmail from "@/hook/useFetchSendEmail";
+import { mapValidationErrors } from "@/utils/mapValidateFormErrors";
+import { focusOnErrorField } from "@/utils/focusOnErrorField";
 
-type FormValues = z.infer<typeof contactSchema>;
+export type FormValues = z.infer<typeof contactSchema>;
 
 const ERROR_BORDER_CLASS = "border-red-500";
 const ERROR_TEXT_CLASS = "text-red-500 text-sm";
@@ -23,18 +25,6 @@ const ContactForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {id, value} = e.target;
     setFormValues((prev) => ({...prev, [id]: value}));
-  };
-  
-  const mapValidationErrors = (err: ZodError): { [key: string]: string } => {
-    const validationErrors: { [key: string]: string } = {};
-    
-    err.errors.forEach((error) => {
-      if (error.path.length) {
-        validationErrors[error.path[0] as string] = error.message;
-      }
-    });
-    
-    return validationErrors;
   };
   
   const resetForm = () => {
@@ -57,6 +47,7 @@ const ContactForm: React.FC = () => {
     } catch (err: unknown) {
       if (err instanceof ZodError) {
         const validationErrors = mapValidationErrors(err);
+        focusOnErrorField(validationErrors);
         setErrors(validationErrors);
       } else {
         console.error("Erro inesperado:", err);
