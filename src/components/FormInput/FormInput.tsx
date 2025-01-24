@@ -1,33 +1,25 @@
 import React from "react";
 
-interface FormInputProps {
+interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   id: string;
-  label: string;
-  type?: string;
-  placeholder?: string;
-  className?: string;
-  rows?: number;
-  minLength?: number;
-  maxLength?: number;
-  value?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   ariaInvalid?: boolean | "true" | "false";
   ariaDescribedBy?: string;
+  rows?: number;
+  label?: string;
+  className?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
                                                id,
                                                label,
-                                               type = "text",
-                                               placeholder,
-                                               className = "",
-                                               rows,
-                                               minLength,
-                                               maxLength,
-                                               value,
-                                               onChange,
                                                ariaInvalid,
                                                ariaDescribedBy,
+                                               type = "text",
+                                               rows,
+                                               className,
+                                               onChange,
+                                               ...props
                                              }) => {
   const baseClasses =
     "w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50 " +
@@ -37,12 +29,9 @@ const FormInput: React.FC<FormInputProps> = ({
   
   const inputAttributes = {
     id,
-    minLength,
-    maxLength,
-    placeholder,
-    value,
     "aria-invalid": ariaInvalid,
-    "aria-describedby": ariaDescribedBy
+    "aria-describedby": ariaDescribedBy,
+    ...props,
   };
   
   const TextareaInput = (

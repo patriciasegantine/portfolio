@@ -71,7 +71,8 @@ const ContactForm: React.FC = () => {
   };
   
   return (
-    <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-8 shadow-sm">
+    <div
+      className="bg-white dark:bg-zinc-800/50 rounded-2xl p-8 shadow-sm border border-gray-200 dark:border-zinc-700 transition-colors-custom">
       <form className="space-y-5" onSubmit={handleSubmit} noValidate>
         <FormInput
           id="name"
