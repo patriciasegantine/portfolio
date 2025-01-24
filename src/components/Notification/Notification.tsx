@@ -49,18 +49,20 @@ const Notification: React.FC<NotificationProps> = ({message, type, onClose}) => 
   
   return (
     <div
+      data-testid="notification-icon"
       className={notificationStyles}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {type === "success" ? (
-        <AiOutlineCheckCircle size={24} className={iconStyles}/>
+        <AiOutlineCheckCircle size={24} className={iconStyles} data-testid="success-icon"/>
       ) : (
-        <AiOutlineCloseCircle size={24} className={iconStyles}/>
+        <AiOutlineCloseCircle size={24} className={iconStyles} data-testid="error-icon"/>
       )}
       <div className="flex-1">
         <p>{message}</p>
       </div>
+      
       <button
         onClick={onClose}
         aria-label="Close notification"
