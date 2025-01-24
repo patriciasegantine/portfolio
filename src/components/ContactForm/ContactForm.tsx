@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React, { useState } from "react";
 import { z, ZodError } from "zod";
@@ -7,6 +7,9 @@ import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
 import useFetchSendEmail from "@/hook/useFetchSendEmail";
 import { mapValidationErrors } from "@/utils/mapValidateFormErrors";
+import Notification from "@/components/Notification/Notification";
+import { errorMessages } from "@/validate/errorMessages";
+import { successMessages } from "@/validate/successMessages";
 import { focusOnErrorField } from "@/utils/focusOnErrorField";
 
 export type FormValues = z.infer<typeof contactSchema>;
@@ -19,6 +22,10 @@ const ContactForm: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(DEFAULT_FORM_VALUES);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
   
   const {isLoading, fetchSendEmail} = useFetchSendEmail();
   
@@ -29,6 +36,7 @@ const ContactForm: React.FC = () => {
   
   const resetForm = () => {
     setFormValues(DEFAULT_FORM_VALUES);
+    setErrors({});
     setHasAttemptedSubmit(false);
   };
   
@@ -40,17 +48,24 @@ const ContactForm: React.FC = () => {
       contactSchema.parse(formValues);
       setErrors({});
       
-      const response = await fetchSendEmail(formValues);
-      console.log(response);
+      await fetchSendEmail(formValues);
       
+      setNotification({
+        type: "success",
+        message: successMessages.description,
+      });
       resetForm();
     } catch (err: unknown) {
       if (err instanceof ZodError) {
         const validationErrors = mapValidationErrors(err);
-        focusOnErrorField(validationErrors);
         setErrors(validationErrors);
+        focusOnErrorField(validationErrors);
       } else {
-        console.error("Erro inesperado:", err);
+        setNotification({
+          message: errorMessages.submissionError.message,
+          type: "error",
+        });
+        console.error(errorMessages.submissionError.message, err);
       }
     }
   };
@@ -107,6 +122,14 @@ const ContactForm: React.FC = () => {
         
         <SubmitButton isLoading={isLoading}/>
       </form>
+      
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
     </div>
   );
 };

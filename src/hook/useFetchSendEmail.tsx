@@ -25,10 +25,16 @@ const useFetchSendEmail = () => {
     try {
       const response = await emailjs.send(serviceId, templateId, {...formData}, publicKey);
       
-      setSuccess(true);
-      return response;
-    } catch (error) {
-      setError(errorMessages.submissionError.message)
+      if (response.status >= 200 && response.status < 300) {
+        setSuccess(true);
+        return response;
+      } else {
+        setError(errorMessages.submissionError.message || "Erro na submissão.");
+        throw new Error("Erro na submissão: Código de status " + response.status);
+      }
+    } catch (err) {
+      setError(errorMessages.submissionError.message || "Erro desconhecido.");
+      throw err;
     } finally {
       setIsLoading(false);
     }
