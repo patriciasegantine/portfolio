@@ -14,7 +14,7 @@ const ErrorComponent: React.FC<ErrorComponentProps> = ({
     className="error flex justify-center items-center gap-2 text-center"
     data-testid={testId}
   >
-    <FaExclamationCircle className="icon w-6 h-6 text-red-600 dark:text-red-400"/>
+    <FaExclamationCircle data-testid="error-icon" className="icon w-6 h-6 text-red-600 dark:text-red-400"/>
     <span className="text-red-600 dark:text-red-400">{message}</span>
   </div>
 );
