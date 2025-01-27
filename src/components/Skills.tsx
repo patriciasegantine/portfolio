@@ -16,26 +16,22 @@ const Skills: React.FC = () => {
               <div
                 key={index}
                 className="group flex flex-col items-center p-6
-                         bg-zinc-50 dark:bg-zinc-700/30
-                         rounded-lg
-                         transition-all duration-300
-                         hover:-translate-y-1
-                         hover:bg-zinc-100 dark:hover:bg-zinc-700/50"
+           bg-zinc-50 dark:bg-zinc-700/30
+           rounded-lg
+           transition-all duration-300 shadow-md
+           hover:-translate-y-1 hover:scale-105
+           hover:bg-zinc-100 dark:hover:bg-zinc-700/50
+           hover:shadow-lg"
               >
                 <div className="relative mb-4">
                   <Icon
-                    className="w-8 h-8 text-secondary dark:text-zinc-300
-                             transition-transform duration-300
-                             group-hover:scale-110"
+                    className="w-8 h-8 text-secondary dark:text-zinc-300 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-45"
                   />
                 </div>
                 
                 <span className="text-primary-dark dark:text-zinc-100 font-medium text-sm text-center">
                   {name}
                 </span>
-                
-                <div
-                  className="absolute inset-0 rounded-lg bg-gradient-to-br from-zinc-200/0 to-zinc-200/20 dark:from-zinc-600/0 dark:to-zinc-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
               </div>
             ))}
           </div>
