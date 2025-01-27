@@ -1,4 +1,4 @@
-import { SiEslint, SiFramer, SiJest, SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si"; // Ícones específicos para NextJS, TypeScript e TailwindCSS
+import { SiEslint, SiFramer, SiJest, SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   
   return (
     <footer
-      className="py-8 bg-white dark:bg-zinc-800 border-t border-zinc-100 dark:border-zinc-700/50 transition-colors-custom">
+      className="py-8 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 transition-colors-custom">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           
