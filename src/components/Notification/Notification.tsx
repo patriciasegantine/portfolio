@@ -64,6 +64,7 @@ const Notification: React.FC<NotificationProps> = ({message, type, onClose}) => 
       </div>
       
       <button
+        data-testid="close-notification"
         onClick={onClose}
         aria-label="Close notification"
         className="absolute top-2 right-2 text-white hover:text-gray-200 transition-colors"

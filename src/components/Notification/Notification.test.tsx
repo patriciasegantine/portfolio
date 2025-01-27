@@ -54,7 +54,7 @@ describe("Notification component", () => {
   it("should call onClose when the close button is clicked", async () => {
     render(<Notification message={message} type="success" onClose={mockOnClose}/>);
     
-    fireEvent.click(screen.getByRole("button", {name: /close notification/i}));
+    fireEvent.click(screen.getByTestId("close-notification"))
     
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
