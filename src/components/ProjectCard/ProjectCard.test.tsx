@@ -1,13 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ProjectCard from '@/components/ProjectCard';
-import { FaReact } from 'react-icons/fa';
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
 const mockProject = {
   image: '/test-image.png',
   title: 'Test Project',
   description: 'This is a test project description.',
-  technologies: [{icon: FaReact, name: 'React'}],
+  technologies: [{icon: "FaReact", name: 'React'}],
   github: 'https://github.com/test',
   website: 'https://test.com',
 };
@@ -37,9 +36,10 @@ describe('ProjectCard Component', () => {
     expect(websiteLink).toHaveAttribute('href', 'https://test.com');
   });
   
-  it('should render the technology icons', () => {
+  it('should render the technology icons with correct titles', () => {
     render(<ProjectCard {...mockProject} />);
-    const techIcon = screen.getByText('React');
+    
+    const techIcon = screen.getByTitle('React');
     expect(techIcon).toBeInTheDocument();
   });
   
