@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
 import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
 
