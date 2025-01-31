@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 import { validationMessages } from "@/validate/validationFormMessage";
 import { successMessages } from "@/validate/successMessages";
 
-jest.mock("@/hook/useFetchSendEmail", () => ({
+jest.mock("@/hook/useSendEmail", () => ({
   __esModule: true,
   default: () => mockUseSendEmail,
 }));
