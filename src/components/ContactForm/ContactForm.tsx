@@ -5,12 +5,11 @@ import { z, ZodError } from "zod";
 import FormInput from "@/components/FormInput/FormInput";
 import SubmitButton from "@/components/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
-import useFetchSendEmail from "@/hook/useFetchSendEmail";
 import { mapValidationErrors } from "@/utils/mapValidateFormErrors";
 import Notification from "@/components/Notification/Notification";
 import { errorMessages } from "@/validate/errorMessages";
-import { successMessages } from "@/validate/successMessages";
 import { focusOnErrorField } from "@/utils/focusOnErrorField";
+import { useSendEmail } from "@/hook/useSendEmail";
 
 export type FormValues = z.infer<typeof contactSchema>;
 
@@ -27,7 +26,7 @@ const ContactForm: React.FC = () => {
     type: "success" | "error";
   } | null>(null);
   
-  const {isLoading, fetchSendEmail} = useFetchSendEmail();
+  const {sendEmail, loading} = useSendEmail()
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {id, value} = e.target;
@@ -44,28 +43,27 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
     setHasAttemptedSubmit(true);
     
+    setErrors({});
+    setNotification(null);
+    
     try {
       contactSchema.parse(formValues);
-      setErrors({});
       
-      await fetchSendEmail(formValues);
+      const {success, message} = await sendEmail(formValues);
       
-      setNotification({
-        type: "success",
-        message: successMessages.description,
-      });
-      resetForm();
-    } catch (err: unknown) {
-      if (err instanceof ZodError) {
-        const validationErrors = mapValidationErrors(err);
+      if (success) {
+        setNotification({type: "success", message});
+        resetForm();
+      } else {
+        setNotification({type: "error", message});
+      }
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const validationErrors = mapValidationErrors(error);
         setErrors(validationErrors);
         focusOnErrorField(validationErrors);
       } else {
-        setNotification({
-          message: errorMessages.submissionError.message,
-          type: "error",
-        });
-        console.error(errorMessages.submissionError.message, err);
+        setNotification({type: "error", message: errorMessages.submissionError.message});
       }
     }
   };
@@ -86,8 +84,11 @@ const ContactForm: React.FC = () => {
           className={errors.name && hasAttemptedSubmit ? ERROR_BORDER_CLASS : ""}
           onChange={handleChange}
           value={formValues.name ?? ""}
+          disabled={loading}
         />
-        {errors.name && hasAttemptedSubmit && <p id="name-error" className={ERROR_TEXT_CLASS}>{errors.name}</p>}
+        {errors.name && hasAttemptedSubmit && (
+          <p id="name-error" className={ERROR_TEXT_CLASS}>{errors.name}</p>
+        )}
         
         <FormInput
           id="email"
@@ -101,8 +102,11 @@ const ContactForm: React.FC = () => {
           className={errors.email && hasAttemptedSubmit ? ERROR_BORDER_CLASS : ""}
           onChange={handleChange}
           value={formValues.email ?? ""}
+          disabled={loading}
         />
-        {errors.email && hasAttemptedSubmit && <p id="email-error" className={ERROR_TEXT_CLASS}>{errors.email}</p>}
+        {errors.email && hasAttemptedSubmit && (
+          <p id="email-error" className={ERROR_TEXT_CLASS}>{errors.email}</p>
+        )}
         
         <FormInput
           id="message"
@@ -116,12 +120,13 @@ const ContactForm: React.FC = () => {
           className={errors.message && hasAttemptedSubmit ? ERROR_BORDER_CLASS : ""}
           onChange={handleChange}
           value={formValues.message ?? ""}
+          disabled={loading}
         />
         {errors.message && hasAttemptedSubmit && (
           <p id="message-error" className={ERROR_TEXT_CLASS}>{errors.message}</p>
         )}
         
-        <SubmitButton isLoading={isLoading}/>
+        <SubmitButton isLoading={loading}/>
       </form>
       
       {notification && (

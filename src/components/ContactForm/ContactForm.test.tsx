@@ -4,11 +4,11 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import ContactForm from "@/components/ContactForm/ContactForm";
 import { validationMessages } from "@/validate/validationFormMessage";
-import { successMessages } from "@/validate/successMessages";
+import { useSendEmail } from "@/hook/useSendEmail";
 
-jest.mock("@/hook/useFetchSendEmail", () => ({
+jest.mock("@/hook/useSendEmail", () => ({
   __esModule: true,
-  default: () => mockUseSendEmail,
+  useSendEmail: jest.fn(),
 }));
 
 const mockFormData = {
@@ -17,33 +17,34 @@ const mockFormData = {
   message: "This is a test message.",
 };
 
+const mockSendEmail = jest.fn();
 const mockUseSendEmail = {
-  sendEmail: jest.fn(),
-  isLoading: false,
-  error: null,
-  success: false,
+  sendEmail: mockSendEmail,
+  loading: false,
 };
 
-const fillFormWithValidData = () => {
-  fireEvent.change(screen.getByLabelText("Name"), {target: {value: mockFormData.name}});
-  fireEvent.change(screen.getByLabelText("Email"), {target: {value: mockFormData.email}});
-  fireEvent.change(screen.getByLabelText("Message"), {target: {value: mockFormData.message}});
+const fillForm = ({name, email, message}: typeof mockFormData) => {
+  fireEvent.change(screen.getByLabelText("Name"), {target: {value: name}});
+  fireEvent.change(screen.getByLabelText("Email"), {target: {value: email}});
+  fireEvent.change(screen.getByLabelText("Message"), {target: {value: message}});
 };
 
 afterEach(() => {
   jest.clearAllMocks();
   jest.restoreAllMocks();
-  localStorage.clear()
-  cleanup()
+  localStorage.clear();
+  cleanup();
 });
 
 beforeEach(() => {
-  global.fetch = jest.fn().mockResolvedValue({
-    json: async () => ({})
-  } as Response);
+  jest.resetAllMocks();
+  (useSendEmail as jest.Mock).mockReturnValue(mockUseSendEmail); // Substituído por 'import' e cast tipado de TS
 });
 
 describe("ContactForm", () => {
+  
+  const getSubmitButton = () => screen.getByTestId("submit-button");
+  
   it("renders the form without errors initially", () => {
     render(<ContactForm/>);
     
@@ -61,11 +62,22 @@ describe("ContactForm", () => {
     expect(screen.getByTestId("submit-button")).not.toBeDisabled();
   });
   
+  it("should handle input maximum lengths", async () => {
+    render(<ContactForm/>);
+    const longName = "a".repeat(51);
+    const inputElement = screen.getByLabelText("Name");
+    
+    await userEvent.type(inputElement, longName);
+    
+    expect(inputElement).toHaveValue(longName.slice(0, 50));
+  });
+  
   it("should NOT DISPLAY validation error messages when the form is loaded initially", () => {
     render(<ContactForm/>);
     
-    const allErrorMessages = Object.values(validationMessages)
-      .flatMap((fieldMessages) => Object.values(fieldMessages));
+    const allErrorMessages = Object.values(validationMessages).flatMap((fieldMessages) =>
+      Object.values(fieldMessages)
+    );
     
     allErrorMessages.forEach((message) => {
       expect(screen.queryByText(message)).not.toBeInTheDocument();
@@ -79,8 +91,7 @@ describe("ContactForm", () => {
     fireEvent.change(screen.getByLabelText("Email"), {target: {value: "invalid-email"}});
     fireEvent.change(screen.getByLabelText("Message"), {target: {value: mockFormData.message}});
     
-    const submitButton = screen.getByTestId("submit-button");
-    fireEvent.click(submitButton);
+    fireEvent.click(getSubmitButton())
     
     expect(screen.getByLabelText("Name")).toHaveValue(mockFormData.name);
     expect(screen.getByLabelText("Email")).toHaveValue("invalid-email");
@@ -90,7 +101,7 @@ describe("ContactForm", () => {
   it("sets focus to the first invalid field on failed validation", () => {
     render(<ContactForm/>);
     
-    const clickSend = () => fireEvent.click(screen.getByTestId("submit-button"));
+    const clickSend = () => fireEvent.click(getSubmitButton());
     
     const fillField = (label: string, value: string) => {
       fireEvent.change(screen.getByLabelText(label), {target: {value}});
@@ -108,58 +119,59 @@ describe("ContactForm", () => {
     expect(screen.getByLabelText("Message")).toHaveFocus();
   });
   
-  it("should allow form submission with valid inputs and display loading state", async () => {
-    mockUseSendEmail.isLoading = true;
-    mockUseSendEmail.sendEmail.mockResolvedValueOnce({status: 200});
+  it("should handle errors returned by the sendEmail function", async () => {
+    mockSendEmail.mockResolvedValueOnce({success: false, message: "An error occurred!"});
     
     render(<ContactForm/>);
     
-    fillFormWithValidData();
-    
-    const submitButton = screen.getByTestId("submit-button");
-    
-    fireEvent.click(submitButton);
-    
-    expect(submitButton).toBeDisabled();
-    expect(submitButton).toHaveTextContent("Sending...");
+    fillForm(mockFormData);
+    fireEvent.click(getSubmitButton())
     
     await waitFor(() => {
-      const allErrorMessages = Object.values(validationMessages).flatMap((fieldMessages) =>
-        Object.values(fieldMessages)
-      );
-      allErrorMessages.forEach((errorMessage) => {
-        expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
-      });
-      
-      expect(submitButton).toHaveTextContent("Sending...");
-      expect(submitButton).not.toBeEnabled();
+      expect(screen.getByText("An error occurred!")).toBeInTheDocument();
+      expect(mockSendEmail).toHaveBeenCalledTimes(1);
     });
   });
   
-  it("should display success modal after successfully submitting the form", async () => {
+  it("allows form submission with valid inputs, shows loading state, and resets the form on success", async () => {
+    mockSendEmail.mockImplementation(async () => {
+      mockUseSendEmail.loading = true;
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      mockUseSendEmail.loading = false;
+      return Promise.resolve({success: true, message: "Email sent successfully!"});
+    });
+    
     render(<ContactForm/>);
     
-    fillFormWithValidData()
+    fillForm(mockFormData);
     
-    const {title, description} = successMessages;
+    const submitButton = getSubmitButton();
     
-    const submitButton = screen.getByTestId("submit-button");
     fireEvent.click(submitButton);
     
     await waitFor(() => {
-      expect(screen.findByText(title)).resolves.toBeInTheDocument();
-      expect(screen.findByText(description)).resolves.toBeInTheDocument();
-    })
-  });
-  
-  it("should handle input maximum lengths", async () => {
-    render(<ContactForm/>);
-    const longName = "a".repeat(51);
-    const inputElement = screen.getByLabelText("Name");
+      expect(submitButton).toBeDisabled();
+      expect(submitButton).toHaveTextContent("Sending...");
+    });
     
-    await userEvent.type(inputElement, longName);
+    await waitFor(() => {
+      expect(mockSendEmail).toHaveBeenCalledWith(expect.objectContaining(mockFormData));
+    });
     
-    expect(inputElement).toHaveValue(longName.slice(0, 50));
+    await waitFor(() => {
+      expect(screen.getByLabelText("Name")).toHaveValue("");
+      expect(screen.getByLabelText("Email")).toHaveValue("");
+      expect(screen.getByLabelText("Message")).toHaveValue("");
+    });
+    
+    await waitFor(() => {
+      expect(screen.getByText("Email sent successfully!")).toBeInTheDocument();
+    });
+    
+    await waitFor(() => {
+      expect(submitButton).not.toBeDisabled();
+      expect(submitButton).toHaveTextContent("Send Message");
+    });
+    
   });
-  
 });
