@@ -7,7 +7,7 @@ import { validationMessages } from "@/validate/validationFormMessage";
 
 jest.mock("@/hook/useSendEmail", () => ({
   __esModule: true,
-  useSendEmail: jest.fn(), // Mock the named export
+  useSendEmail: jest.fn(),
 }));
 
 const mockFormData = {
@@ -22,10 +22,10 @@ const mockUseSendEmail = {
   loading: false,
 };
 
-const fillFormWithValidData = () => {
-  fireEvent.change(screen.getByLabelText("Name"), {target: {value: mockFormData.name}});
-  fireEvent.change(screen.getByLabelText("Email"), {target: {value: mockFormData.email}});
-  fireEvent.change(screen.getByLabelText("Message"), {target: {value: mockFormData.message}});
+const fillForm = ({name, email, message}: typeof mockFormData) => {
+  fireEvent.change(screen.getByLabelText("Name"), {target: {value: name}});
+  fireEvent.change(screen.getByLabelText("Email"), {target: {value: email}});
+  fireEvent.change(screen.getByLabelText("Message"), {target: {value: message}});
 };
 
 afterEach(() => {
@@ -36,10 +36,14 @@ afterEach(() => {
 });
 
 beforeEach(() => {
+  jest.resetAllMocks();
   require("@/hook/useSendEmail").useSendEmail.mockReturnValue(mockUseSendEmail);
 });
 
 describe("ContactForm", () => {
+  
+  const getSubmitButton = () => screen.getByTestId("submit-button");
+  
   it("renders the form without errors initially", () => {
     render(<ContactForm/>);
     
@@ -86,8 +90,7 @@ describe("ContactForm", () => {
     fireEvent.change(screen.getByLabelText("Email"), {target: {value: "invalid-email"}});
     fireEvent.change(screen.getByLabelText("Message"), {target: {value: mockFormData.message}});
     
-    const submitButton = screen.getByTestId("submit-button");
-    fireEvent.click(submitButton);
+    fireEvent.click(getSubmitButton())
     
     expect(screen.getByLabelText("Name")).toHaveValue(mockFormData.name);
     expect(screen.getByLabelText("Email")).toHaveValue("invalid-email");
@@ -97,7 +100,7 @@ describe("ContactForm", () => {
   it("sets focus to the first invalid field on failed validation", () => {
     render(<ContactForm/>);
     
-    const clickSend = () => fireEvent.click(screen.getByTestId("submit-button"));
+    const clickSend = () => fireEvent.click(getSubmitButton());
     
     const fillField = (label: string, value: string) => {
       fireEvent.change(screen.getByLabelText(label), {target: {value}});
@@ -120,15 +123,55 @@ describe("ContactForm", () => {
     
     render(<ContactForm/>);
     
-    fillFormWithValidData();
-    
-    const submitButton = screen.getByTestId("submit-button");
-    fireEvent.click(submitButton);
+    fillForm(mockFormData);
+    fireEvent.click(getSubmitButton())
     
     await waitFor(() => {
       expect(screen.getByText("An error occurred!")).toBeInTheDocument();
       expect(mockSendEmail).toHaveBeenCalledTimes(1);
     });
+  });
+  
+  it("allows form submission with valid inputs, shows loading state, and resets the form on success", async () => {
+    mockSendEmail.mockImplementation(async () => {
+      mockUseSendEmail.loading = true;
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      mockUseSendEmail.loading = false;
+      return Promise.resolve({success: true, message: "Email sent successfully!"});
+    });
+    
+    render(<ContactForm/>);
+    
+    fillForm(mockFormData);
+    
+    const submitButton = getSubmitButton();
+    
+    fireEvent.click(submitButton);
+    
+    await waitFor(() => {
+      expect(submitButton).toBeDisabled();
+      expect(submitButton).toHaveTextContent("Sending...");
+    });
+    
+    await waitFor(() => {
+      expect(mockSendEmail).toHaveBeenCalledWith(expect.objectContaining(mockFormData));
+    });
+    
+    await waitFor(() => {
+      expect(screen.getByLabelText("Name")).toHaveValue("");
+      expect(screen.getByLabelText("Email")).toHaveValue("");
+      expect(screen.getByLabelText("Message")).toHaveValue("");
+    });
+    
+    await waitFor(() => {
+      expect(screen.getByText("Email sent successfully!")).toBeInTheDocument();
+    });
+    
+    await waitFor(() => {
+      expect(submitButton).not.toBeDisabled();
+      expect(submitButton).toHaveTextContent("Send Message");
+    });
+    
   });
   
 });
