@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import ContactForm from "@/components/ContactForm/ContactForm";
 import { validationMessages } from "@/validate/validationFormMessage";
+import { useSendEmail } from "@/hook/useSendEmail";
 
 jest.mock("@/hook/useSendEmail", () => ({
   __esModule: true,
@@ -37,7 +38,7 @@ afterEach(() => {
 
 beforeEach(() => {
   jest.resetAllMocks();
-  require("@/hook/useSendEmail").useSendEmail.mockReturnValue(mockUseSendEmail);
+  (useSendEmail as jest.Mock).mockReturnValue(mockUseSendEmail); // Substituído por 'import' e cast tipado de TS
 });
 
 describe("ContactForm", () => {
@@ -173,5 +174,4 @@ describe("ContactForm", () => {
     });
     
   });
-  
 });
