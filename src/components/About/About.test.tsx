@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import About from "@/components/About";
+import About from "@/components/About/About";
 
 jest.mock('@/data/personalInterests', () => ({
   personalInterests: [

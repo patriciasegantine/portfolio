@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { Code, Menu } from 'lucide-react';
-import ToggleTheme from '@/components/ToggleTheme';
+import ToggleTheme from '@/components/ToggleTheme/ToggleTheme';
 import { useTheme } from 'next-themes';
-import NavMenu from './NavMenu';
+import NavMenu from '../NavMenu/NavMenu';
 import Link from 'next/link';
-import MobileMenu from "@/components/MobileMenu";
+import MobileMenu from "@/components/MobileMenu/MobileMenu";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
