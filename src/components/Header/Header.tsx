@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Code, Menu } from 'lucide-react';
-import ToggleTheme from '@/components/ToggleTheme/ToggleTheme';
+import ToggleTheme from '@/components/ToggleThemeButton/ToggleThemeButton';
 import { useTheme } from 'next-themes';
 import NavMenu from '../NavMenu/NavMenu';
 import Link from 'next/link';

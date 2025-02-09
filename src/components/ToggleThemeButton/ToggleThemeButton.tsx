@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
-const ToggleTheme: React.FC = () => {
+const ToggleThemeButton: React.FC = () => {
   const {setTheme, resolvedTheme} = useTheme()
   const [mounted, setMounted] = useState(false)
   
@@ -20,6 +20,7 @@ const ToggleTheme: React.FC = () => {
   
   return (
     <button
+      data-testid="toggle-theme-button"
       onClick={toggleTheme}
       className="p-2 text-secondary hover:text-primary transition-colors duration-custom dark:text-zinc-400 dark:hover:text-zinc-100"
       aria-label="Toggle theme"
@@ -32,4 +33,4 @@ const ToggleTheme: React.FC = () => {
   )
 }
 
-export default ToggleTheme
+export default ToggleThemeButton
