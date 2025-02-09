@@ -30,7 +30,23 @@ const ContactForm: React.FC = () => {
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {id, value} = e.target;
+    
     setFormValues((prev) => ({...prev, [id]: value}));
+    
+    if (hasAttemptedSubmit) {
+      try {
+        contactSchema.pick({[id]: true} as Record<keyof FormValues, true>).parse({[id]: value});
+        
+        setErrors((prevErrors) => ({...prevErrors, [id]: undefined}));
+      } catch (error) {
+        if (error instanceof ZodError) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [id]: error.errors[0]?.message,
+          }));
+        }
+      }
+    }
   };
   
   const resetForm = () => {
