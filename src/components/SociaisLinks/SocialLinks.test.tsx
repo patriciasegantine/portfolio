@@ -9,18 +9,20 @@ const generateMockSocialLinks = () => [
 ];
 
 describe('SocialLinks Component', () => {
-  
   beforeEach(() => {
     fetchMock.resetMocks();
   });
   
-  it('renders without crashing', () => {
+  it('renders without crashing', async () => {
     render(<SocialLinks/>);
-    expect(screen.getByTestId('social-links')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('social-links')).toBeInTheDocument();
+    });
   });
   
   it('displays a loading state while fetching data', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(generateMockSocialLinks()));
+    
     render(<SocialLinks/>);
     
     expect(screen.getByText(/Loading social links.../i)).toBeInTheDocument();
@@ -76,9 +78,7 @@ describe('SocialLinks Component', () => {
     render(<SocialLinks/>);
     
     await waitFor(() => {
-      expect(
-        screen.getByLabelText(/Visit Unknown profile/i)
-      ).toBeInTheDocument();
+      expect(screen.getByLabelText(/Visit Unknown profile/i)).toBeInTheDocument();
     });
     
     expect(screen.getByTestId('social-links').querySelector('svg')).toBeTruthy();
