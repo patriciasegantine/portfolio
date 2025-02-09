@@ -2,10 +2,10 @@ import React from 'react'
 import { ThemeProvider } from 'next-themes'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
+import Header from '@/components/Header/Header'
 import './globals.css'
-import Footer from "@/components/Footer";
-import ScrollToTopButton from "@/components/ScrollToTopButton";
+import Footer from "@/components/Footer/Footer";
+import ScrollToTopButton from "@/components/ScrollToTopButton/ScrollToTopButton";
 
 const inter = Inter({subsets: ['latin']})
 

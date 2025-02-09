@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import NavMenu from "@/components/NavMenu";
+import NavMenu from "@/components/NavMenu/NavMenu";
 
 describe('NavMenu Component', () => {
   const mockOnItemClick = jest.fn();
