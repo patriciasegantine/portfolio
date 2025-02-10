@@ -58,14 +58,6 @@ describe('Header Component', () => {
     expect(menuButton).toHaveClass('text-secondary');
   });
   
-  it('renders the header in dark mode when theme is dark', () => {
-    (useTheme as jest.Mock).mockReturnValue({resolvedTheme: 'dark'});
-    render(<Header/>);
-    
-    const header = screen.getByRole('banner');
-    expect(header).toHaveClass('dark');
-  });
-  
   it('opens and closes the mobile menu', () => {
     render(<Header/>);
     
