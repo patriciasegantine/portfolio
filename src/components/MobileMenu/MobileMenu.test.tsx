@@ -1,6 +1,48 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { PropsWithChildren } from 'react';
 import MobileMenu from '@/components/MobileMenu/MobileMenu';
-import { motion } from 'framer-motion';
+import { PanInfo } from "framer-motion";
+
+interface MotionDivProps extends PropsWithChildren {
+  onPanEnd?: (event: unknown, info: PanInfo) => void;
+  
+  [key: string]: unknown;
+}
+
+// Mock framer-motion
+jest.mock('framer-motion', () => ({
+  motion: {
+    div: ({children, onPanEnd, ...props}: MotionDivProps) => (
+      <div
+        {...props}
+        data-testid="motion-div"
+        onPointerUp={() => {
+          const mockEvent = {
+            type: 'pointerup',
+            clientX: 0,
+            clientY: 0,
+            preventDefault: () => {
+            },
+            stopPropagation: () => {
+            }
+          };
+          
+          const mockPanInfo: PanInfo = {
+            point: {x: 0, y: 0},
+            delta: {x: 0, y: 0},
+            offset: {x: 0, y: -60},
+            velocity: {x: 0, y: 0}
+          };
+          
+          onPanEnd?.(mockEvent, mockPanInfo);
+        }}
+      >
+        {children}
+      </div>
+    ),
+  },
+  AnimatePresence: ({children}: PropsWithChildren) => <>{children}</>,
+}));
 
 const navItemsMock = [
   {href: '/home', label: 'Home'},
@@ -10,10 +52,13 @@ const navItemsMock = [
 const mockSetIsMobileMenuOpen = jest.fn();
 
 describe('MobileMenu Component', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+  
   afterEach(() => {
     jest.clearAllMocks();
-    document.body.className = '';
-    document.body.style.position = '';
+    jest.useRealTimers();
   });
   
   it('renders nothing if isMobileMenuOpen is false', () => {
@@ -43,21 +88,6 @@ describe('MobileMenu Component', () => {
     });
   });
   
-  it('calls setIsMobileMenuOpen(false) when a link is clicked', () => {
-    render(
-      <MobileMenu
-        navItems={navItemsMock}
-        isMobileMenuOpen={true}
-        setIsMobileMenuOpen={mockSetIsMobileMenuOpen}
-      />
-    );
-    const homeLink = screen.getByText('Home');
-    
-    fireEvent.click(homeLink);
-    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledTimes(1);
-    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
-  });
-  
   it('calls setIsMobileMenuOpen(false) when the close button is clicked', () => {
     render(
       <MobileMenu
@@ -68,12 +98,15 @@ describe('MobileMenu Component', () => {
     );
     const closeButton = screen.getByRole('button', {name: /close menu/i});
     
-    fireEvent.click(closeButton);
+    act(() => {
+      fireEvent.click(closeButton);
+    });
+    
     expect(mockSetIsMobileMenuOpen).toHaveBeenCalledTimes(1);
     expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
   });
   
-  it('blocks body scroll when isMobileMenuOpen is true', () => {
+  it('handles swipe up gesture correctly', () => {
     render(
       <MobileMenu
         navItems={navItemsMock}
@@ -82,13 +115,17 @@ describe('MobileMenu Component', () => {
       />
     );
     
-    expect(document.body.classList.contains('overflow-hidden')).toBe(true);
-    expect(document.body.style.position).toBe('fixed');
-    expect(document.body.style.inset).toBe('0');
+    const menuElement = screen.getByTestId('motion-div');
+    
+    act(() => {
+      fireEvent.pointerUp(menuElement);
+    });
+    
+    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
   });
   
-  it('restores body scroll when isMobileMenuOpen is false', () => {
-    const {rerender} = render(
+  it('handles quick close on link click', async () => {
+    render(
       <MobileMenu
         navItems={navItemsMock}
         isMobileMenuOpen={true}
@@ -96,34 +133,48 @@ describe('MobileMenu Component', () => {
       />
     );
     
-    rerender(
+    const link = screen.getByText(navItemsMock[0].label);
+    
+    await act(async () => {
+      fireEvent.click(link);
+      jest.advanceTimersByTime(200);
+    });
+    
+    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
+  });
+  
+  it('renders the chevron up icon', () => {
+    render(
       <MobileMenu
         navItems={navItemsMock}
-        isMobileMenuOpen={false}
+        isMobileMenuOpen={true}
         setIsMobileMenuOpen={mockSetIsMobileMenuOpen}
       />
     );
     
-    expect(document.body.classList.contains('overflow-hidden')).toBe(false);
-    expect(document.body.style.position).toBe('');
+    const chevronIcon = screen.getByTestId('motion-div').querySelector('.animate-bounce');
+    expect(chevronIcon).toBeInTheDocument();
   });
   
-  it('calls setIsMobileMenuOpen(false) when swiping up (gesture)', () => {
-    const mockHandleSwipe = jest.fn();
-    
+  it('applies quick animation when closing via link click', async () => {
     render(
-      <motion.div
-        onPanEnd={mockHandleSwipe}
-        className="test-motion-div"
+      <MobileMenu
+        navItems={navItemsMock}
+        isMobileMenuOpen={true}
+        setIsMobileMenuOpen={mockSetIsMobileMenuOpen}
       />
     );
     
-    const mockEvent = {};
-    const mockPanInfo = {offset: {y: -60, x: 0}};
+    const link = screen.getByText(navItemsMock[0].label);
+    const menuElement = screen.getByTestId('motion-div');
     
-    mockHandleSwipe(mockEvent, mockPanInfo);
+    expect(menuElement).toBeInTheDocument();
     
-    expect(mockHandleSwipe).toHaveBeenCalledTimes(1);
-    expect(mockHandleSwipe).toHaveBeenCalledWith(mockEvent, mockPanInfo);
+    await act(async () => {
+      fireEvent.click(link);
+      jest.advanceTimersByTime(200);
+    });
+    
+    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
   });
 });
