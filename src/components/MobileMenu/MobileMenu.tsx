@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { ChevronUp, X } from 'lucide-react';
 import NavMenu from '../NavMenu/NavMenu';
@@ -14,29 +16,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                                  setIsMobileMenuOpen,
                                                  navItems,
                                                }) => {
+  
+  const [closeQuickly, setCloseQuickly] = useState<boolean>(false)
+  
   const handleSwipe = (_event: PointerEvent, info: PanInfo) => {
     if (info.offset.y < -50) {
       setIsMobileMenuOpen(false);
     }
   };
   
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add('overflow-hidden');
-      document.body.style.position = 'fixed';
-      document.body.style.inset = '0';
-    } else {
-      document.body.classList.remove('overflow-hidden');
-      document.body.style.position = '';
-      document.body.style.inset = '';
-    }
-    
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-      document.body.style.position = '';
-      document.body.style.inset = '';
-    };
-  }, [isMobileMenuOpen]);
+  const handleLinkClick = () => {
+    setCloseQuickly(true);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setCloseQuickly(false);
+    }, 200);
+  };
   
   return (
     <AnimatePresence>
@@ -47,9 +42,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           animate={{y: 0}}
           exit={{y: '-100%'}}
           transition={{
-            duration: 0.6,
+            duration: closeQuickly ? 0.1 : 0.6,
             ease: 'easeInOut',
           }}
+          
           onPanEnd={handleSwipe}
         >
           <button
@@ -62,9 +58,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           <NavMenu
             isMobile
-            onItemClick={() => {
-              setIsMobileMenuOpen(false);
-            }}
+            onItemClick={handleLinkClick}
             navItems={navItems}
           />
           <div className="absolute bottom-0 inset-x-0 flex items-center justify-center animate-bounce">
