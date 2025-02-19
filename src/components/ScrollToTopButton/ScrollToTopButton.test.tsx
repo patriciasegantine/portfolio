@@ -6,6 +6,12 @@ import ScrollToTopButton from './ScrollToTopButton'
 describe('ScrollToTopButton', () => {
   beforeEach(() => {
     window.scrollTo = jest.fn()
+    
+    Object.defineProperty(window, 'scrollY', {
+      writable: true,
+      configurable: true,
+      value: 0
+    })
   })
   
   const setScrollY = (value: number) => {
@@ -16,42 +22,48 @@ describe('ScrollToTopButton', () => {
     })
   }
   
-  it('should not render the visible button when scroll position is less than 500px', () => {
-    const {queryByRole} = render(<ScrollToTopButton/>)
+  it('should render button with correct visibility classes when scroll position is less than 500px', async () => {
+    const {getByTestId} = render(<ScrollToTopButton/>)
     
-    act(() => {
+    await act(async () => {
       setScrollY(100)
       window.dispatchEvent(new Event('scroll'))
     })
     
-    const button = queryByRole('button', {name: /scroll to top/i})
-    expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('opacity-0 pointer-events-none')
+    const button = getByTestId('scrollToTop')
+    expect(button).toHaveClass('opacity-0')
+    expect(button).toHaveClass('pointer-events-none')
   })
   
-  it('should render the visible button when scroll position exceeds 500px', () => {
-    const {queryByRole} = render(<ScrollToTopButton/>)
+  it('should render the visible button when scroll position exceeds 500px', async () => {
+    const {getByTestId} = render(<ScrollToTopButton/>)
     
-    act(() => {
+    await act(async () => {
       setScrollY(501)
       window.dispatchEvent(new Event('scroll'))
     })
     
-    const button = queryByRole('button', {name: /scroll to top/i})
+    const button = getByTestId('scrollToTop')
     expect(button).toBeInTheDocument()
+    expect(button).toHaveClass('opacity-100')
     expect(button).not.toHaveClass('opacity-0')
+    expect(button).not.toHaveClass('pointer-events-none')
   })
   
-  it('should scroll to the top when button is clicked', () => {
-    const {getByRole} = render(<ScrollToTopButton/>)
+  it('should scroll to the top when button is clicked', async () => {
+    const {getByTestId} = render(<ScrollToTopButton/>)
     
-    act(() => {
+    await act(async () => {
       setScrollY(501)
       window.dispatchEvent(new Event('scroll'))
     })
     
-    const button = getByRole('button', {name: /scroll to top/i})
+    const button = getByTestId('scrollToTop')
     fireEvent.click(button)
-    expect(window.scrollTo).toHaveBeenCalledWith({top: 0, behavior: 'smooth'})
+    
+    expect(window.scrollTo).toHaveBeenCalledWith({
+      top: 0,
+      behavior: 'smooth'
+    })
   })
 })
