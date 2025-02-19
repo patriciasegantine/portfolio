@@ -1,11 +1,12 @@
 import React from 'react'
 import { skills } from "@/data/skills";
 import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
+import { SectionWrapper } from "@/components/SectionWrapper/SectionWrapper";
 
 const Skills: React.FC = () => {
   
   return (
-    <section id="skills" data-testid="skills" className="py-20 bg-zinc-100  dark:bg-zinc-900 transition-colors-custom">
+    <SectionWrapper id="skills" data-testid="skills" aria-label="Skills section" variant="primary">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title={"Skills"}/>
@@ -36,7 +37,7 @@ const Skills: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   )
 }
 

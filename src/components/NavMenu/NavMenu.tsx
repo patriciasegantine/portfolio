@@ -8,7 +8,7 @@ interface NavMenuProps {
 }
 
 const defaultNavItems = [
-  {href: '#home', label: 'home'},
+  {href: '#hero', label: 'home'},
   {href: '#about', label: 'about'},
   {href: '#projects', label: 'projects'},
   {href: '#skills', label: 'skills'},

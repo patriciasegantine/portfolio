@@ -1,12 +1,12 @@
 import React from 'react'
 import { personalInterests } from "@/data/personalInterests";
 import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
+import { SectionWrapper } from "@/components/SectionWrapper/SectionWrapper";
 
 const About: React.FC = () => {
   
   return (
-    <section id="about" data-testid="about" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors-custom">
-      
+    <SectionWrapper id="about" data-testid="about" aria-label="About Me section" variant="primary">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto ">
           <div className="prose dark:prose-dark mb-16">
@@ -65,7 +65,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   )
 }
 

@@ -3,15 +3,11 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import ContactSocialLinks from "@/components/ContactSocialLinks/ContactSocialLinks";
 import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
+import { SectionWrapper } from "@/components/SectionWrapper/SectionWrapper";
 
 const Contact: React.FC = () => {
   return (
-    <section
-      id="contact"
-      className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom"
-      data-testid="contact"
-      aria-label="Contact"
-    >
+    <SectionWrapper id="contact" data-testid="contact" aria-label="Contact section" variant="secondary">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -31,7 +27,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 
