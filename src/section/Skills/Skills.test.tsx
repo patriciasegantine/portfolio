@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Skills from "@/components/Skills/Skills";
+import Skills from "@/section/Skills/Skills";
 
 jest.mock('@/data/skills', () => ({
   skills: [
