@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
 import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
+import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
 
 interface Technology {
   icon: string;
@@ -66,9 +67,7 @@ const Projects: React.FC = () => {
       aria-label="Projects"
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 text-center mb-16 mt-8">
-          Projects
-        </h2>
+        <SectionHeader title={"Projects"}/>
         
         {isLoading && <LoadingComponent message="Loading projects..."/>}
         

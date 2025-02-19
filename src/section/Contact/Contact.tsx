@@ -2,6 +2,7 @@ import React from "react";
 import ContactForm from "@/components/ContactForm/ContactForm";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import ContactSocialLinks from "@/components/ContactSocialLinks/ContactSocialLinks";
+import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
 
 const Contact: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 mb-4">Let&apos;s Connect</h2>
+            <SectionHeader title={"Let's Connect"}/>
             <p className="text-secondary dark:text-zinc-300">
               Feel free to reach out for collaborations or just a friendly hello
             </p>
