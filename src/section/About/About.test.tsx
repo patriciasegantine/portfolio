@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import About from "@/components/About/About";
+import About from "@/section/About/About";
 
 jest.mock('@/data/personalInterests', () => ({
   personalInterests: [
@@ -10,8 +10,8 @@ jest.mock('@/data/personalInterests', () => ({
   ],
 }));
 
-describe('About Component', () => {
-  it('renders the About component without crashing', () => {
+describe('AboutContent Component', () => {
+  it('renders the AboutContent component without crashing', () => {
     render(<About/>)
     const aboutSection = screen.getByTestId('about')
     expect(aboutSection).toBeInTheDocument()

@@ -1,19 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { defaultNavItems } from "@/constants/defaultNavItems";
 
 interface NavMenuProps {
   navItems?: { href: string; label: string }[];
   isMobile?: boolean;
   onItemClick?: () => void;
 }
-
-const defaultNavItems = [
-  {href: '#home', label: 'home'},
-  {href: '#about', label: 'about'},
-  {href: '#projects', label: 'projects'},
-  {href: '#skills', label: 'skills'},
-  {href: '#contact', label: 'contact'},
-];
 
 const NavMenu: React.FC<NavMenuProps> = ({
                                            navItems = defaultNavItems,

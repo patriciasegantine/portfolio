@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
 import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
+import { SectionHeader } from "@/components/SectionHeader/SectionHeader";
+import { SectionWrapper } from "@/components/SectionWrapper/SectionWrapper";
 
 interface Technology {
   icon: string;
@@ -59,16 +61,10 @@ const Projects: React.FC = () => {
   );
   
   return (
-    <section
-      id="projects"
-      data-testid="projects-section"
-      className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom"
-      aria-label="Projects"
+    <SectionWrapper id="projects" data-testid="projects-section" aria-label="Projects section" variant="secondary"
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-medium text-primary-dark dark:text-zinc-50 text-center mb-16 mt-8">
-          Projects
-        </h2>
+        <SectionHeader title={"Projects"}/>
         
         {isLoading && <LoadingComponent message="Loading projects..."/>}
         
@@ -101,7 +97,7 @@ const Projects: React.FC = () => {
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 
