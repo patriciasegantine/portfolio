@@ -49,41 +49,7 @@ const projects = [
     ],
     github: "https://github.com/patriciasegantine/harmony-shop.git",
     website: "https://ps-harmony-shop.vercel.app/",
-  },
-  {
-    key: "dojo-ticket",
-    title: "Dojo Help Desk - Ticket Management App",
-    description:
-      "Dojo Help Desk is a platform for managing customer support tickets. It enables teams to efficiently create, track, and resolve tickets, improving productivity and service quality.",
-    image:
-      "https://raw.githubusercontent.com/patriciasegantine/dojo-ticket/main/public/screenshot.png.jpg",
-    technologies: [
-      {icon: "SiReact", name: "React"},
-      {icon: "SiNextdotjs", name: "Next.js"},
-      {icon: "SiTypescript", name: "TypeScript"},
-      {icon: "SiTailwindcss", name: "Tailwind CSS"},
-    ],
-    github: "https://github.com/patriciasegantine/dojo-ticket.git",
-    website: "https://ps-dojoticket.vercel.app",
-  },
-  {
-    key: "recipe-nest",
-    title: "RecipeNest - Find, Organize, and Create Recipes",
-    description:
-      "RecipeNest is an application that allows users to explore, organize, and save their favorite recipes. It provides a seamless and intuitive experience for managing a personal recipe library.",
-    image:
-      "https://raw.githubusercontent.com/patriciasegantine/recipe-nest/main/public/screenshot.jpg",
-    technologies: [
-      {icon: "SiReact", name: "React"},
-      {icon: "SiNextdotjs", name: "Next.js"},
-      {icon: "SiTailwindcss", name: "Tailwind CSS"},
-      {icon: "SiShadcnui", name: "Shadcn/UI"},
-      {icon: "SiRedux", name: "Redux Toolkit"},
-      {icon: "SiZod", name: "Zod"},
-    ],
-    github: "https://github.com/patriciasegantine/recipe-nest.git",
-    website: "https://ps-recipe-nest.vercel.app/",
-  },
+  }
 ];
 
 export async function GET() {
