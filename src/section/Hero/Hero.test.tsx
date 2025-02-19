@@ -12,7 +12,7 @@ describe('Hero Component', () => {
     render(<Hero/>);
     const section = screen.getByTestId('hero');
     expect(section).toBeInTheDocument();
-    expect(section).toHaveAttribute('id', 'home');
+    expect(section).toHaveAttribute('id', 'hero');
   });
   
   it('should render the SocialLinks component', () => {
