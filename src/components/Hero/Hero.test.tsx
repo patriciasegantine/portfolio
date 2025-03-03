@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Hero from "@/section/Hero/Hero";
+import Hero from "@/components/Hero/Hero";
 
-jest.mock('../../components/SociaisLinks/SocialLinks', () => {
+jest.mock('../SociaisLinks/SocialLinks', () => {
   const MockSocialLinks = () => <div data-testid="social-links"/>;
   MockSocialLinks.displayName = 'MockSocialLinks';
   return MockSocialLinks;
@@ -12,7 +12,7 @@ describe('Hero Component', () => {
     render(<Hero/>);
     const section = screen.getByTestId('hero');
     expect(section).toBeInTheDocument();
-    expect(section).toHaveAttribute('id', 'hero');
+    expect(section).toHaveAttribute('id', 'home');
   });
   
   it('should render the SocialLinks component', () => {
