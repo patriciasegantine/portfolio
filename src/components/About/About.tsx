@@ -1,5 +1,6 @@
 import React from 'react'
 import { personalInterests } from "@/data/personalInterests";
+import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 
 const About: React.FC = () => {
   
@@ -9,9 +10,8 @@ const About: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto ">
           <div className="prose dark:prose-dark mb-16">
-            <h2 className="text-3xl text-center font-medium text-primary-dark dark:text-zinc-50 mb-16 mt-8">
-              About Me
-            </h2>
+            <SectionTitle title="About Me"/>
+            
             <div className="space-y-4">
               <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed">
                 With over 4 years of hands-on experience, I’ve been building scalable, user-focused web applications
