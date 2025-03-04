@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
 import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
+import { Section } from "@/components/ui/Section/Section";
 
 interface Technology {
   icon: string;
@@ -60,10 +61,9 @@ const Projects: React.FC = () => {
   );
   
   return (
-    <section
+    <Section
       id="projects"
-      data-testid="projects-section"
-      className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom"
+      variant="secondary"
       aria-label="Projects"
     >
       <div className="container mx-auto px-4">
@@ -100,7 +100,7 @@ const Projects: React.FC = () => {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

@@ -3,15 +3,16 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import ContactSocialLinks from "@/components/ContactSocialLinks/ContactSocialLinks";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
+import { Section } from "@/components/ui/Section/Section";
 
 const Contact: React.FC = () => {
   return (
-    <section
+    <Section
       id="contact"
-      className="py-20 bg-zinc-50 dark:bg-zinc-900/95 transition-colors-custom"
-      data-testid="contact"
+      variant="secondary"
       aria-label="Contact"
     >
+      
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -32,7 +33,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

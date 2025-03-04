@@ -1,11 +1,16 @@
 import React from 'react'
 import { personalInterests } from "@/data/personalInterests";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
+import { Section } from "@/components/ui/Section/Section";
 
 const About: React.FC = () => {
   
   return (
-    <section id="about" data-testid="about" className="py-20 bg-zinc-100 dark:bg-zinc-900 transition-colors-custom">
+    <Section
+      id="about"
+      variant="primary"
+      aria-label="About"
+    >
       
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto ">
@@ -66,7 +71,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   )
 }
 
