@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import clsx from "clsx";
 import { AiOutlineCheckCircle, AiOutlineClose, AiOutlineCloseCircle } from "react-icons/ai";
+import { cn } from "@/utils/classNamesUtility";
 
 interface NotificationProps {
   message: string;
@@ -37,7 +37,7 @@ const Notification: React.FC<NotificationProps> = ({message, type, onClose}) => 
     setPause(false);
   };
   
-  const notificationStyles = clsx(
+  const notificationStyles = cn(
     "fixed top-20 right-6 max-w-sm w-full flex items-start gap-3 px-5 py-4 rounded-lg shadow-lg text-sm font-medium z-50 transition-opacity duration-300",
     {
       "bg-green-500 text-white": type === "success",

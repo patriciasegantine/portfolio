@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import { ArrowUp } from 'lucide-react'
-import clsx from 'clsx'
+import { cn } from "@/utils/classNamesUtility";
 
 const SCROLL_THRESHOLD = 500
 const SCROLL_OPTIONS = {top: 0, behavior: 'smooth' as const}
@@ -31,7 +31,7 @@ const ScrollToTopButton: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={clsx(
+      className={cn(
         baseStyles,
         interactionStyles,
         transitionStyles,
