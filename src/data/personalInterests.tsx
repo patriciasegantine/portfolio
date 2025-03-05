@@ -1,10 +1,15 @@
-import { Book, Coffee, Music, Plane, Tent, Users } from "lucide-react";
+import { Book, Coffee, LucideIcon, Music, Plane, Tent, Users } from "lucide-react";
 
-export const personalInterests = [
-  {icon: Coffee, label: 'Coffee'},
-  {icon: Music, label: 'Music'},
-  {icon: Book, label: 'Book'},
-  {icon: Plane, label: 'Travel'},
-  {icon: Tent, label: 'Camping'},
-  {icon: Users, label: 'Family Time'},
+export type PersonalInterest = {
+  icon: LucideIcon
+  name: string
+}
+
+export const personalInterests: PersonalInterest[] = [
+  {icon: Coffee, name: 'Coffee'},
+  {icon: Music, name: 'Music'},
+  {icon: Book, name: 'Book'},
+  {icon: Plane, name: 'Travel'},
+  {icon: Tent, name: 'Camping'},
+  {icon: Users, name: 'Family Time'},
 ]

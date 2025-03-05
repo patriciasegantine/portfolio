@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Contact from '@/components/Contact/Contact';
+import Contact from '@/components/section/Contact/Contact';
 
 describe('Contact Component', () => {
   it('should render the Contact section', async () => {

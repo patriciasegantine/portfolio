@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Hero from "@/components/Hero/Hero";
+import Hero from "@/components/section/Hero/Hero";
 
 jest.mock('@/components/ui/SociaisLinks/SocialLinks', () => {
   const MockSocialLinks = () => <div data-testid="social-links"/>;
