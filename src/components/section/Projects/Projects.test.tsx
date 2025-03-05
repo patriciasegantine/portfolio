@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import Projects from "@/components/Projects/Projects";
+import Projects from "@/components/section/Projects/Projects";
 import fetchMock from "jest-fetch-mock";
 
 const generateMockProjects = () => {
