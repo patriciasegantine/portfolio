@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { personalInterests } from "@/data/personalInterests"
-import { InterestCard } from '@/components/ui/InterestCard/InterestCard'
 import { SectionSubtitle } from "@/components/ui/SectionSubtitle/SectionSubtitle";
+import { SkillCard } from "@/components/ui/SkillCard/SkillCard";
 
 export const AboutInterests: FC = () => {
   return (
@@ -9,11 +9,11 @@ export const AboutInterests: FC = () => {
       <SectionSubtitle subtitle="When I'm not Coding"/>
       
       <div className="grid grid-cols-3 md:grid-cols-6 gap-5">
-        {personalInterests.map((interest, index) => (
-          <InterestCard
-            key={index}
-            icon={interest.icon}
-            label={interest.label}
+        {personalInterests.map(({icon, name}) => (
+          <SkillCard
+            key={name}
+            icon={icon}
+            name={name}
           />
         ))}
       </div>
