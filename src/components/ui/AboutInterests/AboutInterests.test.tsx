@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { AboutInterests } from './AboutInterests'
 import { personalInterests } from '@/data/personalInterests'
+import React from "react";
+import { LucideIcon } from "lucide-react";
 
 jest.mock('@/components/ui/SectionSubtitle/SectionSubtitle', () => ({
   SectionSubtitle: ({subtitle}: { subtitle: string }) => (
@@ -9,7 +11,9 @@ jest.mock('@/components/ui/SectionSubtitle/SectionSubtitle', () => ({
 }))
 
 jest.mock('@/components/ui/SkillCard/SkillCard', () => ({
-  SkillCard: ({name, icon: Icon}: { name: string; icon: any }) => (
+  SkillCard: ({name, icon: Icon}: {
+    name: string; icon: LucideIcon
+  }) => (
     <div data-testid="mock-skill-card">
       <span data-testid="skill-name">{name}</span>
       <Icon data-testid="skill-icon"/>

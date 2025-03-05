@@ -15,9 +15,7 @@ describe('SkillCard', () => {
   })
   
   it('renders with custom className', () => {
-    const {container} = render(
-      <SkillCard {...mockProps} className="custom-class"/>
-    )
+    render(<SkillCard {...mockProps} className="custom-class"/>)
     const card = screen.getByTestId('skill-card')
     expect(card).toHaveClass('custom-class')
   })
