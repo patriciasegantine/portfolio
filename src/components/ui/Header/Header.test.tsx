@@ -1,10 +1,10 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Header from '@/components/Header/Header';
+import Header from '@/components/ui/Header/Header';
 import '@testing-library/jest-dom';
 import { useTheme } from 'next-themes';
 
-jest.mock('@/components/ToggleThemeButton/ToggleThemeButton', () => {
+jest.mock('@/components/ui/ToggleThemeButton/ToggleThemeButton', () => {
   const MockToggleThemeButton = () => (
     <div data-testid="toggle-theme">ToggleTheme</div>
   );
@@ -12,7 +12,7 @@ jest.mock('@/components/ToggleThemeButton/ToggleThemeButton', () => {
   return MockToggleThemeButton;
 });
 
-jest.mock('@/components/NavMenu/NavMenu', () => {
+jest.mock('@/components/ui/NavMenu/NavMenu', () => {
   const MockNavMenu = () => (
     <div data-testid="nav-menu">NavMenu</div>
   );
@@ -20,7 +20,7 @@ jest.mock('@/components/NavMenu/NavMenu', () => {
   return MockNavMenu;
 });
 
-jest.mock('@/components/MobileMenu/MobileMenu', () => {
+jest.mock('@/components/ui/MobileMenu/MobileMenu', () => {
   const MockMobileMenu = ({isMobileMenuOpen}: { isMobileMenuOpen: boolean }) => (
     <div data-testid="mobile-menu">
       {isMobileMenuOpen ? 'MobileMenu Open' : 'MobileMenu Closed'}

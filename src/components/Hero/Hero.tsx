@@ -1,7 +1,7 @@
 import React from 'react'
-import SocialLinks from "@/components/SociaisLinks/SocialLinks";
-import HeroImage from "@/components/HeroImage/HeroImage";
-import HeroIntro from "@/components/HeroIntro/HeroIntro";
+import SocialLinks from "@/components/ui/SociaisLinks/SocialLinks";
+import HeroImage from "@/components/ui/HeroImage/HeroImage";
+import HeroIntro from "@/components/ui/HeroIntro/HeroIntro";
 import { Section } from "@/components/ui/Section/Section";
 
 const Hero: React.FC = () => {

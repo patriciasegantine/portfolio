@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import FormInput from "@/components/FormInput/FormInput";
+import FormInput from "@/components/ui/FormInput/FormInput";
 
 describe("FormInput Component", () => {
   

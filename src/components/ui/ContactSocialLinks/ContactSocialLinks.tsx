@@ -1,5 +1,5 @@
 import React from "react";
-import SocialLinks from "@/components/SociaisLinks/SocialLinks";
+import SocialLinks from "@/components/ui/SociaisLinks/SocialLinks";
 
 const ContactSocialLinks: React.FC = () => {
   return (

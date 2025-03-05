@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { FaGithub, FaLink, FaLinkedin } from 'react-icons/fa';
-import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
-import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
+import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
+import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
 
 type SocialLink = {
   name: string;

@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { Mail, MapPin } from "lucide-react";
 import { FaGlobe } from "react-icons/fa";
-import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
-import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
+import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
+import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
 
 interface ContactInfoType {
   icon: string;

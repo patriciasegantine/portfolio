@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { ChevronUp, X } from 'lucide-react';
-import NavMenu from '../NavMenu/NavMenu';
+import NavMenu from '@/components/ui/NavMenu/NavMenu';
 
 interface MobileMenuProps {
   isMobileMenuOpen: boolean;

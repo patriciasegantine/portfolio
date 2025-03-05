@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import ProjectCard from "@/components/ui/ProjectCard/ProjectCard";
 
 const mockProject = {
   image: '/test-image.png',

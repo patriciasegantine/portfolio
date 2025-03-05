@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import LoadingComponent from "@/components/LoadingComponent/LoadingComponent";
-import ErrorComponent from "@/components/ErrorComponent/ErrorComponent";
+import ProjectCard from "@/components/ui/ProjectCard/ProjectCard";
+import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
+import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import { Section } from "@/components/ui/Section/Section";
 

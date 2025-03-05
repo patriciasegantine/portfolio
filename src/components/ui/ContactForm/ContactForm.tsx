@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import { z, ZodError } from "zod";
-import FormInput from "@/components/FormInput/FormInput";
-import SubmitButton from "@/components/SubmitButton/SubmitButton";
+import FormInput from "@/components/ui/FormInput/FormInput";
+import SubmitButton from "@/components/ui/SubmitButton/SubmitButton";
 import contactSchema from "@/validate/contactSchema";
 import { mapValidationErrors } from "@/utils/mapValidateFormErrors";
-import Notification from "@/components/Notification/Notification";
+import Notification from "@/components/ui/Notification/Notification";
 import { errorMessages } from "@/validate/errorMessages";
 import { focusOnErrorField } from "@/utils/focusOnErrorField";
 import { useSendEmail } from "@/hook/useSendEmail";

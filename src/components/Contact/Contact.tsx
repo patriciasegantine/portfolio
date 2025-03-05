@@ -1,7 +1,7 @@
 import React from "react";
-import ContactForm from "@/components/ContactForm/ContactForm";
-import ContactInfo from "@/components/ContactInfo/ContactInfo";
-import ContactSocialLinks from "@/components/ContactSocialLinks/ContactSocialLinks";
+import ContactForm from "@/components/ui/ContactForm/ContactForm";
+import ContactInfo from "@/components/ui/ContactInfo/ContactInfo";
+import ContactSocialLinks from "@/components/ui/ContactSocialLinks/ContactSocialLinks";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import { Section } from "@/components/ui/Section/Section";
 

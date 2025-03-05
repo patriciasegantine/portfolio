@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
-import MobileMenu from '@/components/MobileMenu/MobileMenu';
+import MobileMenu from '@/components/ui/MobileMenu/MobileMenu';
 import { PanInfo } from "framer-motion";
 
 interface MotionDivProps extends PropsWithChildren {

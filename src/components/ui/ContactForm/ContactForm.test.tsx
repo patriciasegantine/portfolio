@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import ContactForm from "@/components/ContactForm/ContactForm";
+import ContactForm from "@/components/ui/ContactForm/ContactForm";
 import { validationMessages } from "@/validate/validationFormMessage";
 import { useSendEmail } from "@/hook/useSendEmail";
 
