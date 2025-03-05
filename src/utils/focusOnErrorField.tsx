@@ -1,4 +1,4 @@
-import { FormValues } from "@/components/ContactForm/ContactForm";
+import { FormValues } from "@/components/ui/ContactForm/ContactForm";
 
 export const focusOnErrorField = (errors: Partial<FormValues>) => {
   const firstErrorFieldId = Object.keys(errors)[0];
