@@ -14,7 +14,7 @@ const projects = [
       {icon: "SiTailwindcss", name: "Tailwind CSS"},
     ],
     github: "https://github.com/patriciasegantine/nexus-dashboard-frontend.git",
-    website: "https://ps-nexus.vercel.app/",
+    website: "https://ps-nexus-dashboard.vercel.app",
   },
   {
     key: "SmartNotes",
