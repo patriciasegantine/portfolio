@@ -13,14 +13,13 @@ const HeroIntro: React.FC = () => {
         Patricia Segantine
       </h1>
       
-      <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300 h-[40px] lg:h-[48px]">
-        Frontend Developer
+      <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300">
+        Front-End Developer
       </p>
       
       <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
-        Building modern front-end applications with React, Next.js, and TypeScript to deliver clean, scalable, and
-        high-performance user experiences.
-      
+        I build <strong>modern, scalable, and user-friendly applications</strong> with React, Next.js, and TypeScript.
+        I focus on <strong>performance, clean code, and intuitive user experiences</strong>, crafting interfaces that make an impact.
       </p>
     </>
   )

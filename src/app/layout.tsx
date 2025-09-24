@@ -21,16 +21,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-GB">
-    <body className={`${inter.className} min-h-screen bg-gray-50 text-dark`}>
     <ThemeProvider attribute="class">
+      <body className={`${inter.className} min-h-screen`}>
       <Header/>
       <main>
         {children}
       </main>
       <Footer/>
       <ScrollToTopButton/>
+      </body>
     </ThemeProvider>
-    </body>
     </html>
   )
 }
