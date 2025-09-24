@@ -13,8 +13,8 @@ interface SectionProps {
 }
 
 const themeVariants: Record<ThemeVariant, string> = {
-  primary: 'bg-zinc-100 dark:bg-zinc-900',
-  secondary: 'bg-zinc-50 dark:bg-zinc-900/95'
+  primary: 'bg-zinc-100 dark:bg-bg-dark',
+  secondary: 'bg-bg-light dark:bg-zinc-900/95'
 }
 
 export const Section: FC<SectionProps> = ({

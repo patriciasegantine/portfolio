@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
     <Section
       id="home"
       variant="secondary"
-      className="flex items-center justify-center min-h-screen pt-16 bg-white"
+      className="flex items-center justify-center min-h-screen pt-16"
     >
       <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
         <HeroImage/>
