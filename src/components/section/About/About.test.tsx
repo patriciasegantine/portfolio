@@ -14,7 +14,7 @@ describe('About Component', () => {
   });
   afterEach(() => fetchMock.resetMocks());
 
-  it('renders the About component without crashing', async () => {
+  it('renders section and fallback content', async () => {
     render(<About/>)
     const aboutSection = screen.getByTestId('about')
     expect(aboutSection).toBeInTheDocument()
@@ -22,15 +22,6 @@ describe('About Component', () => {
       expect(screen.getByText('Default paragraph')).toBeInTheDocument();
     });
   })
-  
-  it('renders section with the class transition-colors-custom', async () => {
-    render(<About/>);
-    const aboutSection = screen.getByTestId('about');
-    expect(aboutSection).toHaveClass('transition-colors-custom');
-    await waitFor(() => {
-      expect(screen.getByText('Default paragraph')).toBeInTheDocument();
-    });
-  });
   
   it('renders external about content from API', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({

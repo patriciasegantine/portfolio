@@ -31,8 +31,9 @@ describe("Footer component", () => {
     );
   });
   
-  it("matches snapshot", () => {
-    const {asFragment} = render(<Footer/>);
-    expect(asFragment()).toMatchSnapshot();
+  it("renders current year", () => {
+    render(<Footer/>);
+    const currentYear = new Date().getFullYear();
+    expect(screen.getByText(`© ${currentYear} All rights reserved`)).toBeInTheDocument();
   });
 });

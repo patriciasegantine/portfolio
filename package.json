@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "pre-pr": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@next/env": "^15.0.4",
