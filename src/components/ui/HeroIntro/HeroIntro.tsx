@@ -1,6 +1,17 @@
+'use client'
+
 import React from 'react'
+import { contentClientService } from "@/services/content/contentClientService";
+import { useRemoteContent } from "@/hook/useRemoteContent";
+import { HeroContent } from "@/types/hero";
+import { heroContent } from "@/data/hero";
 
 const HeroIntro: React.FC = () => {
+  const { data: content } = useRemoteContent<HeroContent>(
+    contentClientService.getHeroContent,
+    heroContent
+  );
+
   return (
     <>
       <div className="flex items-center gap-2 text-secondary dark:text-zinc-400" data-testid="hero-intro">
@@ -14,12 +25,11 @@ const HeroIntro: React.FC = () => {
       </h1>
       
       <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300">
-        Front-End Developer
+        {content.title}
       </p>
       
       <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
-        I build <strong>modern, scalable, and user-friendly applications</strong> with React, Next.js, and TypeScript.
-        I focus on <strong>performance, clean code, and intuitive user experiences</strong>, crafting interfaces that make an impact.
+        {content.subtitle}
       </p>
     </>
   )
