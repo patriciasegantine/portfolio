@@ -1,35 +1,40 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import About from "@/components/section/About/About";
-
-jest.mock('@/data/personalInterests', () => ({
-  personalInterests: [
-    {name: 'Coffee', icon: () => <span>Coffee Icon</span>},
-    {name: 'Music', icon: () => <span>Music Icon</span>},
-  ],
-}));
+import fetchMock from "jest-fetch-mock";
 
 describe('About Component', () => {
-  it('renders the About component without crashing', () => {
+  beforeEach(() => {
+    fetchMock.enableMocks();
+    fetchMock.mockResponse(JSON.stringify({
+      title: "About Me",
+      paragraphs: ["Default paragraph"]
+    }));
+  });
+  afterEach(() => fetchMock.resetMocks());
+
+  it('renders section and fallback content', async () => {
     render(<About/>)
     const aboutSection = screen.getByTestId('about')
     expect(aboutSection).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Default paragraph')).toBeInTheDocument();
+    });
   })
   
-  it('renders section with the class transition-colors-custom', () => {
-    render(<About/>);
-    const aboutSection = screen.getByTestId('about');
-    expect(aboutSection).toHaveClass('transition-colors-custom');
-  });
-  
-  it('renders all personal interests dynamically from the mock array', () => {
+  it('renders external about content from API', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({
+      title: "About Me",
+      paragraphs: ["Paragraph one", "Paragraph two"]
+    }));
+
     render(<About/>)
-    
-    const interests = ['Coffee', 'Music']
-    interests.forEach((interest) => {
-      expect(screen.getByText(interest)).toBeInTheDocument()
-    })
+
+    await waitFor(() => {
+      expect(screen.getByText('Paragraph one')).toBeInTheDocument();
+      expect(screen.getByText('Paragraph two')).toBeInTheDocument();
+    });
   })
-  
+
 })
