@@ -1,10 +1,34 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import { Section } from "@/components/ui/Section/Section";
 import { TextContent } from "@/components/ui/TextContent/TextContent";
-import { AboutInterests } from "@/components/ui/AboutInterests/AboutInterests";
+import { aboutContent } from "@/data/about";
+import type { AboutContent } from "@/types/about";
 
 const About: React.FC = () => {
+  const [content, setContent] = useState<AboutContent>(aboutContent);
+
+  useEffect(() => {
+    const fetchAboutContent = async () => {
+      try {
+        const response = await fetch('/api/about');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch about content.');
+        }
+
+        const data = (await response.json()) as AboutContent;
+        setContent(data);
+      } catch {
+        setContent(aboutContent);
+      }
+    };
+
+    fetchAboutContent();
+  }, []);
+
   return (
     <Section
       id="about"
@@ -12,29 +36,17 @@ const About: React.FC = () => {
       aria-label="About"
     >
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="prose dark:prose-dark mb-16">
-            <SectionTitle title="About Me" />
+        <div className="max-w-6xl mx-auto prose dark:prose-dark mb-16">
+          
+            <SectionTitle title={content.title} />
             
             <div className="text-lg text-secondary dark:text-zinc-300 leading-relaxed space-y-4">
-              <TextContent>
-                Building <strong>scalable, user-friendly applications</strong> with React, Next.js, and TypeScript for <strong>millions of users</strong>.
-                I focus on creating <strong>smooth, intuitive interfaces</strong> that deliver real impact and great user experiences.
-              </TextContent>
-              
-              <TextContent>
-                Experienced in <strong>microfrontends, design systems, and CI/CD workflows</strong>, I write clean, maintainable code
-                while collaborating in agile, cross-functional teams.
-              </TextContent>
-              
-              <TextContent>
-                I value <strong>clear communication, teamwork, and continuous learning</strong>, always exploring new tools and approaches
-                to build better products and grow as a developer.
-              </TextContent>
+              {content.paragraphs.map((paragraph, index) => (
+                <TextContent key={index}>
+                  {paragraph}
+                </TextContent>
+              ))}
             </div>
-          </div>
-          
-          <AboutInterests />
         </div>
       </div>
     </Section>
