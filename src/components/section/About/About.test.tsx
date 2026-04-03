@@ -5,19 +5,31 @@ import About from "@/components/section/About/About";
 import fetchMock from "jest-fetch-mock";
 
 describe('About Component', () => {
-  beforeEach(() => fetchMock.enableMocks());
+  beforeEach(() => {
+    fetchMock.enableMocks();
+    fetchMock.mockResponse(JSON.stringify({
+      title: "About Me",
+      paragraphs: ["Default paragraph"]
+    }));
+  });
   afterEach(() => fetchMock.resetMocks());
 
-  it('renders the About component without crashing', () => {
+  it('renders the About component without crashing', async () => {
     render(<About/>)
     const aboutSection = screen.getByTestId('about')
     expect(aboutSection).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Default paragraph')).toBeInTheDocument();
+    });
   })
   
-  it('renders section with the class transition-colors-custom', () => {
+  it('renders section with the class transition-colors-custom', async () => {
     render(<About/>);
     const aboutSection = screen.getByTestId('about');
     expect(aboutSection).toHaveClass('transition-colors-custom');
+    await waitFor(() => {
+      expect(screen.getByText('Default paragraph')).toBeInTheDocument();
+    });
   });
   
   it('renders external about content from API', async () => {

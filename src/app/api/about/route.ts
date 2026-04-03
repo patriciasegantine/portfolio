@@ -1,21 +1,14 @@
 import { NextResponse } from "next/server";
 import { aboutContent } from "@/data/about";
-import { AboutContent } from "@/types/about";
 import { CONTENT_ENDPOINTS } from "@/config/content";
+import { fetchExternalContentWithFallback } from "@/services/content/contentServerService";
+import type { AboutContent } from "@/types/about";
 
 export async function GET() {
-  try {
-    const response = await fetch(CONTENT_ENDPOINTS.about, {
-      next: { revalidate: 300 }
-    });
+  const content = await fetchExternalContentWithFallback<AboutContent>({
+    url: CONTENT_ENDPOINTS.about,
+    fallback: aboutContent
+  });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch external about content.");
-    }
-
-    const data = (await response.json()) as AboutContent;
-    return NextResponse.json(data);
-  } catch {
-    return NextResponse.json(aboutContent);
-  }
+  return NextResponse.json(content);
 }
