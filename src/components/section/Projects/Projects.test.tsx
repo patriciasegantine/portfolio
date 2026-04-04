@@ -6,28 +6,54 @@ import fetchMock from "jest-fetch-mock";
 const generateMockProjects = () => {
   return [
     {
-      key: "FirstProject",
+      slug: "first-project",
       title: "First Project - Task Dashboard",
+      category: "Web",
       description: "First Project is a web platform...",
-      image: "",
-      technologies: [
-        {icon: "SiReact", name: "React"},
-        {icon: "SiNextdotjs", name: "Next.js"},
-      ],
-      github: "https://github.com/example/first-project",
-      website: "https://web.com/example/first-project",
+      image: null,
+      stackPreview: ["React", "Next.js"],
+      status: "Completed",
+      technologies: [{icon: "SiReact", name: "React"}],
+      links: {
+        github: "https://github.com/example/first-project",
+        liveDemo: "https://web.com/example/first-project",
+      },
+      caseStudy: {
+        projectOverview: "",
+        problemPurpose: "",
+        myFocus: [],
+        techStack: [],
+        whyThisStack: [],
+        keyFeatures: [],
+        challengesTradeoffs: [],
+        whatILearned: [],
+        nextSteps: [],
+      },
     },
     {
-      key: "SecondProject",
+      slug: "second-project",
       title: "Second Project - Collaboration Hub",
+      category: "Web",
       description: "Second Project is designed for teamwork...",
-      image: "",
-      technologies: [
-        {icon: "SiVue", name: "Vue.js"},
-        {icon: "SiNuxtdotjs", name: "Nuxt.js"},
-      ],
-      github: "https://github.com/example/second-project",
-      website: "https://web.com/example/second-project",
+      image: null,
+      stackPreview: ["Vue.js", "Nuxt.js"],
+      status: "In Progress",
+      technologies: [{icon: "SiVue", name: "Vue.js"}],
+      links: {
+        github: "https://github.com/example/second-project",
+        liveDemo: "https://web.com/example/second-project",
+      },
+      caseStudy: {
+        projectOverview: "",
+        problemPurpose: "",
+        myFocus: [],
+        techStack: [],
+        whyThisStack: [],
+        keyFeatures: [],
+        challengesTradeoffs: [],
+        whatILearned: [],
+        nextSteps: [],
+      },
     },
   ];
 };
@@ -44,17 +70,10 @@ describe("Projects Component", () => {
     await waitFor(() => {
       expect(screen.getByText("First Project - Task Dashboard")).toBeInTheDocument();
       expect(screen.getByText("Second Project - Collaboration Hub")).toBeInTheDocument();
-    });
-  });
-  
-  it("renders technologies for each project", async () => {
-    fetchMock.mockResponseOnce(JSON.stringify(generateMockProjects()));
-    
-    render(<Projects/>);
-    
-    await waitFor(() => {
-      expect(screen.getByTitle("React")).toBeInTheDocument();
-      expect(screen.getByTitle("Next.js")).toBeInTheDocument();
+      const detailsLinks = screen.getAllByRole("link", {name: "View Details"});
+      expect(detailsLinks).toHaveLength(2);
+      expect(detailsLinks[0]).toHaveAttribute("href", "/projects/first-project");
+      expect(detailsLinks[1]).toHaveAttribute("href", "/projects/second-project");
     });
   });
   
