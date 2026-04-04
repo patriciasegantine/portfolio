@@ -39,7 +39,7 @@ const ScrollToTopButton: React.FC = () => {
       )}
       aria-label="Scroll to top"
       data-testid="scrollToTop"
-      aria-hidden={!isVisible}
+      tabIndex={isVisible ? 0 : -1}
     >
       <ArrowUp className="w-5 h-5 transition-transform duration-300 group-hover:scale-110"/>
     </button>

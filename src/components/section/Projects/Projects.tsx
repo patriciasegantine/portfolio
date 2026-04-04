@@ -19,7 +19,7 @@ const Projects: React.FC = () => {
   return (
     <Section
       id="projects"
-      variant="secondary"
+      variant="primary"
       aria-label="Projects"
     >
       <div className="container mx-auto px-4">

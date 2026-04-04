@@ -9,7 +9,7 @@ const Contact: React.FC = () => {
   return (
     <Section
       id="contact"
-      variant="secondary"
+      variant="primary"
       aria-label="Contact"
     >
       
