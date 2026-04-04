@@ -3,9 +3,23 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Contact from '@/components/section/Contact/Contact';
 
-jest.mock('@/components/ui/ContactForm/ContactForm', () => () => <div data-testid="mock-contact-form" />);
-jest.mock('@/components/ui/ContactInfo/ContactInfo', () => () => <div data-testid="mock-contact-info" />);
-jest.mock('@/components/ui/ContactSocialLinks/ContactSocialLinks', () => () => <div data-testid="mock-contact-social-links" />);
+jest.mock('@/components/ui/ContactForm/ContactForm', () => {
+  const MockContactForm = () => <div data-testid="mock-contact-form" />;
+  MockContactForm.displayName = 'MockContactForm';
+  return MockContactForm;
+});
+
+jest.mock('@/components/ui/ContactInfo/ContactInfo', () => {
+  const MockContactInfo = () => <div data-testid="mock-contact-info" />;
+  MockContactInfo.displayName = 'MockContactInfo';
+  return MockContactInfo;
+});
+
+jest.mock('@/components/ui/ContactSocialLinks/ContactSocialLinks', () => {
+  const MockContactSocialLinks = () => <div data-testid="mock-contact-social-links" />;
+  MockContactSocialLinks.displayName = 'MockContactSocialLinks';
+  return MockContactSocialLinks;
+});
 
 describe('Contact Component', () => {
   it('should render the Contact section', () => {
