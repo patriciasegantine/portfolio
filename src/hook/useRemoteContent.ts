@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 
 interface UseRemoteContentResult<T> {
-  data: T;
+  data: T | null;
   isLoading: boolean;
   error: string | null;
 }
 
-export const useRemoteContent = <T>(fetcher: () => Promise<T>, fallback: T): UseRemoteContentResult<T> => {
-  const [data, setData] = useState<T>(fallback);
+export const useRemoteContent = <T>(fetcher: () => Promise<T>): UseRemoteContentResult<T> => {
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,6 @@ export const useRemoteContent = <T>(fetcher: () => Promise<T>, fallback: T): Use
         }
       } catch (err) {
         if (isMounted) {
-          setData(fallback);
           setError(err instanceof Error ? err.message : "Failed to fetch remote content.");
         }
       } finally {
@@ -43,7 +42,7 @@ export const useRemoteContent = <T>(fetcher: () => Promise<T>, fallback: T): Use
     return () => {
       isMounted = false;
     };
-  }, [fetcher, fallback]);
+  }, [fetcher]);
 
   return { data, isLoading, error };
 };
