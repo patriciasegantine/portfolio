@@ -4,12 +4,12 @@ import React from 'react'
 import { contentClientService } from "@/services/content/contentClientService";
 import { useRemoteContent } from "@/hook/useRemoteContent";
 import { HeroContent } from "@/types/hero";
-import { heroContent } from "@/data/hero";
+import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
+import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
 
 const HeroIntro: React.FC = () => {
-  const { data: content } = useRemoteContent<HeroContent>(
-    contentClientService.getHeroContent,
-    heroContent
+  const { data: content, isLoading, error } = useRemoteContent<HeroContent>(
+    contentClientService.getHeroContent
   );
 
   return (
@@ -23,14 +23,21 @@ const HeroIntro: React.FC = () => {
                    text-primary-dark dark:text-zinc-50">
         Patricia Segantine
       </h1>
-      
-      <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300">
-        {content.title}
-      </p>
-      
-      <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
-        {content.subtitle}
-      </p>
+
+      {isLoading && <LoadingComponent message="Loading hero content..." />}
+      {error && <ErrorComponent message={error} />}
+
+      {content && (
+        <>
+          <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300">
+            {content.title}
+          </p>
+
+          <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
+            {content.subtitle}
+          </p>
+        </>
+      )}
     </>
   )
 }
