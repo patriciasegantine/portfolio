@@ -30,7 +30,6 @@ export interface Project {
   image: string | null;
   stackPreview: string[];
   status: ProjectStatus;
-  featured: boolean;
   technologies: ProjectTechnology[];
   links: ProjectLinks;
   caseStudy: ProjectCaseStudy;

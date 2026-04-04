@@ -16,11 +16,6 @@ const Projects: React.FC = () => {
   );
   const projects = data ?? [];
   
-  const featuredProject = projects.find((project) => project.featured);
-  const filteredProjects = projects.filter(
-    (project) => project.slug !== featuredProject?.slug
-  );
-  
   return (
     <Section
       id="projects"
@@ -34,23 +29,8 @@ const Projects: React.FC = () => {
         
         {error && <ErrorComponent message={error}/>}
         
-        {featuredProject && (
-          <div className="max-w-6xl mx-auto mb-20">
-            <ProjectCard
-              slug={featuredProject.slug}
-              image={featuredProject.image}
-              title={featuredProject.title}
-              description={featuredProject.description}
-              stackPreview={featuredProject.stackPreview}
-              status={featuredProject.status}
-              github={featuredProject.links.github}
-              liveDemo={featuredProject.links.liveDemo}
-            />
-          </div>
-        )}
-        
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <ProjectCard
               key={project.slug}
               slug={project.slug}

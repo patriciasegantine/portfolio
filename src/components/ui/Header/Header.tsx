@@ -15,7 +15,7 @@ const Header: React.FC = () => {
       className="bg-white dark:bg-zinc-900 shadow-sm fixed w-full z-50 top-0 border-b border-zinc-100 dark:border-zinc-800 transition-colors-custom"
     >
       <nav className="container mx-auto flex justify-between items-center py-4 px-4">
-        <Link href="#home" className="flex items-center gap-2">
+        <Link href="/#home" className="flex items-center gap-2">
           
           <Code className="w-5 h-5 text-secondary dark:text-zinc-300"/>
           <h3 className="text-xl font-medium text-primary-dark dark:text-zinc-50">PS</h3>
