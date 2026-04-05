@@ -9,6 +9,7 @@ import { Section } from "@/components/ui/Section/Section";
 import { contentClientService } from "@/services/content/contentClientService";
 import { useRemoteContent } from "@/hook/useRemoteContent";
 import { Project } from "@/types/project";
+import RevealOnScroll from "@/components/ui/RevealOnScroll/RevealOnScroll";
 
 const Projects: React.FC = () => {
   const { data, isLoading, error } = useRemoteContent<Project[]>(
@@ -30,18 +31,19 @@ const Projects: React.FC = () => {
         {error && <ErrorComponent message={error}/>}
         
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              slug={project.slug}
-              image={project.image}
-              title={project.title}
-              description={project.description}
-              stackPreview={project.stackPreview}
-              status={project.status}
-              github={project.links.github}
-              liveDemo={project.links.liveDemo}
-            />
+          {projects.map((project, index) => (
+            <RevealOnScroll key={project.slug} delay={index * 0.08}>
+              <ProjectCard
+                slug={project.slug}
+                image={project.image}
+                title={project.title}
+                description={project.description}
+                stackPreview={project.stackPreview}
+                status={project.status}
+                github={project.links.github}
+                liveDemo={project.links.liveDemo}
+              />
+            </RevealOnScroll>
           ))}
         </div>
       </div>

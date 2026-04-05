@@ -12,7 +12,7 @@ const ProjectLinks = ({ github, liveDemo }: ProjectLinksProps) => {
 
   return (
     <section id="project-links" className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 p-6">
-      <h2 className="text-xl font-medium text-primary-dark dark:text-zinc-50 mb-4">Links</h2>
+      <h2 className="text-xl font-medium text-primary mb-4">Links</h2>
       <div className="flex flex-wrap gap-3">
         {liveDemo && (
           <a
@@ -33,7 +33,7 @@ const ProjectLinks = ({ github, liveDemo }: ProjectLinksProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-             text-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80 transition-colors border-2 border-zinc-200 dark:border-zinc-700"
+             text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80 transition-colors border-2 border-zinc-200 dark:border-zinc-700"
           >
             <FaGithub className="w-5 h-5" />
             <span>GitHub</span>

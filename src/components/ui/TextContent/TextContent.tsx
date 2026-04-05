@@ -12,7 +12,7 @@ export const TextContent: FC<TextContentProps> = ({
                                                   }) => {
   return (
     <p className={cn(
-      "text-lg text-secondary dark:text-zinc-300 leading-relaxed",
+      "text-lg text-secondary dark:text-secondary leading-relaxed",
       className
     )}>
       {children}

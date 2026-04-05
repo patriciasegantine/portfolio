@@ -5,9 +5,9 @@ import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 const ToggleThemeButton: React.FC = () => {
-  const {setTheme, resolvedTheme, systemTheme} = useTheme();
+  const {setTheme, resolvedTheme} = useTheme();
   
-  const currentTheme = resolvedTheme === 'system' ? systemTheme : resolvedTheme;
+  const currentTheme = resolvedTheme ?? 'light';
   
   const toggleTheme = () => {
     setTheme(currentTheme === 'dark' ? 'light' : 'dark');
@@ -19,7 +19,7 @@ const ToggleThemeButton: React.FC = () => {
     <button
       data-testid="toggle-theme-button"
       onClick={toggleTheme}
-      className="p-2 text-secondary hover:text-primary transition-colors duration-custom dark:text-zinc-400 dark:hover:text-zinc-100"
+      className="p-2 text-secondary hover:text-primary transition-colors duration-custom"
       aria-label={`Activate ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
     >
       <Icon className="w-5 h-5" data-testid={currentTheme === 'dark' ? 'sun-icon' : 'moon-icon'}/>

@@ -18,7 +18,7 @@ const Contact: React.FC = () => {
           <div className="text-center mb-16">
             <SectionTitle title={"Let's Contact"}/>
             
-            <p className="text-secondary dark:text-zinc-300">
+            <p className="text-secondary dark:text-secondary">
               Feel free to reach out for collaborations or just a friendly hello
             </p>
           </div>

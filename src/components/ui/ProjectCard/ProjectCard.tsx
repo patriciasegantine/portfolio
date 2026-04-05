@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, Loader2 } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
 
 interface ProjectCardProps {
@@ -40,15 +40,42 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                                                    title,
                                                    description,
                                                    stackPreview,
-                                                   status,
-                                                   github,
-                                                   liveDemo
+                                                 status,
+                                                 github,
+                                                 liveDemo
                                                  }) => {
   const [showImage, setShowImage] = React.useState(Boolean(image));
+  const [isNavigatingToDetails, setIsNavigatingToDetails] = React.useState(false);
+  const detailsHref = `/projects/${slug}`;
 
   React.useEffect(() => {
     setShowImage(Boolean(image));
   }, [image]);
+
+  React.useEffect(() => {
+    if (!isNavigatingToDetails) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setIsNavigatingToDetails(false);
+    }, 2000);
+
+    return () => window.clearTimeout(timeout);
+  }, [isNavigatingToDetails]);
+
+  const handleDetailsClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
+    setIsNavigatingToDetails(true);
+  };
 
   return (
     <div
@@ -69,17 +96,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
       <div className="flex flex-col flex-grow p-8">
         <div className="flex-grow">
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <h3 className="text-2xl font-medium text-primary-dark dark:text-zinc-50">
+          <div className="flex flex-col items-start gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <h3 className="text-2xl font-medium text-primary">
               {title}
             </h3>
             {status && (
-              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300">
+              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300 whitespace-nowrap">
                 {status}
               </span>
             )}
           </div>
-          <p className="text-secondary dark:text-zinc-300 mb-6">
+          <p className="text-secondary dark:text-secondary mb-6">
             {description}
           </p>
         </div>
@@ -98,12 +125,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href={`/projects/${slug}`}
+              href={detailsHref}
+              onClick={handleDetailsClick}
+              aria-busy={isNavigatingToDetails}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
                        hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200
-                       transition-colors"
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+                       focus-visible:ring-zinc-900 focus-visible:ring-offset-zinc-100
+                       dark:focus-visible:ring-zinc-100 dark:focus-visible:ring-offset-zinc-900
+                       transition-colors hover:-translate-y-0.5 active:scale-[0.99]"
+              style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
             >
-              <span>View Details</span>
+              {isNavigatingToDetails && <Loader2 className="w-4 h-4 animate-spin" />}
+              <span>{isNavigatingToDetails ? 'Opening...' : 'View Details'}</span>
             </Link>
 
             {liveDemo && (
@@ -112,7 +146,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80
+                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
                        transition-colors"
               >
                 <FaExternalLinkAlt className="w-4 h-4" />
@@ -126,7 +160,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80
+                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
                        transition-colors"
               >
                 <FaGithub className="w-5 h-5" />

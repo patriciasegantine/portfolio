@@ -61,10 +61,10 @@ const SocialLinks: React.FC<SocialLinksProps> = ({showLabel = false}) => {
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors text-secondary bg-zinc-100 dark:bg-zinc-700/50 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors text-secondary bg-zinc-100 dark:bg-zinc-700/50 hover:bg-zinc-200 dark:hover:bg-zinc-700/80"
           aria-label={`Visit ${social.name} profile`}
         >
-          {React.createElement(icons[social.icon] || icons.default, {className: "w-5 h-5 dark:text-zinc-300"})}
+          {React.createElement(icons[social.icon] || icons.default, {className: "w-5 h-5"})}
           {showLabel && <span>{social.name}</span>}
         </a>
       ))}

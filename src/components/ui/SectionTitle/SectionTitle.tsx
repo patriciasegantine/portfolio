@@ -10,7 +10,7 @@ export const SectionTitle: FC<SectionTitleProps> = ({title, className}) => {
   return (
     <div className="text-center pb-12">
       <h2 className={cn(
-        "text-3xl font-medium text-primary-dark dark:text-zinc-50",
+        "text-3xl font-medium text-primary",
         className
       )}>
         {title}

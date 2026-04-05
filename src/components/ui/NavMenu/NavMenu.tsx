@@ -8,7 +8,7 @@ interface NavMenuProps {
 }
 
 const defaultNavItems = [
-  {href: '/#home', label: 'home'},
+  {href: '/', label: 'home'},
   {href: '/#about', label: 'about'},
   {href: '/#projects', label: 'projects'},
   {href: '/#skills', label: 'skills'},
@@ -32,9 +32,8 @@ const NavMenu: React.FC<NavMenuProps> = ({
         <Link
           key={label}
           href={href}
-          className={`${
-            isMobile ? 'block py-2' : 'text-secondary hover:text-primary'
-          } transition-colors duration-custom dark:text-zinc-400 dark:hover:text-zinc-100`}
+          className={`${isMobile ? 'block' : 'inline-block'}
+          px-3 py-2 rounded-lg text-secondary hover:text-primary hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors duration-custom`}
           onClick={onItemClick}
         >
           {label}

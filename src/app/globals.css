@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #34495e;
+    --color-primary: #18181b; /* zinc-900 */
+    --color-primary-light: #27272a; /* zinc-800 */
+    --color-primary-dark: #09090b; /* zinc-950 */
+
+    --color-secondary: #3f3f46; /* zinc-700 */
+    --color-secondary-light: #52525b; /* zinc-600 */
+    --color-secondary-dark: #27272a; /* zinc-800 */
+
     --text-color: #2c3e50;
     --background-color: #f8f9fa;
     --accent-color: #7f8c8d;
@@ -20,6 +26,16 @@
 }
 
 .dark {
+    --color-primary: #f4f4f5; /* zinc-100 */
+    --color-primary-light: #fafafa; /* zinc-50 */
+    --color-primary-dark: #e4e4e7; /* zinc-200 */
+
+    --color-secondary: #e4e4e7; /* zinc-200 */
+    --color-secondary-light: #f4f4f5; /* zinc-100 */
+    --color-secondary-dark: #d4d4d8; /* zinc-300 */
+
+    --text-color: #f4f4f5;
+    --background-color: #18181b;
     --bg-color-light: #18181b;
     --bg-color-dark: #ffffff;
     --dark-100: #27272a; /* zinc-800 */
@@ -35,16 +51,17 @@ body {
 }
 
 html {
+    background-color: var(--background-color);
     scroll-behavior: smooth;
 }
 
 .icon {
-    color: var(--primary-color);
+    color: var(--color-primary);
     transition: color 0.3s ease;
 }
 
 .icon:hover {
-    color: var(--secondary-color);
+    color: var(--color-secondary);
 }
 
 .transition-colors-custom {

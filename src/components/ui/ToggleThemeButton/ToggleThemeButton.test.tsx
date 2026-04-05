@@ -16,7 +16,6 @@ describe('ToggleThemeButton', () => {
     (useTheme as jest.Mock).mockReturnValue({
       setTheme: mockSetTheme,
       resolvedTheme: 'light',
-      systemTheme: 'system',
     });
   });
   
@@ -52,21 +51,20 @@ describe('ToggleThemeButton', () => {
     expect(button).toHaveAttribute('aria-label', 'Activate light mode');
   });
   
-  it('should default to the system theme (dark mode)', () => {
+  it('should fallback to light when theme is undefined', () => {
     (useTheme as jest.Mock).mockReturnValueOnce({
       setTheme: mockSetTheme,
-      resolvedTheme: 'system',
-      systemTheme: 'dark',
+      resolvedTheme: undefined,
     });
     
     render(<ToggleThemeButton/>);
     
     const button = screen.getByTestId('toggle-theme-button');
-    const sunIcon = screen.getByTestId('sun-icon');
+    const moonIcon = screen.getByTestId('moon-icon');
     
     expect(button).toBeInTheDocument();
-    expect(sunIcon).toBeInTheDocument();
-    expect(button).toHaveAttribute('aria-label', 'Activate light mode');
+    expect(moonIcon).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', 'Activate dark mode');
   });
   
   it('should switch to dark mode when the current theme is light', () => {
@@ -83,7 +81,6 @@ describe('ToggleThemeButton', () => {
     (useTheme as jest.Mock).mockReturnValueOnce({
       setTheme: mockSetTheme,
       resolvedTheme: 'dark',
-      systemTheme: 'dark',
     });
     
     render(<ToggleThemeButton/>);
