@@ -3,6 +3,11 @@ import { render, screen, waitFor } from "@testing-library/react";
 import Projects from "@/components/section/Projects/Projects";
 import fetchMock from "jest-fetch-mock";
 
+jest.mock("@/components/ui/RevealOnScroll/RevealOnScroll", () => ({
+  __esModule: true,
+  default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
 const generateMockProjects = () => {
   return [
     {
