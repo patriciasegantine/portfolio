@@ -4,23 +4,21 @@ import React from 'react'
 import SocialLinks from "@/components/ui/SociaisLinks/SocialLinks";
 import HeroImage from "@/components/ui/HeroImage/HeroImage";
 import { Section } from "@/components/ui/Section/Section";
-import { contentClientService } from "@/services/content/contentClientService";
-import { useRemoteContent } from "@/hook/useRemoteContent";
 import type { HeroContent } from "@/types/hero";
-import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
-import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
+
+const HERO_CONTENT: HeroContent = {
+  title: "Frontend Engineer",
+  subtitle: "Building reliable applications for scalable SaaS products, with a strong focus on performance, accessibility, and maintainable front-end systems.",
+};
 
 const Hero: React.FC = () => {
-  const { data: content, isLoading, error } = useRemoteContent<HeroContent>(
-    contentClientService.getHeroContent
-  );
 
   return (
     <Section
       id="home"
       variant="primary"
       aria-label="Home"
-      className="flex items-center justify-center min-h-screen"
+      className="flex items-center justify-center min-h-[calc(100svh-4rem)] md:min-h-screen py-0"
     >
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center md:items-start gap-12">
         <HeroImage/>
@@ -35,21 +33,17 @@ const Hero: React.FC = () => {
             Patricia Segantine
           </h1>
 
-          {isLoading && <LoadingComponent message="Loading hero content..." />}
-          {error && <ErrorComponent message={error} />}
+          <p className="text-xl md:text-2xl lg:text-3xl text-secondary min-h-8 md:min-h-10">
+            {HERO_CONTENT.title}
+          </p>
 
-          {content && (
-            <>
-              <p className="text-xl md:text-2xl lg:text-3xl text-secondary dark:text-zinc-300">
-                {content.title}
-              </p>
+          <p className="text-lg text-secondary leading-relaxed max-w-2xl min-h-32 md:min-h-24">
+            {HERO_CONTENT.subtitle}
+          </p>
 
-              <p className="text-lg text-secondary dark:text-secondary leading-relaxed max-w-2xl">
-                {content.subtitle}
-              </p>
-            </>
-          )}
-          <SocialLinks showLabel={true}/>
+          <div className="min-h-11 flex items-center">
+            <SocialLinks showLabel={true}/>
+          </div>
         </div>
       </div>
     </Section>
