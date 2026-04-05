@@ -18,7 +18,7 @@ const About: React.FC = () => {
   return (
     <Section
       id="about"
-      variant="primary"
+      variant="secondary"
       aria-label="About"
     >
       <div className="container mx-auto px-4">

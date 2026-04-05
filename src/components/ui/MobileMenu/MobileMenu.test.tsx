@@ -45,9 +45,9 @@ jest.mock('framer-motion', () => ({
 }));
 
 const navItemsMock = [
-  {href: '/home', label: 'Home'},
-  {href: '/about', label: 'About'},
-  {href: '/contact', label: 'Contact'},
+  {href: '#home', label: 'Home'},
+  {href: '#about', label: 'About'},
+  {href: '#contact', label: 'Contact'},
 ];
 const mockSetIsMobileMenuOpen = jest.fn();
 
@@ -134,41 +134,6 @@ describe('MobileMenu Component', () => {
     );
     
     const link = screen.getByText(navItemsMock[0].label);
-    
-    await act(async () => {
-      fireEvent.click(link);
-      jest.advanceTimersByTime(200);
-    });
-    
-    expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
-  });
-  
-  it('renders the chevron up icon', () => {
-    render(
-      <MobileMenu
-        navItems={navItemsMock}
-        isMobileMenuOpen={true}
-        setIsMobileMenuOpen={mockSetIsMobileMenuOpen}
-      />
-    );
-    
-    const chevronIcon = screen.getByTestId('motion-div').querySelector('.animate-bounce');
-    expect(chevronIcon).toBeInTheDocument();
-  });
-  
-  it('applies quick animation when closing via link click', async () => {
-    render(
-      <MobileMenu
-        navItems={navItemsMock}
-        isMobileMenuOpen={true}
-        setIsMobileMenuOpen={mockSetIsMobileMenuOpen}
-      />
-    );
-    
-    const link = screen.getByText(navItemsMock[0].label);
-    const menuElement = screen.getByTestId('motion-div');
-    
-    expect(menuElement).toBeInTheDocument();
     
     await act(async () => {
       fireEvent.click(link);

@@ -9,7 +9,7 @@ const Skills: React.FC = () => {
   return (
     <Section
       id="skills"
-      variant="primary"
+      variant="secondary"
       aria-label="Skills"
     >
       <div className="container mx-auto px-4">
