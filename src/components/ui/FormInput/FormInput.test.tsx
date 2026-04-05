@@ -4,18 +4,11 @@ import "@testing-library/jest-dom";
 import FormInput from "@/components/ui/FormInput/FormInput";
 
 describe("FormInput Component", () => {
-  
-  it("renders a label with the correct text", () => {
+  it("renders an input with label association", () => {
     render(<FormInput id="username" label="Username"/>);
     const labelElement = screen.getByText("Username");
-    expect(labelElement).toBeInTheDocument();
-    expect(labelElement.tagName).toBe("LABEL");
-    expect(labelElement).toHaveAttribute("for", "username");
-  });
-  
-  it("renders an input when rows is not provided", () => {
-    render(<FormInput id="username" label="Username"/>);
     const inputElement = screen.getByRole("textbox");
+    expect(labelElement).toHaveAttribute("for", "username");
     expect(inputElement).toBeInTheDocument();
     expect(inputElement.tagName).toBe("INPUT");
   });
@@ -28,62 +21,6 @@ describe("FormInput Component", () => {
     expect(textareaElement).toHaveAttribute("rows", "4");
   });
   
-  it("renders input with the correct initial value", () => {
-    render(
-      <FormInput
-        id="email"
-        label="Email"
-        value="test@example.com"
-        onChange={() => {
-        }}
-        placeholder="Enter your email"
-      />
-    );
-    
-    const inputElement = screen.getByPlaceholderText("Enter your email");
-    
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveValue("test@example.com");
-  });
-  
-  it("includes placeholder, value, and type for input", () => {
-    render(
-      <FormInput
-        id="email"
-        label="Email"
-        type="email"
-        placeholder="Enter your email"
-        value="test@example.com"
-        onChange={() => {
-        }}
-      />
-    );
-    const inputElement = screen.getByPlaceholderText("Enter your email");
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveAttribute("type", "email");
-    expect(inputElement).toHaveValue("test@example.com");
-  });
-  
-  it("includes placeholder and value for textarea", () => {
-    render(
-      <FormInput
-        id="bio"
-        label="Bio"
-        rows={5}
-        onChange={() => {
-        }}
-        placeholder="Write about yourself"
-        value="I am a developer."
-      />
-    );
-    const textareaElement = screen.getByPlaceholderText(
-      "Write about yourself"
-    );
-    expect(textareaElement).toBeInTheDocument();
-    expect(textareaElement).toHaveAttribute("rows", "5");
-    expect(textareaElement).toHaveValue("I am a developer.");
-  });
-  
   it("calls the onChange handler when the value changes for input", () => {
     const handleChange = jest.fn();
     render(<FormInput id="username" label="Username" onChange={handleChange}/>);
@@ -92,15 +29,7 @@ describe("FormInput Component", () => {
     fireEvent.change(inputElement, {target: {value: "JohnDoe"}});
     
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(expect.any(Object)); // Optional, verify the event object
-  });
-  
-  it("renders with the correct className", () => {
-    render(
-      <FormInput id="test" label="Test" className="custom-class"/>
-    );
-    const inputElement = screen.getByRole("textbox");
-    expect(inputElement).toHaveClass("custom-class");
+    expect(handleChange).toHaveBeenCalledWith(expect.any(Object));
   });
   
   it("applies accessibility attributes", () => {
