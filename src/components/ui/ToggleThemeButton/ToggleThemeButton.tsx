@@ -5,9 +5,9 @@ import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 const ToggleThemeButton: React.FC = () => {
-  const {setTheme, resolvedTheme, systemTheme} = useTheme();
+  const {setTheme, resolvedTheme} = useTheme();
   
-  const currentTheme = resolvedTheme === 'system' ? systemTheme : resolvedTheme;
+  const currentTheme = resolvedTheme ?? 'light';
   
   const toggleTheme = () => {
     setTheme(currentTheme === 'dark' ? 'light' : 'dark');

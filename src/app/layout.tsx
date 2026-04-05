@@ -20,17 +20,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-GB">
-    <ThemeProvider attribute="class">
+    <html lang="en-GB" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen`}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+      >
       <Header/>
       <main>
         {children}
       </main>
       <Footer/>
       <ScrollToTopButton/>
+      </ThemeProvider>
       </body>
-    </ThemeProvider>
     </html>
   )
 }
