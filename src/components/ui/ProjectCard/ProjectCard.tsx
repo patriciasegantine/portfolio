@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ImageIcon } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
+import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   slug: string;
@@ -97,14 +98,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link
-              href={`/projects/${slug}`}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href={`/projects/${slug}`}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
                        hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200
                        transition-colors"
-            >
-              <span>View Details</span>
-            </Link>
+              >
+                <span>View Details</span>
+              </Link>
+            </motion.div>
 
             {liveDemo && (
               <a
