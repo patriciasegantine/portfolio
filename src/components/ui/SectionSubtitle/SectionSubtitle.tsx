@@ -12,7 +12,7 @@ export const SectionSubtitle: FC<SectionSubtitleProps> = ({
                                                           }) => {
   return (
     <h3 className={cn(
-      "text-xl font-medium text-primary-dark dark:text-zinc-50 text-center pt-8 pb-12",
+      "text-xl font-medium text-primary text-center pt-8 pb-12",
       className
     )}>
       {subtitle}

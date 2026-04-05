@@ -30,7 +30,7 @@ const About: React.FC = () => {
             <>
               <SectionTitle title={content.title} />
 
-              <div className="text-lg text-secondary dark:text-zinc-300 leading-relaxed space-y-4">
+              <div className="text-lg text-secondary dark:text-secondary leading-relaxed space-y-4">
                 {content.paragraphs.map((paragraph, index) => (
                   <TextContent key={index}>
                     {paragraph}

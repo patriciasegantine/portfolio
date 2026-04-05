@@ -34,7 +34,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
           href={href}
           className={`${
             isMobile ? 'block py-2' : 'text-secondary hover:text-primary'
-          } transition-colors duration-custom dark:text-zinc-400 dark:hover:text-zinc-100`}
+          } transition-colors duration-custom`}
           onClick={onItemClick}
         >
           {label}

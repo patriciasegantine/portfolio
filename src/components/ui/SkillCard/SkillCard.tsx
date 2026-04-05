@@ -30,7 +30,7 @@ export const SkillCard: FC<SkillCardProps> = ({
         <Icon
           data-testid="skill-card-icon"
           className={cn(
-            "w-8 h-8 text-secondary dark:text-zinc-300",
+            "w-8 h-8 text-secondary dark:text-secondary",
             "transition-transform duration-500",
             "group-hover:scale-125 group-hover:rotate-45"
           )}
@@ -39,7 +39,7 @@ export const SkillCard: FC<SkillCardProps> = ({
       
       <span
         data-testid="skill-card-name"
-        className="text-primary-dark dark:text-zinc-100 font-medium text-sm text-center">
+        className="text-primary font-medium text-sm text-center">
         {name}
       </span>
     </div>

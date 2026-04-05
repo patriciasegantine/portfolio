@@ -51,7 +51,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         >
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-4 right-4 text-secondary hover:text-primary dark:text-zinc-50 dark:hover:text-zinc-400"
+            className="absolute top-4 right-4 text-secondary hover:text-primary"
             aria-label="Close menu"
           >
             <X className="w-6 h-6"/>

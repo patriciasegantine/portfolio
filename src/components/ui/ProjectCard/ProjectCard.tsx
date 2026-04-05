@@ -71,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex flex-col flex-grow p-8">
         <div className="flex-grow">
           <div className="flex items-center justify-between gap-4 mb-4">
-            <h3 className="text-2xl font-medium text-primary-dark dark:text-zinc-50">
+            <h3 className="text-2xl font-medium text-primary">
               {title}
             </h3>
             {status && (
@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </span>
             )}
           </div>
-          <p className="text-secondary dark:text-zinc-300 mb-6">
+          <p className="text-secondary dark:text-secondary mb-6">
             {description}
           </p>
         </div>
@@ -115,7 +115,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80
+                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
                        transition-colors"
               >
                 <FaExternalLinkAlt className="w-4 h-4" />
@@ -129,7 +129,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/80
+                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
                        transition-colors"
               >
                 <FaGithub className="w-5 h-5" />

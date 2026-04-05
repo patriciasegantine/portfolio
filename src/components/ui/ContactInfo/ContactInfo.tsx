@@ -58,7 +58,7 @@ const ContactInfo: React.FC = () => {
       
       
       {!isLoading && !error && contactInfo.length === 0 && (
-        <p data-testid="no-contact-info" className="text-center text-secondary dark:text-zinc-400">
+        <p data-testid="no-contact-info" className="text-center text-secondary dark:text-secondary">
           No contact information available.
         </p>
       )}
@@ -73,19 +73,18 @@ const ContactInfo: React.FC = () => {
         >
           <div
             className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                text-secondary dark:text-zinc-300
+                text-secondary dark:text-secondary
                 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700
                 transition-colors"
           >
             {React.createElement(icons[item.icon] || icons.default, {
-              className: "w-5 h-5 text-secondary dark:text-zinc-300",
+              className: "w-5 h-5 text-secondary dark:text-secondary",
             })}
           </div>
           <div>
-            <p className="text-sm font-medium text-secondary dark:text-zinc-400">{item.label}</p>
+            <p className="text-sm font-medium text-secondary dark:text-secondary">{item.label}</p>
             <p
-              className="text-primary-dark dark:text-zinc-100
-              group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors"
+              className="text-primary group-hover:text-secondary-light transition-colors"
             >
               {item.value}
             </p>

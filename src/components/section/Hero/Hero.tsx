@@ -20,18 +20,18 @@ const Hero: React.FC = () => {
       id="home"
       variant="primary"
       aria-label="Home"
-      className="flex items-center justify-center min-h-screen pt-16"
+      className="flex items-center justify-center min-h-screen"
     >
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center md:items-start gap-12">
         <HeroImage/>
         
         <div className="flex-1 flex flex-col gap-6 text-center md:text-left items-center md:items-start">
-          <div className="flex items-center gap-2 text-secondary dark:text-zinc-400" data-testid="hero-intro">
+          <div className="flex items-center gap-2 text-secondary dark:text-secondary" data-testid="hero-intro">
             <span className="w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
             <span>Hi there, I&apos;m</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-dark dark:text-zinc-50">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary">
             Patricia Segantine
           </h1>
 
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
                 {content.title}
               </p>
 
-              <p className="text-lg text-secondary dark:text-zinc-300 leading-relaxed max-w-2xl">
+              <p className="text-lg text-secondary dark:text-secondary leading-relaxed max-w-2xl">
                 {content.subtitle}
               </p>
             </>

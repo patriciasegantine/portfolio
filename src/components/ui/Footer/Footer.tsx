@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
             {technologies.map((tech, index) => (
               <div key={index} title={tech.name}>
                 {React.createElement(tech.icon as React.ComponentType<{ className: string }>, {
-                  className: "w-6 h-6 text-secondary dark:text-zinc-300",
+                  className: "w-6 h-6 text-secondary dark:text-secondary",
                 })}
               </div>
             ))}
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           <div className="my-6 border-t border-zinc-300 dark:border-zinc-600 w-full"></div>
           
           <div
-            className="flex flex-col md:flex-row justify-center items-center gap-2 text-sm text-secondary dark:text-zinc-400">
+            className="flex flex-col md:flex-row justify-center items-center gap-2 text-sm text-secondary dark:text-secondary">
             <span>© {currentYear} All rights reserved</span>
             <span className="hidden md:inline">•</span>
             <span> Developed with ❤️ by <strong>Patricia Segantine</strong></span>
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             <a
               href="https://github.com/patriciasegantine/portfolio"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              className="flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors"
               title="GitHub Repository"
             >
               <FaGithub className="w-5 h-5"/>
