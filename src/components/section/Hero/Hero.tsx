@@ -20,29 +20,31 @@ const Hero: React.FC = () => {
       aria-label="Home"
       className="flex items-center justify-center min-h-[calc(100svh-4rem)] md:min-h-screen py-0"
     >
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center md:items-start gap-12">
-        <HeroImage/>
-        
-        <div className="flex-1 flex flex-col gap-6 text-center md:text-left items-center md:items-start">
-          <div className="flex items-center gap-2 text-secondary dark:text-secondary" data-testid="hero-intro">
-            <span className="w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
-            <span>Hi there, I&apos;m</span>
-          </div>
+      <div className="container mx-auto px-4">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 md:flex-row md:items-start">
+          <HeroImage/>
 
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary">
-            Patricia Segantine
-          </h1>
+          <div className="flex flex-1 flex-col items-center gap-6 text-center md:items-start md:text-left">
+            <div className="flex items-center gap-2 text-secondary dark:text-secondary" data-testid="hero-intro">
+              <span className="w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
+              <span>Hi there, I&apos;m</span>
+            </div>
 
-          <p className="text-xl md:text-2xl lg:text-3xl text-secondary min-h-8 md:min-h-10">
-            {HERO_CONTENT.title}
-          </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary">
+              Patricia Segantine
+            </h1>
 
-          <p className="text-lg text-secondary leading-relaxed max-w-2xl min-h-32 md:min-h-24">
-            {HERO_CONTENT.subtitle}
-          </p>
+            <p className="text-xl md:text-2xl lg:text-3xl text-secondary min-h-8 md:min-h-10">
+              {HERO_CONTENT.title}
+            </p>
 
-          <div className="min-h-11 flex items-center">
-            <SocialLinks showLabel={true}/>
+            <p className="text-lg text-secondary leading-relaxed max-w-2xl min-h-32 md:min-h-24">
+              {HERO_CONTENT.subtitle}
+            </p>
+
+            <div className="min-h-11 flex items-center">
+              <SocialLinks showLabel={true}/>
+            </div>
           </div>
         </div>
       </div>

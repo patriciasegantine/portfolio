@@ -33,7 +33,8 @@ const NavMenu: React.FC<NavMenuProps> = ({
           key={label}
           href={href}
           className={`${isMobile ? 'block' : 'inline-block'}
-          px-3 py-2 rounded-lg text-secondary hover:text-primary hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors duration-custom`}
+          px-3 py-2 rounded-lg text-secondary hover:text-zinc-900 dark:hover:text-zinc-50
+          hover:underline underline-offset-4 decoration-2 transition-colors duration-custom`}
           onClick={onItemClick}
         >
           {label}

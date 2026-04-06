@@ -19,10 +19,13 @@ const ToggleThemeButton: React.FC = () => {
     <button
       data-testid="toggle-theme-button"
       onClick={toggleTheme}
-      className="p-2 text-secondary hover:text-primary transition-colors duration-custom"
+      className="group rounded-lg p-2 text-secondary transition-all duration-300 hover:text-zinc-900 dark:hover:text-zinc-50 hover:scale-105"
       aria-label={`Activate ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      <Icon className="w-5 h-5" data-testid={currentTheme === 'dark' ? 'sun-icon' : 'moon-icon'}/>
+      <Icon
+        className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12"
+        data-testid={currentTheme === 'dark' ? 'sun-icon' : 'moon-icon'}
+      />
     </button>
   );
 };

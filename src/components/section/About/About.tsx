@@ -23,21 +23,19 @@ const About: React.FC = () => {
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto prose dark:prose-dark mb-16">
+          <SectionTitle title={"About"} />
+          
           {isLoading && <LoadingComponent message="Loading about content..." />}
           {error && <ErrorComponent message={error} />}
 
           {content && (
-            <>
-              <SectionTitle title={content.title} />
-
-              <div className="text-lg text-secondary dark:text-secondary leading-relaxed space-y-4">
-                {content.paragraphs.map((paragraph, index) => (
-                  <TextContent key={index}>
-                    {paragraph}
-                  </TextContent>
-                ))}
-              </div>
-            </>
+            <div className="text-lg text-secondary dark:text-secondary leading-relaxed space-y-4">
+              {content.paragraphs.map((paragraph, index) => (
+                <TextContent key={index}>
+                  {paragraph}
+                </TextContent>
+              ))}
+            </div>
           )}
         </div>
       </div>

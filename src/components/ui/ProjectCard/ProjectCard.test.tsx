@@ -34,10 +34,10 @@ describe('ProjectCard Component', () => {
 
   it('renders stack preview and handles empty list', () => {
     const {rerender} = render(<ProjectCard {...mockProject} />);
-    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByLabelText('React')).toBeInTheDocument();
 
     rerender(<ProjectCard {...mockProject} stackPreview={[]} />);
-    expect(screen.queryByText('React')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('React')).not.toBeInTheDocument();
   });
 
   it('renders image placeholder when image is missing', () => {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ImageIcon } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
+import { getProjectStackIcon } from "@/data/projectStackIcons";
 
 interface ProjectDetailsHeroProps {
   title: string;
@@ -34,10 +35,10 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
     <header className="space-y-6">
       <Link
         href="/#projects"
-        className="inline-flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors"
+        className="group inline-flex items-center gap-2 text-sm text-secondary transition-colors hover:text-primary"
       >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Back to Projects</span>
+        <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
+        <span className="underline-offset-4 group-hover:underline">Back to Projects</span>
       </Link>
 
       <div className="space-y-3">
@@ -51,6 +52,22 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
         </div>
         <p className="text-lg text-secondary max-w-3xl">{description}</p>
       </div>
+      
+      <div className="flex flex-wrap gap-2 pb-2">
+        {stackPreview.map((item) => {
+          const Icon = getProjectStackIcon(item);
+          
+          return (
+            <span
+              key={item}
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full bg-zinc-200/70 border border-zinc-300 dark:border-zinc-700/50 text-zinc-800 dark:bg-zinc-700/50 dark:text-zinc-300"
+            >
+              {Icon && <Icon className="h-3.5 w-3.5" aria-hidden="true" />}
+              <p>{item}</p>
+            </span>
+          );
+        })}
+      </div>
 
       <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700">
         {showImage && image ? (
@@ -58,6 +75,7 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
             src={image}
             alt={title}
             fill
+            sizes="(min-width: 1024px) 64rem, 100vw"
             className="object-cover"
             onError={() => setShowImage(false)}
           />
@@ -66,16 +84,7 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
         )}
       </div>
 
-      <div className="flex flex-wrap gap-2 pb-2">
-        {stackPreview.map((item) => (
-          <span
-            key={item}
-            className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-200 text-zinc-800 dark:bg-zinc-700/50 dark:text-zinc-300"
-          >
-            {item}
-          </span>
-        ))}
-      </div>
+      
     </header>
   );
 };

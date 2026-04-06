@@ -1,63 +1,22 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Mail, MapPin } from "lucide-react";
 import { FaGlobe } from "react-icons/fa";
-import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
-import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
-
-interface ContactInfoType {
-  icon: string;
-  label: string;
-  value: string;
-  href: string;
-}
+import { contactInfo } from "@/data/contactInfo";
 
 const ContactInfo: React.FC = () => {
-  const [contactInfo, setContactInfo] = useState<ContactInfoType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  
   const icons: Record<string, React.ElementType> = {
     Mail,
     MapPin,
     default: FaGlobe,
   };
   
-  const fetchContactInfo = async () => {
-    try {
-      const response = await fetch('/api/contact-info');
-      if (!response.ok) {
-        throw new Error('Failed to fetch contact info');
-      }
-      const data = await response.json();
-      setContactInfo(data);
-      setIsLoading(false);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : 'Failed to fetch contact info.';
-      setError(errorMessage);
-      setIsLoading(false);
-    }
-  };
-  
-  useEffect(() => {
-    fetchContactInfo();
-  }, []);
-  
   return (
     <div
       data-testid="contact-info"
       className="bg-white dark:bg-zinc-800/50 rounded-2xl p-6 border shadow-sm space-y-6 transition-colors-custom border-gray-200 dark:border-zinc-700">
-      
-      {isLoading && <LoadingComponent message="Loading contact informations..."/>}
-      
-      {error && <ErrorComponent message={error}/>}
-      
-      
-      {!isLoading && !error && contactInfo.length === 0 && (
+      {contactInfo.length === 0 && (
         <p data-testid="no-contact-info" className="text-center text-secondary dark:text-secondary">
           No contact information available.
         </p>
@@ -72,7 +31,7 @@ const ContactInfo: React.FC = () => {
           className="flex items-start gap-4 group"
         >
           <div
-            className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
+            className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50 border border-zinc-200 dark:border-zinc-700/50
                 text-secondary dark:text-secondary
                 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700
                 transition-colors"
