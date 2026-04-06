@@ -19,8 +19,8 @@ export const SkillCard: FC<SkillCardProps> = ({
     <div
       data-testid="skill-card"
       className={cn(
-        "group flex min-h-[140px] flex-col items-center justify-between p-5",
-        "bg-slate-50 dark:bg-zinc-700/30 border border-slate-200 dark:border-zinc-700/60",
+        "group flex min-h-[140px] flex-col items-center justify-between py-8 px-4",
+        "bg-white dark:bg-zinc-700/30 border border-zinc-200 dark:border-zinc-700/60",
         "rounded-lg",
         "transition-all duration-300 shadow-md",
         "hover:-translate-y-1",
@@ -37,14 +37,14 @@ export const SkillCard: FC<SkillCardProps> = ({
         )}
       />
 
-      <div className="w-full text-center">
+      <div className="flex w-full flex-col items-center text-center">
         <p
           data-testid="skill-card-name"
-          className="min-h-[2.5rem] text-sm font-medium leading-tight text-primary flex items-center justify-center"
+          className="min-h-[2rem] text-sm font-medium leading-tight text-primary flex items-center justify-center"
         >
           {name}
         </p>
-        <p className="min-h-[2.25rem] text-xs leading-snug text-secondary">
+        <p className="text-xs leading-snug text-secondary">
           {subtitle ?? "\u00A0"}
         </p>
       </div>
