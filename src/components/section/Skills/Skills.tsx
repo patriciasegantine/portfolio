@@ -1,5 +1,5 @@
 import React from 'react'
-import { skills } from "@/data/skills";
+import { coreSkills, toolingSkills } from "@/data/skills";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import { Section } from "@/components/ui/Section/Section";
 import { SkillCard } from "@/components/ui/SkillCard/SkillCard";
@@ -16,14 +16,20 @@ const Skills: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <SectionTitle title={"Skills"}/>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {skills.map(({name, icon}, index) => (
-              <RevealOnScroll key={name} delay={index * 0.05} yOffset={16}>
-                <SkillCard
-                  name={name}
-                  icon={icon}
-                />
+
+          <div className="mb-12 grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {coreSkills.map(({name, subtitle, icon}, index) => (
+              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14}>
+                <SkillCard name={name} subtitle={subtitle} icon={icon} />
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <h3 className="mb-5 text-primary font-medium text-center">Tooling</h3>
+          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-5 lg:grid-cols-4">
+            {toolingSkills.map(({name, subtitle, icon}, index) => (
+              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14}>
+                <SkillCard name={name} subtitle={subtitle} icon={icon} />
               </RevealOnScroll>
             ))}
           </div>

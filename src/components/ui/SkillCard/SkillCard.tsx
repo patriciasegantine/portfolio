@@ -5,43 +5,49 @@ import { IconType } from 'react-icons'
 interface SkillCardProps {
   icon: IconType
   name: string
+  subtitle?: string
   className?: string
 }
 
 export const SkillCard: FC<SkillCardProps> = ({
                                                 icon: Icon,
                                                 name,
+                                                subtitle,
                                                 className
                                               }) => {
   return (
     <div
       data-testid="skill-card"
       className={cn(
-        "group flex flex-col items-center p-6",
-        "bg-zinc-50 dark:bg-zinc-700/30",
+        "group flex min-h-[140px] flex-col items-center justify-between p-5",
+        "bg-slate-50 dark:bg-zinc-700/30 border border-slate-200 dark:border-zinc-700/60",
         "rounded-lg",
         "transition-all duration-300 shadow-md",
-        "hover:-translate-y-1 hover:scale-105",
-        "hover:bg-zinc-100 dark:hover:bg-zinc-700/50",
+        "hover:-translate-y-1",
+        "hover:bg-white dark:hover:bg-zinc-700/50",
         "hover:shadow-lg",
         className
       )}>
-      <div className="relative mb-4">
-        <Icon
-          data-testid="skill-card-icon"
-          className={cn(
-            "w-8 h-8 text-secondary dark:text-secondary",
-            "transition-transform duration-500",
-            "group-hover:scale-125 group-hover:rotate-45"
-          )}
-        />
+      <Icon
+        data-testid="skill-card-icon"
+        className={cn(
+          "w-7 h-7 text-secondary dark:text-secondary",
+          "transition-transform duration-500",
+          "group-hover:scale-110"
+        )}
+      />
+
+      <div className="w-full text-center">
+        <p
+          data-testid="skill-card-name"
+          className="min-h-[2.5rem] text-sm font-medium leading-tight text-primary flex items-center justify-center"
+        >
+          {name}
+        </p>
+        <p className="min-h-[2.25rem] text-xs leading-snug text-secondary">
+          {subtitle ?? "\u00A0"}
+        </p>
       </div>
-      
-      <span
-        data-testid="skill-card-name"
-        className="text-primary font-medium text-sm text-center">
-        {name}
-      </span>
     </div>
   )
 }
