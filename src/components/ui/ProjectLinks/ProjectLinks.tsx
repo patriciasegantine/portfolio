@@ -20,7 +20,7 @@ const ProjectLinks = ({ github, liveDemo }: ProjectLinksProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
-             hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 transition-colors"
+             hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 transition-colors focus-ring"
           >
             <FaExternalLinkAlt className="w-4 h-4" />
             <span>Live Demo</span>
@@ -33,7 +33,7 @@ const ProjectLinks = ({ github, liveDemo }: ProjectLinksProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-             text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80 transition-colors border-2 border-zinc-200 dark:border-zinc-700"
+             text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80 transition-colors border-2 border-zinc-200 dark:border-zinc-700 focus-ring"
           >
             <FaGithub className="w-5 h-5" />
             <span>GitHub</span>

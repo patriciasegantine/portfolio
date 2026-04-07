@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             <a
               href="https://github.com/patriciasegantine/portfolio"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors"
+              className="flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors focus-ring"
               title="GitHub Repository"
             >
               <FaGithub className="w-5 h-5"/>

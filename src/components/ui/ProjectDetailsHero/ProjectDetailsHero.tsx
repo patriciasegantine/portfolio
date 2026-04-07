@@ -35,7 +35,7 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
     <header className="space-y-6">
       <Link
         href="/#projects"
-        className="group inline-flex items-center gap-2 text-sm text-secondary transition-colors hover:text-primary"
+        className="group inline-flex items-center gap-2 text-sm text-secondary transition-colors hover:text-primary focus-ring"
       >
         <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
         <span className="underline-offset-4 group-hover:underline">Back to Projects</span>

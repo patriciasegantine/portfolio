@@ -19,7 +19,7 @@ const ToggleThemeButton: React.FC = () => {
     <button
       data-testid="toggle-theme-button"
       onClick={toggleTheme}
-      className="group rounded-lg p-2 text-secondary transition-all duration-300 hover:text-zinc-900 dark:hover:text-zinc-50 hover:scale-105"
+      className="group rounded-lg p-2 text-secondary transition-all duration-300 hover:text-zinc-900 dark:hover:text-zinc-50 hover:scale-105 focus-ring"
       aria-label={`Activate ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
     >
       <Icon

@@ -81,7 +81,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div
       data-testid="project-card"
-      className="group relative min-w-0 rounded-xl overflow-hidden transition-colors-custom bg-white dark:bg-zinc-800/50 shadow-sm hover:shadow-md border border-gray-200 dark:border-zinc-700 flex flex-col"
+      className="group relative min-w-0 h-full rounded-xl overflow-hidden transition-colors-custom bg-white dark:bg-zinc-800/50 shadow-md hover:shadow-lg border border-gray-200 dark:border-zinc-700 flex flex-col"
     >
       <div className="aspect-video overflow-hidden relative">
         {showImage && image
@@ -149,9 +149,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               aria-busy={isNavigatingToDetails}
               className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
                        hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-                       focus-visible:ring-zinc-900 focus-visible:ring-offset-zinc-100
-                       dark:focus-visible:ring-zinc-100 dark:focus-visible:ring-offset-zinc-900
+                       focus-ring
                        transition-colors hover:-translate-y-0.5 active:scale-[0.99] lg:w-auto"
               style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
             >
@@ -167,7 +165,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   rel="noopener noreferrer"
                   className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
                        text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors lg:w-auto"
+                       transition-colors lg:w-auto focus-ring"
                 >
                   <FaExternalLinkAlt className="w-4 h-4" />
                   <span>Live Demo</span>
@@ -181,7 +179,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   rel="noopener noreferrer"
                   className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
                        text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors lg:w-auto"
+                       transition-colors lg:w-auto focus-ring"
                 >
                   <FaGithub className="w-5 h-5" />
                   <span>GitHub</span>
