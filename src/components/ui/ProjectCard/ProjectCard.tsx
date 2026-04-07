@@ -147,8 +147,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={detailsHref}
               onClick={handleDetailsClick}
               aria-busy={isNavigatingToDetails}
-              className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
-                       hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200
+              className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 text-white
+                       hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-800 dark:hover:bg-zinc-200
                        focus-ring
                        transition-colors hover:-translate-y-0.5 active:scale-[0.99] lg:w-auto"
               style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
