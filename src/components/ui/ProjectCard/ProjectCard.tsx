@@ -142,50 +142,52 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             })}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-3 lg:flex-row lg:flex-wrap">
             <Link
               href={detailsHref}
               onClick={handleDetailsClick}
               aria-busy={isNavigatingToDetails}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
+              className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 text-white
                        hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200
                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
                        focus-visible:ring-zinc-900 focus-visible:ring-offset-zinc-100
                        dark:focus-visible:ring-zinc-100 dark:focus-visible:ring-offset-zinc-900
-                       transition-colors hover:-translate-y-0.5 active:scale-[0.99]"
+                       transition-colors hover:-translate-y-0.5 active:scale-[0.99] lg:w-auto"
               style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
             >
               {isNavigatingToDetails && <Loader2 className="w-4 h-4 animate-spin" />}
               <span>{isNavigatingToDetails ? 'Opening...' : 'View Details'}</span>
             </Link>
 
-            {liveDemo && (
-              <a
-                href={liveDemo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
+            <div className="grid w-full grid-cols-2 gap-3 lg:flex lg:w-auto lg:flex-wrap">
+              {liveDemo && (
+                <a
+                  href={liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
                        text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors"
-              >
-                <FaExternalLinkAlt className="w-4 h-4" />
-                <span>Live Demo</span>
-              </a>
-            )}
+                       transition-colors lg:w-auto"
+                >
+                  <FaExternalLinkAlt className="w-4 h-4" />
+                  <span>Live Demo</span>
+                </a>
+              )}
 
-            {github && (
-              <a
-                href={github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
+              {github && (
+                <a
+                  href={github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
                        text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors"
-              >
-                <FaGithub className="w-5 h-5" />
-                <span>GitHub</span>
-              </a>
-            )}
+                       transition-colors lg:w-auto"
+                >
+                  <FaGithub className="w-5 h-5" />
+                  <span>GitHub</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
