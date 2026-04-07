@@ -22,7 +22,7 @@ const About: React.FC = () => {
       aria-label="About"
     >
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto prose dark:prose-dark mb-16">
+        <div className="max-w-6xl mx-auto prose dark:prose-dark">
           <SectionTitle title={"About"} />
           
           {isLoading && <LoadingComponent message="Loading about content..." />}
