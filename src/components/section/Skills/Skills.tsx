@@ -17,18 +17,18 @@ const Skills: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <SectionTitle title={"Skills"}/>
 
-          <div className="mb-12 grid grid-cols-2 gap-5 lg:grid-cols-4">
+          <div className="mb-12 grid grid-cols-2 auto-rows-fr gap-5 lg:grid-cols-4">
             {coreSkills.map(({name, subtitle, icon}, index) => (
-              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14}>
+              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14} className="h-full">
                 <SkillCard name={name} subtitle={subtitle} icon={icon} />
               </RevealOnScroll>
             ))}
           </div>
 
           <h3 className="mb-5 text-primary font-medium text-center">Tooling</h3>
-          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-5 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-4xl grid-cols-2 auto-rows-fr gap-5 lg:grid-cols-4">
             {toolingSkills.map(({name, subtitle, icon}, index) => (
-              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14}>
+              <RevealOnScroll key={name} delay={index * 0.04} yOffset={14} className="h-full">
                 <SkillCard name={name} subtitle={subtitle} icon={icon} />
               </RevealOnScroll>
             ))}

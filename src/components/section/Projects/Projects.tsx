@@ -32,7 +32,7 @@ const Projects: React.FC = () => {
         
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {projects.map((project, index) => (
-            <RevealOnScroll key={project.slug} delay={index * 0.08}>
+            <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
               <ProjectCard
                 slug={project.slug}
                 image={project.image}
