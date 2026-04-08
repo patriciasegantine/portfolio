@@ -28,7 +28,7 @@ const ContactInfo: React.FC = () => {
           key={index}
           href={item.href}
           target={item.href.includes("mailto") ? "_self" : "_blank"}
-          className="flex items-start gap-4 group"
+          className="flex items-start gap-4 group focus-ring"
         >
           <div
             className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50 border border-zinc-200 dark:border-zinc-700/50

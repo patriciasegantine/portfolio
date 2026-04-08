@@ -21,14 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-GB" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen`}>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
         enableSystem
       >
       <Header/>
-      <main>
+      <main className="flex-1">
         {children}
       </main>
       <Footer/>

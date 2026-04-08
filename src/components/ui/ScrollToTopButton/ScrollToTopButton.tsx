@@ -24,7 +24,7 @@ const ScrollToTopButton: React.FC = () => {
   const scrollToTop = () => window.scrollTo(SCROLL_OPTIONS)
   
   const baseStyles = 'fixed bottom-8 right-8 p-3 bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-800/20 rounded-full text-secondary'
-  const interactionStyles = 'hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-700'
+  const interactionStyles = 'hover:-translate-y-1 hover:shadow-xl focus-ring'
   const transitionStyles = 'transition-all duration-300 group z-50'
   const visibilityStyles = isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
   

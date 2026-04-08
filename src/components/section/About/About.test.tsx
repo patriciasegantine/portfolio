@@ -1,40 +1,21 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import About from "@/components/section/About/About";
-import fetchMock from "jest-fetch-mock";
+import { aboutMe } from "@/data/aboutMe";
 
 describe('About Component', () => {
-  beforeEach(() => {
-    fetchMock.enableMocks();
-    fetchMock.mockResponse(JSON.stringify({
-      title: "About Me",
-      paragraphs: ["Default paragraph"]
-    }));
-  });
-  afterEach(() => fetchMock.resetMocks());
-
-  it('renders section and fallback content', async () => {
+  it('renders about section', () => {
     render(<About/>)
-    const aboutSection = screen.getByTestId('about')
-    expect(aboutSection).toBeInTheDocument()
-    await waitFor(() => {
-      expect(screen.getByText('Default paragraph')).toBeInTheDocument();
-    });
-  })
-  
-  it('renders external about content from API', async () => {
-    fetchMock.mockResponseOnce(JSON.stringify({
-      title: "About Me",
-      paragraphs: ["Paragraph one", "Paragraph two"]
-    }));
-
-    render(<About/>)
-
-    await waitFor(() => {
-      expect(screen.getByText('Paragraph one')).toBeInTheDocument();
-      expect(screen.getByText('Paragraph two')).toBeInTheDocument();
-    });
+    expect(screen.getByTestId('about')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument()
   })
 
+  it('renders all local about paragraphs', () => {
+    render(<About/>)
+
+    aboutMe.paragraphs.forEach((paragraph) => {
+      expect(screen.getByText(paragraph)).toBeInTheDocument();
+    });
+  })
 })

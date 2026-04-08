@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-1 flex-col items-center gap-6 text-center md:items-start md:text-left">
             <div className="flex items-center gap-2 text-secondary dark:text-secondary" data-testid="hero-intro">
-              <span className="w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
+              <span className="hidden md:block w-6 h-[2px] bg-zinc-300 dark:bg-zinc-600"/>
               <span>Hi there, I&apos;m</span>
             </div>
 
