@@ -75,7 +75,7 @@ describe("Projects Component", () => {
     await waitFor(() => {
       expect(screen.getByText("First Project - Task Dashboard")).toBeInTheDocument();
       expect(screen.getByText("Second Project - Collaboration Hub")).toBeInTheDocument();
-      const detailsLinks = screen.getAllByRole("link", {name: "View Details"});
+      const detailsLinks = screen.getAllByRole("link", {name: /View details for/i});
       expect(detailsLinks).toHaveLength(2);
       expect(detailsLinks[0]).toHaveAttribute("href", "/projects/first-project");
       expect(detailsLinks[1]).toHaveAttribute("href", "/projects/second-project");

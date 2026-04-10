@@ -17,7 +17,7 @@ describe('ProjectCard Component', () => {
     render(<ProjectCard {...mockProject} />);
     expect(screen.getByText('Test Project')).toBeInTheDocument();
     expect(screen.getByText('This is a test project description.')).toBeInTheDocument();
-    expect(screen.getByRole('link', {name: 'View Details'})).toHaveAttribute('href', '/projects/test-project');
+    expect(screen.getByRole('link', {name: 'View details for Test Project'})).toHaveAttribute('href', '/projects/test-project');
   });
   
   it('renders optional links when provided', () => {
@@ -34,10 +34,10 @@ describe('ProjectCard Component', () => {
 
   it('renders stack preview and handles empty list', () => {
     const {rerender} = render(<ProjectCard {...mockProject} />);
-    expect(screen.getByLabelText('React')).toBeInTheDocument();
+    expect(screen.getByText('React')).toBeInTheDocument();
 
     rerender(<ProjectCard {...mockProject} stackPreview={[]} />);
-    expect(screen.queryByLabelText('React')).not.toBeInTheDocument();
+    expect(screen.queryByText('React')).not.toBeInTheDocument();
   });
 
   it('renders image placeholder when image is missing', () => {

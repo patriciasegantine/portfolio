@@ -132,11 +132,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               return (
                 <span
                   key={item}
-                  aria-label={item}
                   title={item}
                   className="text-secondary dark:text-secondary transition-colors hover:text-primary"
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
+                  <span className="sr-only">{item}</span>
                 </span>
               );
             })}
@@ -147,6 +147,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={detailsHref}
               onClick={handleDetailsClick}
               aria-busy={isNavigatingToDetails}
+              aria-label={
+                isNavigatingToDetails
+                  ? `Opening details for ${title}`
+                  : `View details for ${title}`
+              }
               className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 text-white
                        hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-800 dark:hover:bg-zinc-200
                        focus-ring
