@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import SocialLinks from "@/components/ui/SociaisLinks/SocialLinks";
+import SocialLinks from "@/components/ui/SocialLinks/SocialLinks";
 import HeroImage from "@/components/ui/HeroImage/HeroImage";
 import { Section } from "@/components/ui/Section/Section";
 import type { HeroContent } from "@/types/hero";
