@@ -3,8 +3,8 @@ import type { Project } from "@/types/project";
 import ProjectOverviewSection from "./components/ProjectOverviewSection";
 import ProjectDetailsSection from "./components/ProjectDetailsSection";
 import { getProjectsContent } from "./projectsServerContent";
-import ProjectDetailsHero from "@/components/ui/ProjectDetailsHero/ProjectDetailsHero";
-import ProjectLinks from "@/components/ui/ProjectLinks/ProjectLinks";
+import ProjectDetailsHero from "@/app/projects/[slug]/components/ProjectDetailsHero";
+import ProjectLinks from "@/app/projects/[slug]/components/ProjectLinks";
 
 export { generateMetadata, generateStaticParams } from "./page.config";
 

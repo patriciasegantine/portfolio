@@ -1,5 +1,5 @@
 import type { ProjectCaseStudy } from "@/types/project";
-import { hasText } from "./caseStudyHelpers";
+import { hasText } from "../utils/caseStudyHelpers";
 
 interface ProjectOverviewSectionProps {
   caseStudy: ProjectCaseStudy;
