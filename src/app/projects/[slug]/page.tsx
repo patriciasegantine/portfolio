@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
-import ProjectDetailsHero from "@/components/ui/ProjectDetailsHero/ProjectDetailsHero";
-import ProjectLinks from "@/components/ui/ProjectLinks/ProjectLinks";
 import type { Project } from "@/types/project";
 import ProjectOverviewSection from "./components/ProjectOverviewSection";
 import ProjectDetailsSection from "./components/ProjectDetailsSection";
 import { getProjectsContent } from "./projectsServerContent";
+import ProjectDetailsHero from "@/components/ui/ProjectDetailsHero/ProjectDetailsHero";
+import ProjectLinks from "@/components/ui/ProjectLinks/ProjectLinks";
 
 export { generateMetadata, generateStaticParams } from "./page.config";
 
