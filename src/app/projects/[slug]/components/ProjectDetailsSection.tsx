@@ -1,6 +1,6 @@
-import ProjectItem from "@/components/ui/ProjectSection/ProjectItem";
 import type { ProjectCaseStudy } from "@/types/project";
-import { hasItems, hasText } from "./caseStudyHelpers";
+import { hasItems, hasText } from "../utils/caseStudyHelpers";
+import ProjectItem from "./ProjectItem";
 
 interface ProjectDetailsSectionProps {
   caseStudy: ProjectCaseStudy;

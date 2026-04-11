@@ -8,7 +8,7 @@ jest.mock("@/components/ui/HeroImage/HeroImage", () => {
   return MockHeroImage;
 });
 
-jest.mock("@/components/ui/SociaisLinks/SocialLinks", () => {
+jest.mock("@/components/ui/SocialLinks/SocialLinks", () => {
   const MockSocialLinks = () => <div data-testid="social-links"/>;
   MockSocialLinks.displayName = "MockSocialLinks";
   return {

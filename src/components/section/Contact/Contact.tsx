@@ -16,7 +16,7 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <SectionTitle title={"Let's Contact"}/>
+            <SectionTitle title={"Let's Connect"}/>
             
             <p className="text-secondary dark:text-secondary">
               Feel free to reach out for collaborations or just a friendly hello
