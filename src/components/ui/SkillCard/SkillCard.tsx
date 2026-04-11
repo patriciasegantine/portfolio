@@ -19,7 +19,7 @@ export const SkillCard: FC<SkillCardProps> = ({
     <div
       data-testid="skill-card"
       className={cn(
-        "group flex h-full min-h-[140px] flex-col items-center justify-between py-8 px-4",
+        "group flex h-full min-h-[140px] flex-col items-center justify-between py-8 px-4 gap-4",
         "bg-white dark:bg-zinc-700/30 border border-zinc-200 dark:border-zinc-700/60",
         "rounded-lg",
         "transition-all duration-300 shadow-md",
