@@ -1,13 +1,18 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 const ToggleThemeButton: React.FC = () => {
   const {setTheme, resolvedTheme} = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
-  const currentTheme = resolvedTheme ?? 'light';
+  const currentTheme = mounted ? (resolvedTheme ?? 'light') : 'light';
   
   const toggleTheme = () => {
     setTheme(currentTheme === 'dark' ? 'light' : 'dark');

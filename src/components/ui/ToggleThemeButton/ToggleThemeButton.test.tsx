@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useTheme } from 'next-themes';
 import ToggleThemeButton from './ToggleThemeButton';
@@ -34,8 +34,8 @@ describe('ToggleThemeButton', () => {
     expect(button).toHaveAttribute('aria-label', 'Activate dark mode');
   });
   
-  it('should render the button with the Sun icon (dark mode)', () => {
-    (useTheme as jest.Mock).mockReturnValueOnce({
+  it('should render the button with the Sun icon (dark mode)', async () => {
+    (useTheme as jest.Mock).mockReturnValue({
       setTheme: mockSetTheme,
       resolvedTheme: 'dark',
       systemTheme: 'dark',
@@ -44,7 +44,7 @@ describe('ToggleThemeButton', () => {
     render(<ToggleThemeButton/>);
     
     const button = screen.getByTestId('toggle-theme-button');
-    const sunIcon = screen.getByTestId('sun-icon');
+    const sunIcon = await screen.findByTestId('sun-icon');
     
     expect(button).toBeInTheDocument();
     expect(sunIcon).toBeInTheDocument();
@@ -77,8 +77,8 @@ describe('ToggleThemeButton', () => {
     expect(mockSetTheme).toHaveBeenCalledWith('dark');
   });
   
-  it('should switch to light mode when the current theme is dark', () => {
-    (useTheme as jest.Mock).mockReturnValueOnce({
+  it('should switch to light mode when the current theme is dark', async () => {
+    (useTheme as jest.Mock).mockReturnValue({
       setTheme: mockSetTheme,
       resolvedTheme: 'dark',
     });
@@ -86,6 +86,9 @@ describe('ToggleThemeButton', () => {
     render(<ToggleThemeButton/>);
     
     const button = screen.getByTestId('toggle-theme-button');
+    await waitFor(() => {
+      expect(button).toHaveAttribute('aria-label', 'Activate light mode');
+    });
     
     fireEvent.click(button);
     
