@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     
     // to sender
     await transporter.sendMail({
-      from: `"Patricia Segantine | Front-end Developer" <${user}>`,
+      from: `Patricia Segantine <${user}>`,
       to: email,
       subject: "Thank you for reaching out!",
       html: confirmationTemplate(name),
