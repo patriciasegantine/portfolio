@@ -25,7 +25,7 @@ describe("Hero Component", () => {
     expect(screen.getByTestId("social-links")).toBeInTheDocument();
     expect(screen.getByTestId("hero-intro")).toHaveTextContent("Hi there, I'm");
     expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Patricia Segantine");
-    expect(screen.getByText("Frontend Engineer")).toBeInTheDocument();
+    expect(screen.getByText("Frontend Developer")).toBeInTheDocument();
     expect(
       screen.getByText(
         "Building reliable applications for scalable SaaS products, with a strong focus on performance, accessibility, and maintainable front-end systems."
