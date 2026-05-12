@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Hero from "@/components/section/Hero/Hero";
+import Hero, { HERO_CONTENT } from "@/components/section/Hero/Hero";
 
 jest.mock("@/components/ui/HeroImage/HeroImage", () => {
   const MockHeroImage = () => <div data-testid="hero-image"/>;
@@ -25,11 +25,7 @@ describe("Hero Component", () => {
     expect(screen.getByTestId("social-links")).toBeInTheDocument();
     expect(screen.getByTestId("hero-intro")).toHaveTextContent("Hi there, I'm");
     expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Patricia Segantine");
-    expect(screen.getByText("Frontend Engineer")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Building reliable applications for scalable SaaS products, with a strong focus on performance, accessibility, and maintainable front-end systems."
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(HERO_CONTENT.title.trim())).toBeInTheDocument();
+    expect(screen.getByText(HERO_CONTENT.subtitle)).toBeInTheDocument();
   });
 });

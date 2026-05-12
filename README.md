@@ -8,7 +8,7 @@ A personal space where I share selected projects, ideas, and my journey in front
 
 ## 📖 Overview
 
-This portfolio was designed to present my work as a Frontend Engineer through selected projects, practical case studies, and the technologies I use to build modern web experiences.  
+This portfolio was designed to present my work as a Frontend Developer through selected projects, practical case studies, and the technologies I use to build modern web experiences.  
 It highlights not only visual outcomes, but also the thinking behind each solution, including performance, accessibility, maintainable code structure, and user-centred interface decisions.
 
 ---
@@ -66,5 +66,5 @@ Recommended deployment on [Vercel](https://vercel.com/) with direct Git integrat
 
 ## 👩‍💻 Author
 
-Created by **Patricia Segantine** — Frontend Engineer  
+Created by **Patricia Segantine** — Frontend Developer  
 [LinkedIn](https://linkedin.com/in/patriciasegantine) · [Portfolio](https://patriciasegantine.vercel.app/)
