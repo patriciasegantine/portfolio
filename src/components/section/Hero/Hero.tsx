@@ -6,7 +6,7 @@ import HeroImage from "@/components/ui/HeroImage/HeroImage";
 import { Section } from "@/components/ui/Section/Section";
 import type { HeroContent } from "@/types/hero";
 
-const HERO_CONTENT: HeroContent = {
+export const HERO_CONTENT: HeroContent = {
   title: "Frontend Developer ",
   subtitle: "Focused on clean interfaces, scalable architecture, and understanding how the full picture fits together.",
 };
