@@ -11,6 +11,7 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
     hasText(caseStudy.problemPurpose) ||
     hasItems(caseStudy.keyFeatures) ||
     hasItems(caseStudy.challengesTradeoffs) ||
+    hasItems(caseStudy.whatILearned) ||
     hasItems(caseStudy.nextSteps);
 
   if (!hasProjectDetails) {
@@ -35,6 +36,12 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
         <ProjectItem
           title="Challenges / Trade-offs"
           items={caseStudy.challengesTradeoffs}
+        />
+      )}
+      {hasItems(caseStudy.whatILearned) && (
+        <ProjectItem
+          title="What I Learned"
+          items={caseStudy.whatILearned}
         />
       )}
       {hasItems(caseStudy.nextSteps) && (

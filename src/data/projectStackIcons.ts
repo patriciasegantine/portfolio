@@ -1,9 +1,11 @@
 import type { IconType } from "react-icons";
 import { GiBearFace } from "react-icons/gi";
 import {
+  SiFastify,
   SiMdx,
   SiNextdotjs,
   SiNodedotjs,
+  SiPostgresql,
   SiReact,
   SiReactquery,
   SiTailwindcss,
@@ -22,7 +24,9 @@ const STACK_ICON_MAP: Record<string, IconType> = {
   "Zod": SiZod,
   "MDX": SiMdx,
   "Zustand": GiBearFace,
-  "Vite": SiVite
+  "Vite": SiVite,
+  "Fastify": SiFastify,
+  "PostgreSQL": SiPostgresql,
 };
 
 export const getProjectStackIcon = (stackName: string) => STACK_ICON_MAP[stackName];

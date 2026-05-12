@@ -7,8 +7,8 @@ import { Section } from "@/components/ui/Section/Section";
 import type { HeroContent } from "@/types/hero";
 
 const HERO_CONTENT: HeroContent = {
-  title: "Frontend Engineer",
-  subtitle: "Building reliable applications for scalable SaaS products, with a strong focus on performance, accessibility, and maintainable front-end systems.",
+  title: "Frontend Developer ",
+  subtitle: "Focused on clean interfaces, scalable architecture, and understanding how the full picture fits together.",
 };
 
 const Hero: React.FC = () => {
