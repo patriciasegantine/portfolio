@@ -10,11 +10,11 @@ const SubmitButton = ({isLoading}: SubmitButtonProps) => {
       data-testid="submit-button"
       type="submit"
       className={`relative w-full inline-flex items-center justify-center gap-2 px-6 py-3
-              rounded-lg text-white dark:text-zinc-900 font-medium transition-colors
+              rounded-control text-white font-medium transition-all duration-300
               focus-ring
               ${isLoading
-                ? "opacity-75 cursor-not-allowed bg-zinc-800 dark:bg-zinc-100"
-                : "bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-100 dark:hover:bg-zinc-200"}`}
+                ? "cursor-not-allowed bg-accent opacity-70"
+                : "bg-accent shadow-soft hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-lift"}`}
       disabled={isLoading}
     >
       {isLoading ? (
