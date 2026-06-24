@@ -22,10 +22,10 @@ const FormInput: React.FC<FormInputProps> = ({
                                                ...props
                                              }) => {
   const baseClasses =
-    "w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-700/50 " +
-    "border border-zinc-200 dark:border-zinc-700 " +
+    "w-full px-4 py-2.5 rounded-control bg-canvas " +
+    "border border-line " +
     "text-primary " +
-    "focus-ring transition-colors " +
+    "placeholder:text-ink-subtle focus:border-accent focus-ring transition-colors " +
     "disabled:opacity-50 disabled:cursor-not-allowed " +
     "disabled:bg-gray-100 disabled:dark:bg-zinc-800 disabled:border-gray-300 disabled:dark:border-zinc-600 " +
     "disabled:text-gray-400 disabled:dark:text-zinc-500";
