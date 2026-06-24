@@ -1,6 +1,24 @@
-export const aboutMe = {
-  paragraphs: [
-    "I'm a Frontend Developer with 6 years of experience building user-facing applications for B2B and B2C SaaS products, working mainly with React, TypeScript, and Next.js in micro-frontend environments where performance, accessibility, and maintainability matter at scale.",
-    "I work closely with Product, Design, and backend teams, contributing to technical discussions, flagging trade-offs early, and taking ownership of what I ship. I care about frontend that is reliable, easy to evolve, and built with the people who will use and maintain it in mind."
-  ]
-}
+const ABOUT_ME = [
+  { text: "I'm a Frontend Developer with 6 years of experience building B2B and B2C SaaS products with React, TypeScript, and Next.js. I focus on accessible, maintainable interfaces that can evolve with the product." },
+  { text: "Most of my work happens in micro-frontend environments, where several teams ship into the same product. That shapes how I think about structure, consistency, and the decisions that keep a frontend healthy as it grows." },
+]
+
+const ABOUT_PRINCIPLES = [
+  {
+    number: '01',
+    title: 'Think in systems',
+    description: 'Build foundations that stay understandable as the product grows.',
+  },
+  {
+    number: '02',
+    title: 'Work in context',
+    description: 'Connect Product, Design, and backend decisions before they become UI problems.',
+  },
+  {
+    number: '03',
+    title: 'Own the outcome',
+    description: 'Ship with accessibility, maintainability, and the next developer in mind.',
+  },
+];
+
+export { ABOUT_ME, ABOUT_PRINCIPLES };
