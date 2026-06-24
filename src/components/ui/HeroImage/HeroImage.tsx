@@ -3,24 +3,21 @@ import Image from 'next/image'
 
 const HeroImage: React.FC = () => {
   return (
-    <div className="relative w-56 h-56 md:w-72 md:h-72" data-testid="hero-image">
-      <div
-        className="absolute inset-0 bg-zinc-100/50 dark:bg-zinc-700/30 rounded-full -rotate-6 transform transition-all duration-custom group-hover:rotate-6"/>
-      
-      <div
-        className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-tr from-zinc-200/60 via-zinc-300/40 to-transparent dark:from-zinc-600/40 dark:via-zinc-700/20 dark:to-transparent">
-        <div className="w-full h-full rounded-full bg-white dark:bg-zinc-800 p-[2px]">
+    <div className="hero-portrait group relative mx-auto w-full max-w-[18rem] sm:max-w-[20rem] lg:max-w-[21rem]" data-testid="hero-image">
+      <div className="hero-squircle-accent absolute -bottom-3 -right-3 h-2/3 w-2/3 bg-accent-soft transition-transform duration-700 ease-out group-hover:translate-x-1 group-hover:translate-y-1" aria-hidden="true" />
+
+      <div className="hero-squircle relative aspect-[4/5] overflow-hidden bg-canvas-muted shadow-soft">
+        <div className="hero-squircle relative h-full w-full overflow-hidden">
           <Image
             src="https://github.com/patriciasegantine.png"
             alt="Profile picture of Patricia Segantine"
             fill
-            className="rounded-full ring-1 ring-zinc-100 dark:ring-zinc-700 "
+            priority
+            sizes="(min-width: 1024px) 21rem, (min-width: 640px) 20rem, 90vw"
+            className="object-cover object-[center_35%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
           />
         </div>
       </div>
-      
-      <div className="absolute -bottom-2 -right-2 w-3 h-3 rounded-full bg-zinc-200/80 dark:bg-zinc-600/50"/>
-      <div className="absolute -top-2 -left-2 w-4 h-4 rounded-full bg-zinc-100/80 dark:bg-zinc-700/50"/>
     </div>
   )
 }

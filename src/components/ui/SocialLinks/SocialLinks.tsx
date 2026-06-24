@@ -16,17 +16,17 @@ const SocialLinks: React.FC<SocialLinksProps> = ({showLabel = false}) => {
   };
   
   return (
-    <div className="flex gap-4" data-testid="social-links">
+    <div className="flex flex-wrap gap-3" data-testid="social-links">
       {socialLinks.map((social) => (
         <a
           key={social.name}
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors text-secondary bg-zinc-100 border border-zinc-200 dark:border-zinc-700/50 dark:bg-zinc-700/50 hover:bg-zinc-200 dark:hover:bg-zinc-700/80 focus-ring"
+          className="group flex items-center gap-2 rounded-control border border-line bg-transparent px-3 py-2 text-sm text-secondary transition-all duration-300 hover:border-accent hover:bg-accent-soft hover:text-accent-strong focus-ring"
           aria-label={`Visit ${social.name} profile`}
         >
-          {React.createElement(icons[social.icon] || icons.default, {className: "w-5 h-5"})}
+          {React.createElement(icons[social.icon] || icons.default, {className: "h-4 w-4 transition-transform duration-300 group-hover:-rotate-6"})}
           {showLabel && <span>{social.name}</span>}
         </a>
       ))}

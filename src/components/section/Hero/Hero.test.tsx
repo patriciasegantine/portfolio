@@ -23,9 +23,11 @@ describe("Hero Component", () => {
 
     expect(screen.getByTestId("hero-image")).toBeInTheDocument();
     expect(screen.getByTestId("social-links")).toBeInTheDocument();
-    expect(screen.getByTestId("hero-intro")).toHaveTextContent("Hi there, I'm");
+    expect(screen.getByTestId("hero-intro")).toHaveTextContent("Frontend Developer · England, UK");
     expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Patricia Segantine");
-    expect(screen.getByText(HERO_CONTENT.title.trim())).toBeInTheDocument();
+    expect(screen.getByText(/Interfaces that stay clear/)).toBeInTheDocument();
     expect(screen.getByText(HERO_CONTENT.subtitle)).toBeInTheDocument();
+    expect(screen.getByRole("link", {name: /Explore selected work/i})).toHaveAttribute("href", "#projects");
+    expect(screen.getByRole("link", {name: /More about me/i})).toHaveAttribute("href", "#about");
   });
 });

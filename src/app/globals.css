@@ -19,6 +19,7 @@
     --color-accent: #7657ff;
     --color-accent-strong: #5938db;
     --color-accent-soft: #ebe6ff;
+    --color-on-accent: #ffffff;
 
     /* Legacy aliases while components migrate to semantic tokens */
     --color-primary: var(--color-ink);
@@ -60,6 +61,7 @@
     --color-accent: #a68cff;
     --color-accent-strong: #b8a4ff;
     --color-accent-soft: #2e2748;
+    --color-on-accent: #19171f;
 
     --color-primary: var(--color-ink);
     --color-primary-light: #ffffff;
@@ -141,7 +143,7 @@ h3 {
     }
 
     .button-primary {
-        @apply inline-flex items-center justify-center gap-2 rounded-control bg-accent px-5 py-2.5 font-medium text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-lift focus-ring;
+        @apply inline-flex items-center justify-center gap-2 rounded-control bg-accent px-5 py-2.5 font-medium text-accent-contrast shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-lift focus-ring;
     }
 
     .profile-image-container {
@@ -167,6 +169,59 @@ h3 {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+.hero-squircle {
+    border-radius: 28% 16% 24% 18% / 20% 26% 18% 24%;
+}
+
+.hero-squircle-accent {
+    border-radius: 18% 26% 16% 24% / 28% 18% 24% 16%;
+}
+
+/* Keep the full hero visible on wide laptops with limited vertical space. */
+@media (min-width: 1024px) and (max-height: 850px) {
+    .hero-viewport {
+        min-height: calc(100svh - 4rem);
+        padding-block: 2rem;
+    }
+
+    .hero-layout {
+        gap: 3rem;
+    }
+
+    .hero-heading {
+        margin-top: 1rem;
+        font-size: clamp(3.75rem, 8vh, 4.75rem);
+    }
+
+    .hero-tagline {
+        margin-top: 1.25rem;
+        font-size: clamp(1.5rem, 3.5vh, 2rem);
+    }
+
+    .hero-description {
+        margin-top: 1rem;
+        font-size: 1rem;
+        line-height: 1.55;
+    }
+
+    .hero-actions {
+        margin-top: 1.25rem;
+    }
+
+    .hero-socials {
+        margin-top: 0.75rem;
+    }
+
+    .hero-highlights {
+        margin-top: 1.5rem;
+        padding-block: 0.75rem;
+    }
+
+    .hero-portrait {
+        max-width: 17.5rem;
     }
 }
 
