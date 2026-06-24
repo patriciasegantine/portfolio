@@ -30,6 +30,7 @@ const config: Config = {
           DEFAULT: 'var(--color-accent)',
           strong: 'var(--color-accent-strong)',
           soft: 'var(--color-accent-soft)',
+          contrast: 'var(--color-on-accent)',
         },
         line: 'var(--color-line)',
         primary: {

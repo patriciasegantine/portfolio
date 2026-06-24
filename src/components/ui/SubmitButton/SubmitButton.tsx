@@ -10,7 +10,7 @@ const SubmitButton = ({isLoading}: SubmitButtonProps) => {
       data-testid="submit-button"
       type="submit"
       className={`relative w-full inline-flex items-center justify-center gap-2 px-6 py-3
-              rounded-control text-white font-medium transition-all duration-300
+              rounded-control text-accent-contrast font-medium transition-all duration-300
               focus-ring
               ${isLoading
                 ? "cursor-not-allowed bg-accent opacity-70"
