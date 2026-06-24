@@ -4,14 +4,17 @@ import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import { ImageIcon, Loader2 } from "lucide-react";
+import { ArrowRight, ImageIcon, Loader2, Maximize2 } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
 import { getProjectStackIcon } from "@/data/projectStackIcons";
+import ImageLightbox from "@/components/ui/ImageLightbox/ImageLightbox";
 
 interface ProjectCardProps {
+  imagePosition?: 'left' | 'right';
   slug: string;
   image?: string | null;
   title: string;
+  category?: string;
   description: string;
   stackPreview: string[];
   status?: ProjectStatus;
@@ -36,16 +39,19 @@ const ImagePlaceholder = ({ className = "" }: { className?: string }) => (
 );
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
+                                                   imagePosition = 'left',
                                                    slug,
                                                    image,
                                                    title,
                                                    description,
                                                    stackPreview,
-                                                 status,
-                                                 github,
-                                                 liveDemo
+                                                   category,
+                                                   status,
+                                                   github,
+                                                   liveDemo
                                                  }) => {
   const [showImage, setShowImage] = React.useState(Boolean(image));
+  const [isLightboxOpen, setIsLightboxOpen] = React.useState(false);
   const [isNavigatingToDetails, setIsNavigatingToDetails] = React.useState(false);
   const detailsHref = `/projects/${slug}`;
 
@@ -79,100 +85,100 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <div
+    <article
       data-testid="project-card"
-      className="group relative min-w-0 h-full rounded-xl overflow-hidden transition-colors-custom bg-white dark:bg-zinc-800/50 shadow-md hover:shadow-lg border border-gray-200 dark:border-zinc-700 flex flex-col"
+      className="group relative grid min-w-0 overflow-visible rounded-panel border border-line bg-surface shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift lg:grid-cols-12"
     >
-      <div className="aspect-video overflow-hidden relative">
-        {showImage && image
-          ? <Image
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            src={image}
-            alt={title}
-            fill
-            sizes="(min-width: 1024px) 32rem, (min-width: 768px) 48vw, 100vw"
-            onError={() => setShowImage(false)}
-          />
-          : <ImagePlaceholder />}
-      </div>
-
-      <div className="flex flex-col flex-grow p-8">
-        <div className="flex-grow">
-          <div className="flex flex-col items-start gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-            <h3 className="text-2xl font-medium text-primary break-words">
-              {title}
-            </h3>
-            {status && (
-              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300 whitespace-nowrap">
-                {status}
-              </span>
-            )}
-          </div>
-          <p className="text-secondary dark:text-secondary mb-6 break-words">
-            {description}
-          </p>
+      <div className={`relative self-center lg:col-span-7 ${imagePosition === 'right' ? 'lg:order-2 lg:pr-6' : 'lg:pl-6'}`}>
+        <div className="relative aspect-video w-full overflow-hidden rounded-t-[1.2rem] bg-canvas lg:rounded-none">
+          {showImage && image ? (
+            <button
+              className="group/img relative h-full w-full cursor-zoom-in"
+              onClick={() => setIsLightboxOpen(true)}
+              aria-label={`Preview image for ${title}`}
+            >
+              <Image
+                className="object-cover object-center"
+                src={image}
+                alt={title}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                onError={() => setShowImage(false)}
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-ink/0 transition-colors duration-300 group-hover/img:bg-ink/30">
+                <Maximize2 className="h-7 w-7 text-white opacity-0 drop-shadow-md transition-opacity duration-300 group-hover/img:opacity-100" />
+              </div>
+            </button>
+          ) : (
+            <ImagePlaceholder />
+          )}
         </div>
 
-        <div className="mt-auto">
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            {stackPreview.map((item) => {
-              const Icon = getProjectStackIcon(item);
+      </div>
 
-              if (!Icon) {
-                return (
-                  <span
-                    key={item}
-                    className="text-xs font-medium px-2 py-1 rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-700/50 dark:text-zinc-300"
-                  >
-                    {item}
-                  </span>
-                );
-              }
+      <div className={`flex flex-col p-6 sm:p-8 lg:col-span-5 lg:p-8 xl:p-10 ${imagePosition === 'right' ? 'lg:order-1' : ''}`}>
+        <div className="flex flex-wrap items-center gap-3">
+          {category && <span className="eyebrow text-[0.65rem]">{category}</span>}
+          {category && status && <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />}
+          {status && (
+            <span className="whitespace-nowrap rounded-full border border-line bg-canvas px-2.5 py-1 text-[0.65rem] font-medium text-secondary">
+              {status}
+            </span>
+          )}
+        </div>
 
-              return (
-                <span
-                  key={item}
-                  title={item}
-                  className="text-secondary dark:text-secondary transition-colors hover:text-primary"
-                >
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                  <span className="sr-only">{item}</span>
-                </span>
-              );
-            })}
-          </div>
+        <h3 className="mt-4 break-words font-display text-4xl font-semibold tracking-[-0.045em] text-primary">
+          {title}
+        </h3>
 
-          <div className="flex flex-col gap-3 lg:flex-row lg:flex-wrap">
-            <Link
-              href={detailsHref}
-              onClick={handleDetailsClick}
-              aria-busy={isNavigatingToDetails}
-              aria-label={
-                isNavigatingToDetails
-                  ? `Opening details for ${title}`
-                  : `View details for ${title}`
-              }
-              className="flex w-full justify-center items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 text-white
-                       hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-800 dark:hover:bg-zinc-200
-                       focus-ring
-                       transition-colors hover:-translate-y-0.5 active:scale-[0.99] lg:w-auto"
-              style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
-            >
-              {isNavigatingToDetails && <Loader2 className="w-4 h-4 animate-spin" />}
-              <span>{isNavigatingToDetails ? 'Opening...' : 'View Details'}</span>
-            </Link>
+        <p className="mt-4 break-words text-base leading-relaxed text-secondary">
+          {description}
+        </p>
 
-            <div className="grid w-full grid-cols-2 gap-3 lg:flex lg:w-auto lg:flex-wrap">
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          {stackPreview.map((item) => {
+            const Icon = getProjectStackIcon(item);
+
+            return (
+              <span
+                key={item}
+                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-secondary"
+              >
+                {Icon && <Icon className="h-3.5 w-3.5" aria-hidden="true" />}
+                {item}
+              </span>
+            );
+          })}
+        </div>
+
+        <div className="mt-auto pt-7">
+          <Link
+            href={detailsHref}
+            onClick={handleDetailsClick}
+            aria-busy={isNavigatingToDetails}
+            aria-label={
+              isNavigatingToDetails
+                ? `Opening details for ${title}`
+                : `View details for ${title}`
+            }
+            className="button-primary group/link w-full sm:w-auto"
+            style={{opacity: isNavigatingToDetails ? 0.85 : 1}}
+          >
+            {isNavigatingToDetails && <Loader2 className="h-4 w-4 animate-spin" />}
+            <span>{isNavigatingToDetails ? 'Opening...' : 'View case study'}</span>
+            {!isNavigatingToDetails && <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />}
+          </Link>
+
+          {(liveDemo || github) && (
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 border-t border-line pt-4">
               {liveDemo && (
                 <a
                   href={liveDemo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors lg:w-auto focus-ring"
+                  className="group/link inline-flex items-center gap-2 text-sm font-medium text-secondary transition-colors hover:text-accent-strong focus-ring"
                 >
-                  <FaExternalLinkAlt className="w-4 h-4" />
+                  <FaExternalLinkAlt className="h-3.5 w-3.5" />
                   <span>Live Demo</span>
                 </a>
               )}
@@ -182,19 +188,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-700/50
-                       text-secondary dark:text-secondary hover:bg-zinc-200 dark:hover:bg-zinc-700/80
-                       transition-colors lg:w-auto focus-ring"
+                  className="group/link inline-flex items-center gap-2 text-sm font-medium text-secondary transition-colors hover:text-accent-strong focus-ring"
                 >
-                  <FaGithub className="w-5 h-5" />
+                  <FaGithub className="h-4 w-4" />
                   <span>GitHub</span>
                 </a>
               )}
             </div>
-          </div>
+          )}
         </div>
       </div>
-    </div>
+      {showImage && image && (
+        <ImageLightbox
+          src={image}
+          alt={title}
+          isOpen={isLightboxOpen}
+          onClose={() => setIsLightboxOpen(false)}
+        />
+      )}
+    </article>
   );
 };
 
