@@ -1,5 +1,5 @@
 import type { ProjectCaseStudy } from "@/types/project";
-import { hasItems, hasText } from "../utils/caseStudyHelpers";
+import { hasItems } from "../utils/caseStudyHelpers";
 import ProjectItem from "./ProjectItem";
 
 interface ProjectDetailsSectionProps {
@@ -8,7 +8,8 @@ interface ProjectDetailsSectionProps {
 
 const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
   const hasProjectDetails =
-    hasText(caseStudy.problemPurpose) ||
+    hasItems(caseStudy.myFocus) ||
+    hasItems(caseStudy.whyThisStack) ||
     hasItems(caseStudy.keyFeatures) ||
     hasItems(caseStudy.challengesTradeoffs) ||
     hasItems(caseStudy.whatILearned) ||
@@ -19,38 +20,53 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
   }
 
   return (
-    <section className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 px-6">
-      {hasText(caseStudy.problemPurpose) && (
+    <div className="mt-8 pb-16 md:pb-24">
+      {hasItems(caseStudy.myFocus) && (
         <ProjectItem
-          title="Problem / Purpose"
-          text={caseStudy.problemPurpose}
+          number="02 · Contribution"
+          title="My focus"
+          items={caseStudy.myFocus}
+          columns
+        />
+      )}
+      {hasItems(caseStudy.whyThisStack) && (
+        <ProjectItem
+          number="03 · Decisions"
+          title="Why this stack"
+          items={caseStudy.whyThisStack}
         />
       )}
       {hasItems(caseStudy.keyFeatures) && (
         <ProjectItem
-          title="Key Features"
+          number="04 · Product"
+          title="What shipped"
           items={caseStudy.keyFeatures}
+          columns
         />
       )}
       {hasItems(caseStudy.challengesTradeoffs) && (
         <ProjectItem
-          title="Challenges / Trade-offs"
+          number="05 · Trade-offs"
+          title="The hard choices"
           items={caseStudy.challengesTradeoffs}
         />
       )}
       {hasItems(caseStudy.whatILearned) && (
         <ProjectItem
+          number="06 · Reflection"
           title="What I Learned"
           items={caseStudy.whatILearned}
         />
       )}
       {hasItems(caseStudy.nextSteps) && (
         <ProjectItem
-          title="Next Steps / Improvements"
+          number="07 · Next"
+          title="Where it goes next"
           items={caseStudy.nextSteps}
+          columns
         />
       )}
-    </section>
+    </div>
   );
 };
 
