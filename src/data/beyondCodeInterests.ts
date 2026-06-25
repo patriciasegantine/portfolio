@@ -1,15 +1,14 @@
-import { IconType } from "react-icons";
-import { FaBook, FaMusic, FaPlaneDeparture, FaUsers } from "react-icons/fa";
+import { BookOpen, Headphones, Plane, UsersRound, type LucideIcon } from "lucide-react";
 
 export type BeyondCodeInterest = {
   name: string;
-  icon: IconType;
+  icon: LucideIcon;
   subtitle: string;
 };
 
 export const beyondCodeInterests: BeyondCodeInterest[] = [
-  { name: "Books", icon: FaBook, subtitle: "quiet time" },
-  { name: "Music", icon: FaMusic, subtitle: "reset mode" },
-  { name: "Travel", icon: FaPlaneDeparture, subtitle: "new perspectives" },
-  { name: "Family Time", icon: FaUsers, subtitle: "time together"},
+  { name: "Books", icon: BookOpen, subtitle: "quiet time" },
+  { name: "Music", icon: Headphones, subtitle: "reset mode" },
+  { name: "Travel", icon: Plane, subtitle: "new perspectives" },
+  { name: "Family Time", icon: UsersRound, subtitle: "time together"},
 ];
