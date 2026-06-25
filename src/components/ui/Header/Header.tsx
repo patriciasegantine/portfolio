@@ -12,13 +12,15 @@ const Header: React.FC = () => {
   
   return (
     <header
-      className="bg-white dark:bg-zinc-900 shadow-sm sticky w-full z-50 top-0 border-b border-zinc-100 dark:border-zinc-800 transition-colors-custom"
+      className="sticky top-0 z-50 w-full border-b border-line bg-canvas backdrop-blur-xl transition-colors-custom"
     >
       <nav className="container mx-auto flex justify-between items-center p-4">
-        <Link href="/" className="group p-2 rounded-lg flex items-center gap-2 transition-colors duration-custom focus-ring">
+        <Link href="/" className="group flex items-center gap-2 rounded-control p-2 transition-colors duration-custom focus-ring">
           
-          <Code className="w-5 h-5 text-secondary dark:text-secondary transition-all duration-300 group-hover:text-primary group-hover:-rotate-6"/>
-          <h3 className="text-xl font-medium text-primary transition-colors duration-custom group-hover:text-zinc-900 dark:group-hover:text-zinc-50">PS</h3>
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent-strong transition-transform duration-300 group-hover:-rotate-6">
+            <Code className="h-4 w-4"/>
+          </span>
+          <h3 className="font-display text-lg font-semibold text-primary transition-colors duration-custom group-hover:text-accent-strong">PS</h3>
         
         </Link>
         

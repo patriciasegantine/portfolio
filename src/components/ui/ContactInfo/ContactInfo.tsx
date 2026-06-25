@@ -15,41 +15,40 @@ const ContactInfo: React.FC = () => {
   return (
     <div
       data-testid="contact-info"
-      className="bg-white dark:bg-zinc-800/50 rounded-2xl p-6 border shadow-sm space-y-6 transition-colors-custom border-gray-200 dark:border-zinc-700">
+      className="space-y-1 transition-colors-custom">
       {contactInfo.length === 0 && (
         <p data-testid="no-contact-info" className="text-center text-secondary dark:text-secondary">
           No contact information available.
         </p>
       )}
       
-      {contactInfo.map((item, index) => (
-        <a
-          data-testid="contact-info-item"
-          key={index}
-          href={item.href}
-          target={item.href.includes("mailto") ? "_self" : "_blank"}
-          className="flex items-start gap-4 group focus-ring"
-        >
-          <div
-            className="p-3 rounded-lg bg-zinc-100 dark:bg-zinc-700/50 border border-zinc-200 dark:border-zinc-700/50
-                text-secondary dark:text-secondary
-                group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700
-                transition-colors"
+      <div className="divide-y divide-line">
+        {contactInfo.map((item, index) => (
+          <a
+            data-testid="contact-info-item"
+            key={index}
+            href={item.href}
+            target={item.href.includes("mailto") ? "_self" : "_blank"}
+            className="group flex items-center gap-4 py-4 focus-ring"
           >
-            {React.createElement(icons[item.icon] || icons.default, {
-              className: "w-5 h-5 text-secondary dark:text-secondary",
-            })}
-          </div>
-          <div>
-            <p className="text-sm font-medium text-secondary dark:text-secondary">{item.label}</p>
-            <p
-              className="text-primary group-hover:text-secondary-light transition-colors"
+            <div
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-control bg-accent-soft text-accent-strong transition-colors group-hover:bg-accent group-hover:text-accent-contrast"
             >
-              {item.value}
-            </p>
-          </div>
-        </a>
-      ))}
+              {React.createElement(icons[item.icon] || icons.default, {
+                className: "h-5 w-5",
+              })}
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">{item.label}</p>
+              <p
+                className="mt-1 text-primary transition-colors group-hover:text-accent-strong"
+              >
+                {item.value}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   );
 };

@@ -5,9 +5,9 @@ const ContactSocialLinks: React.FC = () => {
   return (
     <div
       data-testid="contact-social-links"
-      className="bg-white dark:bg-zinc-800/50 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-zinc-700 transition-colors-custom">
-      <h3 className="text-primary font-medium mb-4">Follow Me</h3>
-      <div className="flex gap-3">
+      className="border-t border-line pt-4 transition-colors-custom [&_[data-testid=social-links]]:gap-2 [&_[data-testid=social-links]_a]:px-2.5 [&_[data-testid=social-links]_a]:py-1.5 [&_[data-testid=social-links]_a]:text-xs">
+      <div className="flex flex-wrap items-center gap-3">
+        <h3 className="mr-1 text-xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">Follow</h3>
         <SocialLinks showLabel={true}/>
       </div>
     </div>

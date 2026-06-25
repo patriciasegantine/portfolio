@@ -15,7 +15,7 @@ export const contactInfo: ContactInfoItem[] = [
   {
     icon: "MapPin",
     label: "Location",
-    value: "England - UK",
+    value: "England, UK",
     href: "https://maps.app.goo.gl/XAQpU6Q2Rqfr7Jpx5",
   },
 ];

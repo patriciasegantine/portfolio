@@ -86,7 +86,7 @@ const ContactForm: React.FC = () => {
   
   return (
     <div
-      className="bg-white dark:bg-zinc-800/50 rounded-2xl p-8 shadow-sm border border-gray-200 dark:border-zinc-700 transition-colors-custom">
+      className="border-t border-line bg-canvas/60 p-6 transition-colors-custom sm:p-8 lg:col-span-7 lg:border-l lg:border-t-0">
       <form className="space-y-5" onSubmit={handleSubmit} noValidate>
         <FormInput
           id="name"
@@ -124,23 +124,25 @@ const ContactForm: React.FC = () => {
           <p id="email-error" className={ERROR_TEXT_CLASS}>{errors.email}</p>
         )}
         
-        <FormInput
-          id="message"
-          aria-invalid={!!errors.message}
-          aria-describedby="message-error"
-          label="Message"
-          rows={4}
-          minLength={10}
-          maxLength={500}
-          placeholder="Your message..."
-          className={errors.message && hasAttemptedSubmit ? ERROR_BORDER_CLASS : ""}
-          onChange={handleChange}
-          value={formValues.message ?? ""}
-          disabled={loading}
-        />
-        {errors.message && hasAttemptedSubmit && (
-          <p id="message-error" className={ERROR_TEXT_CLASS}>{errors.message}</p>
-        )}
+        <div>
+          <FormInput
+            id="message"
+            aria-invalid={!!errors.message}
+            aria-describedby="message-error"
+            label="Message"
+            rows={5}
+            minLength={10}
+            maxLength={500}
+            placeholder="Your message..."
+            className={errors.message && hasAttemptedSubmit ? ERROR_BORDER_CLASS : ""}
+            onChange={handleChange}
+            value={formValues.message ?? ""}
+            disabled={loading}
+          />
+          {errors.message && hasAttemptedSubmit && (
+            <p id="message-error" className={ERROR_TEXT_CLASS}>{errors.message}</p>
+          )}
+        </div>
         
         <SubmitButton isLoading={loading}/>
       </form>
