@@ -12,7 +12,7 @@ describe('ContactInfo Component', () => {
     expect(screen.getByText('Email')).toBeInTheDocument();
     expect(screen.getByText('pnsegantine@gmail.com')).toBeInTheDocument();
     expect(screen.getByText('Location')).toBeInTheDocument();
-    expect(screen.getByText('England - UK')).toBeInTheDocument();
+    expect(screen.getByText('England, UK')).toBeInTheDocument();
     expect(screen.queryByTestId('no-contact-info')).not.toBeInTheDocument();
   });
 });
