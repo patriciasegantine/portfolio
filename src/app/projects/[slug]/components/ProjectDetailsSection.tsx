@@ -7,13 +7,32 @@ interface ProjectDetailsSectionProps {
 }
 
 const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
-  const hasProjectDetails =
-    hasItems(caseStudy.myFocus) ||
-    hasItems(caseStudy.whyThisStack) ||
-    hasItems(caseStudy.keyFeatures) ||
-    hasItems(caseStudy.challengesTradeoffs) ||
-    hasItems(caseStudy.whatILearned) ||
-    hasItems(caseStudy.nextSteps);
+  const sections = [
+    {
+      label: "Decisions",
+      title: "Why this stack",
+      items: caseStudy.whyThisStack,
+    },
+    {
+      label: "Product",
+      title: "What shipped",
+      items: caseStudy.keyFeatures,
+      columns: true,
+    },
+    {
+      label: "Trade-offs",
+      title: "The hard choices",
+      items: caseStudy.challengesTradeoffs,
+    },
+    {
+      label: "Next",
+      title: "Where it goes next",
+      items: caseStudy.nextSteps,
+      columns: true,
+    },
+  ].filter(({ items }) => hasItems(items));
+
+  const hasProjectDetails = sections.length > 0;
 
   if (!hasProjectDetails) {
     return null;
@@ -21,51 +40,15 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
 
   return (
     <div className="mt-8 pb-16 md:pb-24">
-      {hasItems(caseStudy.myFocus) && (
+      {sections.map(({ label, title, items, columns }, index) => (
         <ProjectItem
-          number="02 · Contribution"
-          title="My focus"
-          items={caseStudy.myFocus}
-          columns
+          key={label}
+          number={`${String(index + 2).padStart(2, "0")} · ${label}`}
+          title={title}
+          items={items}
+          columns={columns}
         />
-      )}
-      {hasItems(caseStudy.whyThisStack) && (
-        <ProjectItem
-          number="03 · Decisions"
-          title="Why this stack"
-          items={caseStudy.whyThisStack}
-        />
-      )}
-      {hasItems(caseStudy.keyFeatures) && (
-        <ProjectItem
-          number="04 · Product"
-          title="What shipped"
-          items={caseStudy.keyFeatures}
-          columns
-        />
-      )}
-      {hasItems(caseStudy.challengesTradeoffs) && (
-        <ProjectItem
-          number="05 · Trade-offs"
-          title="The hard choices"
-          items={caseStudy.challengesTradeoffs}
-        />
-      )}
-      {hasItems(caseStudy.whatILearned) && (
-        <ProjectItem
-          number="06 · Reflection"
-          title="What I Learned"
-          items={caseStudy.whatILearned}
-        />
-      )}
-      {hasItems(caseStudy.nextSteps) && (
-        <ProjectItem
-          number="07 · Next"
-          title="Where it goes next"
-          items={caseStudy.nextSteps}
-          columns
-        />
-      )}
+      ))}
     </div>
   );
 };

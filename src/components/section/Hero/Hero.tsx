@@ -10,7 +10,7 @@ import type { HeroContent } from "@/types/hero";
 
 export const HERO_CONTENT: HeroContent = {
   title: "Interfaces that stay clear as products grow.",
-  subtitle: "I turn complex product requirements into accessible, maintainable frontend experiences, with a sharp eye for the details and the system behind them.",
+  subtitle: "I turn complex product requirements into accessible, maintainable frontend experiences, with a close eye on the details and the system behind them.",
 };
 
 const HERO_HIGHLIGHTS = [
