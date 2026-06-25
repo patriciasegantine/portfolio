@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -14,6 +14,12 @@ interface ImageLightboxProps {
 }
 
 const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, onClose }) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   useEffect(() => {
     if (!isOpen) return
     const handleKey = (e: KeyboardEvent) => {
@@ -26,6 +32,8 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, onClose
       document.body.style.overflow = ''
     }
   }, [isOpen, onClose])
+
+  if (!isMounted) return null
 
   return createPortal(
     <AnimatePresence>
@@ -51,13 +59,13 @@ const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, onClose
             transition={{ type: 'spring', stiffness: 320, damping: 30 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-video w-full">
+            <div className="relative aspect-video w-full bg-ink">
               <Image
                 src={src}
                 alt={alt}
                 fill
                 priority
-                className="object-cover"
+                className="object-contain"
                 sizes="(min-width: 1024px) 85vw, 92vw"
               />
             </div>
