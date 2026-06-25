@@ -3,16 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ImageIcon } from "lucide-react";
+import { ArrowLeft, ExternalLink, ImageIcon } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { ProjectStatus } from "@/types/project";
-import { getProjectStackIcon } from "@/data/projectStackIcons";
 
 interface ProjectDetailsHeroProps {
   title: string;
+  category: string;
   description: string;
   status?: ProjectStatus;
   image?: string | null;
-  stackPreview: string[];
+  github?: string;
+  liveDemo?: string;
 }
 
 const ImagePlaceholder = () => (
@@ -24,7 +26,7 @@ const ImagePlaceholder = () => (
   </div>
 );
 
-const ProjectDetailsHero = ({ title, description, status, image, stackPreview }: ProjectDetailsHeroProps) => {
+const ProjectDetailsHero = ({ title, category, description, status, image, github, liveDemo }: ProjectDetailsHeroProps) => {
   const [showImage, setShowImage] = useState(Boolean(image));
 
   useEffect(() => {
@@ -32,59 +34,68 @@ const ProjectDetailsHero = ({ title, description, status, image, stackPreview }:
   }, [image]);
 
   return (
-    <header className="space-y-6">
+    <header>
       <Link
         href="/#projects"
-        className="group inline-flex items-center gap-2 text-sm text-secondary transition-colors hover:text-primary focus-ring"
+        className="group inline-flex items-center gap-2 rounded-control text-sm text-secondary transition-colors hover:text-accent-strong focus-ring"
       >
-        <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
-        <span className="underline-offset-4 group-hover:underline">Back to Projects</span>
+        <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+        <span>Back to projects</span>
       </Link>
 
-      <div className="space-y-3">
-        <div className="flex items-center gap-3 flex-wrap">
-          <h1 className="text-4xl font-semibold text-primary">{title}</h1>
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
+        <div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="eyebrow">Case study · {category}</span>
           {status && (
-            <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-zinc-200 text-zinc-800 dark:bg-zinc-700/50 dark:text-zinc-300">
+              <span className="rounded-full border border-line bg-surface px-2.5 py-1 text-[0.68rem] font-medium text-secondary">
               {status}
             </span>
           )}
         </div>
-        <p className="text-lg text-secondary max-w-3xl">{description}</p>
-      </div>
-      
-      <div className="flex flex-wrap gap-2 pb-2">
-        {stackPreview.map((item) => {
-          const Icon = getProjectStackIcon(item);
-          
-          return (
-            <span
-              key={item}
-              className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full bg-zinc-200/70 border border-zinc-300 dark:border-zinc-700/50 text-zinc-800 dark:bg-zinc-700/50 dark:text-zinc-300"
-            >
-              {Icon && <Icon className="h-3.5 w-3.5" aria-hidden="true" />}
-              <p>{item}</p>
-            </span>
-          );
-        })}
-      </div>
+          <h1 className="mt-5 font-display text-6xl font-semibold leading-[0.9] tracking-[-0.065em] text-primary sm:text-7xl md:text-8xl">
+            {title}
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-secondary md:text-xl">{description}</p>
+        </div>
 
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700">
-        {showImage && image ? (
-          <Image
-            src={image}
-            alt={title}
-            fill
-            sizes="(min-width: 1024px) 64rem, 100vw"
-            className="object-cover"
-            onError={() => setShowImage(false)}
-          />
-        ) : (
-          <ImagePlaceholder />
+        {(liveDemo || github) && (
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            {liveDemo && (
+              <a href={liveDemo} target="_blank" rel="noopener noreferrer" className="button-primary group whitespace-nowrap">
+                View live project
+                <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            )}
+            {github && (
+              <a href={github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-control border border-line bg-surface px-5 py-2.5 font-medium text-primary transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent-strong focus-ring">
+                <FaGithub className="h-4 w-4" />
+                View source
+              </a>
+            )}
+          </div>
         )}
       </div>
 
-      
+      <div className="mt-12 overflow-hidden rounded-panel border border-line bg-surface shadow-soft">
+        {showImage && image ? (
+          <div className="relative aspect-video w-full overflow-hidden bg-canvas">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              priority
+              sizes="(min-width: 1280px) 80rem, 100vw"
+              className="object-cover object-center"
+              onError={() => setShowImage(false)}
+            />
+          </div>
+        ) : (
+          <div className="aspect-video">
+            <ImagePlaceholder />
+          </div>
+        )}
+      </div>
     </header>
   );
 };

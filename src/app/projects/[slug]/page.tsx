@@ -4,7 +4,6 @@ import ProjectOverviewSection from "./components/ProjectOverviewSection";
 import ProjectDetailsSection from "./components/ProjectDetailsSection";
 import { getProjectsContent } from "./projectsServerContent";
 import ProjectDetailsHero from "@/app/projects/[slug]/components/ProjectDetailsHero";
-import ProjectLinks from "@/app/projects/[slug]/components/ProjectLinks";
 
 export { generateMetadata, generateStaticParams } from "./page.config";
 
@@ -31,25 +30,22 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
   }
 
   return (
-    <div className="bg-zinc-100 dark:bg-zinc-900/95 transition-colors-custom">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-5xl mx-auto space-y-4">
+    <div className="bg-canvas transition-colors-custom">
+      <div className="container mx-auto px-5 py-8 sm:px-8 md:py-12">
+        <div className="mx-auto max-w-7xl">
           <ProjectDetailsHero
             title={project.title}
+            category={project.category}
             description={project.description}
             status={project.status}
             image={project.image}
-            stackPreview={project.stackPreview}
+            github={project.links.github}
+            liveDemo={project.links.liveDemo}
           />
 
           <ProjectOverviewSection caseStudy={project.caseStudy} />
 
           <ProjectDetailsSection caseStudy={project.caseStudy} />
-
-          <ProjectLinks
-            github={project.links.github}
-            liveDemo={project.links.liveDemo}
-          />
         </div>
       </div>
     </div>
