@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
               </h2>
             </div>
             <p className="max-w-2xl text-lg leading-relaxed text-secondary lg:col-span-6 lg:col-start-7">
-              Have an idea, an opening, or a frontend problem worth thinking through? Send a note and I'll get back to you.
+              Have an idea, an opening, or a frontend problem worth thinking through? Send a note and I&apos;ll get back to you.
             </p>
           </div>
 
@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
             <aside className="flex flex-col gap-8 p-6 sm:p-8 lg:col-span-5">
               <div>
                 <p className="font-display text-2xl font-medium leading-tight tracking-[-0.035em] text-primary">
-                 I'm open to thoughtful product work, frontend collaborations, and friendly hellos.
+                  I&apos;m open to thoughtful product work, frontend collaborations, and friendly hellos.
                 </p>
                 <p className="mt-5 max-w-md text-secondary">
                   I do my best work with teams that care about accessibility, maintainability, and interfaces that make complex products feel easier to use.
