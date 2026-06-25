@@ -17,24 +17,24 @@ const Footer: React.FC = () => {
   
   return (
     <footer
-      className="py-8 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 transition-colors-custom">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
+      className="border-t border-line bg-canvas py-8 transition-colors-custom">
+      <div className="container mx-auto px-5 sm:px-8">
+        <div className="mx-auto max-w-5xl">
           
           <div className="flex flex-wrap items-center justify-center gap-4">
             {technologies.map((tech, index) => (
               <div key={index} title={tech.name}>
                 {React.createElement(tech.icon as React.ComponentType<{ className: string }>, {
-                  className: "w-6 h-6 text-secondary dark:text-secondary",
+                  className: "h-5 w-5 text-ink-subtle transition-colors duration-300 hover:text-accent-strong",
                 })}
               </div>
             ))}
           </div>
           
-          <div className="my-6 border-t border-zinc-300 dark:border-zinc-600 w-full"></div>
+          <div className="my-6 w-full border-t border-line"></div>
           
           <div
-            className="flex flex-col md:flex-row justify-center items-center gap-2 text-sm text-secondary dark:text-secondary">
+            className="flex flex-col items-center justify-center gap-2 text-sm text-secondary md:flex-row">
             <span>© {currentYear} All rights reserved</span>
             <span className="hidden md:inline">•</span>
             <span> Developed with ❤️ by <strong>Patricia Segantine</strong></span>
@@ -42,11 +42,12 @@ const Footer: React.FC = () => {
             
             <a
               href="https://github.com/patriciasegantine/portfolio"
+              target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors focus-ring"
+              className="flex items-center gap-2 text-sm text-secondary transition-colors hover:text-accent-strong focus-ring"
               title="GitHub Repository"
             >
-              <FaGithub className="w-5 h-5"/>
+              <FaGithub className="h-4 w-4"/>
               <span>GitHub</span>
             </a>
           </div>
