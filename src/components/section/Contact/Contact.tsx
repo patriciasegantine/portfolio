@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
                 05 · Contact
               </p>
               <h2 className="mt-5 font-display text-5xl font-semibold tracking-[-0.055em] text-primary md:text-6xl">
-                Let’s build something clear.
+                Let’s work together.
               </h2>
             </div>
             <p className="max-w-2xl text-lg leading-relaxed text-secondary lg:col-span-6 lg:col-start-7">

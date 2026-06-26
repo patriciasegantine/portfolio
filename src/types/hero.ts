@@ -1,4 +1,7 @@
 export interface HeroContent {
-  title: string;
+  tagline: {
+    main: string;
+    accent: string;
+  };
   subtitle: string;
 }
