@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
-import { X } from 'lucide-react';
+import { Code, X } from 'lucide-react';
 import NavMenu from '@/components/ui/NavMenu/NavMenu';
 
 interface MobileMenuProps {
@@ -38,7 +38,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       {isMobileMenuOpen && (
         <>
           <motion.div
-            className="fixed inset-0 z-[60] bg-canvas/55 backdrop-blur-md"
+            className="fixed inset-0 z-[60] bg-canvas/90 backdrop-blur-3xl dark:bg-canvas/[0.96]"
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
@@ -52,25 +52,34 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
           <motion.aside
             data-testid="mobile-menu"
-            className="fixed inset-y-0 right-0 z-[70] flex min-h-svh w-[min(82vw,22rem)] flex-col border-l border-line bg-surface px-6 py-6 shadow-2xl shadow-black/20"
-            initial={{x: '100%'}}
-            animate={{x: 0}}
-            exit={{x: '100%'}}
+            className="fixed inset-0 z-[70] flex min-h-svh flex-col overflow-hidden border border-white/40 px-6 py-6 shadow-2xl shadow-black/30 backdrop-blur-3xl [background:color-mix(in_srgb,var(--color-surface)_97%,transparent)] dark:border-white/10 dark:shadow-black/60 dark:[background:color-mix(in_srgb,var(--color-surface)_98%,transparent)]"
+            initial={{opacity: 0, y: 24, scale: 0.98}}
+            animate={{opacity: 1, y: 0, scale: 1}}
+            exit={{opacity: 0, y: 16, scale: 0.98}}
             transition={{
               duration: closeQuickly ? 0.1 : 0.45,
               ease: [0.22, 1, 0.36, 1],
             }}
             onPanEnd={handleSwipe}
           >
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="ml-auto rounded-control border border-line bg-canvas p-2 text-secondary transition-colors hover:text-primary focus-ring"
-              aria-label="Close menu"
-            >
-              <X className="h-6 w-6"/>
-            </button>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 rounded-control px-2 py-1 text-primary">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent-strong">
+                  <Code className="h-4 w-4"/>
+                </span>
+                <span className="font-display text-lg font-semibold">PS</span>
+              </div>
 
-            <div className="mt-16 flex flex-1 items-start">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-control border border-line bg-canvas/80 p-2 text-secondary shadow-soft transition-colors hover:text-primary focus-ring dark:bg-surface/80"
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6"/>
+              </button>
+            </div>
+
+            <div className="flex flex-1 items-center justify-center pb-16">
               <NavMenu
                 isMobile
                 onItemClick={handleLinkClick}
