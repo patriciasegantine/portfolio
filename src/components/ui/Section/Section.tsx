@@ -31,7 +31,7 @@ export const Section: FC<SectionProps> = ({
       data-testid={dataTestId || id}
       aria-label={ariaLabel}
       className={cn(
-        'py-12 md:py-20 transition-colors-custom',
+        'py-16 md:py-20 transition-colors-custom',
         themeVariants[variant],
         className
       )}

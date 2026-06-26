@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-5 sm:px-8">
         <div className="hero-layout mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-20">
-          <div className="order-2 flex min-w-0 flex-col items-start text-left lg:order-1">
+          <div className="order-1 flex min-w-0 flex-col items-start text-left">
             <div className="eyebrow flex items-center gap-3" data-testid="hero-intro">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
               <span>Senior Frontend Developer · England, UK</span>
@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
             </dl>
           </div>
 
-          <div className="order-1 lg:order-2">
+          <div className="order-2">
             <HeroImage/>
           </div>
         </div>

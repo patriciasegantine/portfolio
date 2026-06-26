@@ -3,9 +3,9 @@ import { ThemeProvider } from 'next-themes'
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import Header from '@/components/ui/Header/Header'
-import './globals.css'
 import Footer from "@/components/ui/Footer/Footer";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton/ScrollToTopButton";
+import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,8 +20,8 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Patricia Segantine - Web Developer',
-  description: 'Personal web developer portfolio',
+  title: 'Patricia Segantine — Senior Frontend Developer',
+  description: 'Senior Frontend Developer building reliable, maintainable interfaces for B2B and B2C SaaS with React, TypeScript, and Next.js.',
 }
 
 export default function RootLayout({
