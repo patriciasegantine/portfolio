@@ -16,9 +16,9 @@
     --color-line: rgb(25 23 31 / 0.12);
 
     /* Signature violet */
-    --color-accent: #7657ff;
-    --color-accent-strong: #5938db;
-    --color-accent-soft: #ebe6ff;
+    --color-accent: #5f35e8;
+    --color-accent-strong: #3f1fb3;
+    --color-accent-soft: #ddd4ff;
     --color-on-accent: #ffffff;
 
     /* Legacy aliases while components migrate to semantic tokens */

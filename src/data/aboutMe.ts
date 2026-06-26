@@ -1,5 +1,5 @@
 const ABOUT_ME = [
-  { text: "I'm a Frontend Developer with 6 years of experience building B2B and B2C SaaS products with React, TypeScript, and Next.js. I focus on accessible, maintainable interfaces that can evolve with the product." },
+  { text: "I'm a Senior Frontend Developer with 6 years of experience building B2B and B2C SaaS products with React, TypeScript, and Next.js. I focus on accessible, maintainable interfaces that can evolve with the product." },
   { text: "Most of my work happens in micro-frontend environments, where several teams ship into the same product. That shapes how I think about structure, consistency, and the decisions that keep a frontend healthy as it grows." },
 ]
 

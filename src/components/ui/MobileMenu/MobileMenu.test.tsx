@@ -40,6 +40,34 @@ jest.mock('framer-motion', () => ({
         {children}
       </div>
     ),
+    aside: ({children, onPanEnd, ...props}: MotionDivProps) => (
+      <aside
+        {...props}
+        data-testid={props['data-testid'] as string ?? 'motion-aside'}
+        onPointerUp={() => {
+          const mockEvent = {
+            type: 'pointerup',
+            clientX: 0,
+            clientY: 0,
+            preventDefault: () => {
+            },
+            stopPropagation: () => {
+            }
+          };
+
+          const mockPanInfo: PanInfo = {
+            point: {x: 0, y: 0},
+            delta: {x: 0, y: 0},
+            offset: {x: 60, y: 0},
+            velocity: {x: 0, y: 0}
+          };
+
+          onPanEnd?.(mockEvent, mockPanInfo);
+        }}
+      >
+        {children}
+      </aside>
+    ),
   },
   AnimatePresence: ({children}: PropsWithChildren) => <>{children}</>,
 }));
@@ -106,7 +134,7 @@ describe('MobileMenu Component', () => {
     expect(mockSetIsMobileMenuOpen).toHaveBeenCalledWith(false);
   });
   
-  it('handles swipe up gesture correctly', () => {
+  it('handles swipe right gesture correctly', () => {
     render(
       <MobileMenu
         navItems={navItemsMock}
@@ -115,7 +143,7 @@ describe('MobileMenu Component', () => {
       />
     );
     
-    const menuElement = screen.getByTestId('motion-div');
+    const menuElement = screen.getByTestId('mobile-menu');
     
     act(() => {
       fireEvent.pointerUp(menuElement);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { coreSkills, toolingSkills } from "@/data/skills";
+import { coreSkills, toolingSkills, type SkillItem } from "@/data/skills";
 import { Section } from "@/components/ui/Section/Section";
 import RevealOnScroll from "@/components/ui/RevealOnScroll/RevealOnScroll";
 import type { IconType } from "react-icons";
@@ -8,6 +8,39 @@ const SkillIcon = ({icon: Icon}: {icon: IconType}) => (
   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-control bg-accent-soft text-accent-strong">
     <Icon className="h-5 w-5" aria-hidden="true" />
   </span>
+);
+
+type SkillGroupProps = {
+  label: string;
+  skills: SkillItem[];
+  gridClassName: string;
+  titleClassName?: string;
+};
+
+const SkillGroup = ({
+  label,
+  skills,
+  gridClassName,
+  titleClassName = "text-sm",
+}: SkillGroupProps) => (
+  <div className="grid gap-6 border-b border-line py-8 md:grid-cols-[11rem_1fr] md:gap-10">
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-subtle">{label}</p>
+    <div className={gridClassName}>
+      {skills.map(({name, subtitle, icon: Icon}, index) => (
+        <RevealOnScroll key={name} delay={index * 0.04} yOffset={12}>
+          <div className="group flex gap-4 items-start" data-testid="skill-item">
+            <div className="transition-transform duration-300 group-hover:-rotate-6">
+              <SkillIcon icon={Icon} />
+            </div>
+            <div>
+              <h3 className={`font-display font-semibold text-primary ${titleClassName}`}>{name}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-secondary">{subtitle}</p>
+            </div>
+          </div>
+        </RevealOnScroll>
+      ))}
+    </div>
+  </div>
 );
 
 const Skills: React.FC = () => {
@@ -38,43 +71,18 @@ const Skills: React.FC = () => {
           </div>
 
           <div className="mt-12">
-            <div className="grid gap-6 border-b border-line py-8 md:grid-cols-[11rem_1fr] md:gap-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-subtle">Core stack</p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
-                {primarySkills.map(({name, subtitle, icon: Icon}, index) => (
-                  <RevealOnScroll key={name} delay={index * 0.04} yOffset={12}>
-                    <div className="group flex items-center gap-4">
-                      <div className="transition-transform duration-300 group-hover:-rotate-6">
-                        <SkillIcon icon={Icon} />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-lg font-semibold text-primary">{name}</h3>
-                        <p className="mt-1 text-xs leading-relaxed text-secondary">{subtitle}</p>
-                      </div>
-                    </div>
-                  </RevealOnScroll>
-                ))}
-              </div>
-            </div>
+            <SkillGroup
+              label="Core stack"
+              skills={primarySkills}
+              gridClassName="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4"
+              titleClassName="text-lg"
+            />
 
-            <div className="grid gap-6 border-b border-line py-8 md:grid-cols-[11rem_1fr] md:gap-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-subtle">Engineering practice</p>
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                {practiceSkills.map(({name, subtitle, icon: Icon}, index) => (
-                  <RevealOnScroll key={name} delay={index * 0.04} yOffset={12}>
-                    <div className="group flex items-center gap-4">
-                      <div className="transition-transform duration-300 group-hover:-rotate-6">
-                        <SkillIcon icon={Icon} />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-sm font-semibold text-primary">{name}</h3>
-                        <p className="mt-1 text-xs leading-relaxed text-secondary">{subtitle}</p>
-                      </div>
-                    </div>
-                  </RevealOnScroll>
-                ))}
-              </div>
-            </div>
+            <SkillGroup
+              label="Engineering practice"
+              skills={practiceSkills}
+              gridClassName="grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            />
 
             <div className="grid gap-6 py-8 md:grid-cols-[11rem_1fr] md:items-center md:gap-10">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-subtle">Tooling</p>
