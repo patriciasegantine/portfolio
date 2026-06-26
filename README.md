@@ -1,6 +1,6 @@
-# Patricia Segantine Studio
+# Patricia Segantine | Portfolio
 
-A personal portfolio studio where I share selected projects, ideas, and my journey in frontend development.
+A personal space where I share selected projects, ideas, and my journey in frontend development.
 
 ---
 
@@ -8,7 +8,8 @@ A personal portfolio studio where I share selected projects, ideas, and my journ
 
 ## 📖 Overview
 
-Patricia Segantine Studio presents my work as a Senior Frontend Developer through selected projects, practical case studies, and modern web experiences.  
+This portfolio presents my work as a Senior Frontend Developer through selected projects, practical case studies, and the technologies I use to build modern web experiences.
+
 It highlights both the final interface and the thinking behind each solution, including performance, accessibility, maintainable code structure, and user-centred product decisions.
 
 ---
