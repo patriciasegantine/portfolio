@@ -20,7 +20,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
                                            isMobile = false,
                                            onItemClick,
                                          }) => {
-  const mobileClasses = 'mobile-menu-class block md:hidden py-4 px-4';
+  const mobileClasses = 'mobile-menu-class flex w-full flex-col items-stretch gap-2 md:hidden';
   const desktopClasses = 'hidden md:flex items-center space-x-6';
   
   return (
@@ -32,9 +32,10 @@ const NavMenu: React.FC<NavMenuProps> = ({
         <Link
           key={label}
           href={href}
-          className={`${isMobile ? 'block' : 'inline-block'}
-          px-3 py-2 rounded-lg text-secondary hover:text-zinc-900 dark:hover:text-zinc-50
-          hover:underline underline-offset-4 decoration-2 transition-colors duration-custom focus-ring`}
+          className={`${isMobile ? 'block text-right font-display text-3xl font-semibold tracking-[-0.04em]' : 'inline-block'}
+          rounded-lg px-3 py-2 text-secondary
+          transition-colors duration-custom hover:bg-accent-soft hover:text-primary hover:underline
+          decoration-2 underline-offset-4 focus-ring`}
           onClick={onItemClick}
         >
           {label}
