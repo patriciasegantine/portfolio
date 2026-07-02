@@ -23,7 +23,7 @@ describe("Hero Component", () => {
 
     expect(screen.getByTestId("hero-image")).toBeInTheDocument();
     expect(screen.getByTestId("social-links")).toBeInTheDocument();
-    expect(screen.getByTestId("hero-intro")).toHaveTextContent("Senior Frontend Developer · England, UK");
+    expect(screen.getByTestId("hero-intro")).toHaveTextContent("Senior Frontend Engineer");
     expect(screen.getByRole("heading", {level: 1})).toHaveTextContent("Patricia Segantine");
     expect(screen.getByText(/Interfaces that hold up/)).toBeInTheDocument();
     expect(screen.getByText(HERO_CONTENT.subtitle)).toBeInTheDocument();

@@ -30,7 +30,7 @@ export const confirmationTemplate = (name: string): string => `
     <p style="color: #666; font-size: 14px; margin: 0;">
       Best regards,<br />
       <strong style="color: #333;">Patricia Segantine</strong><br />
-      Senior Frontend Developer
+      Senior Frontend Engineer
     </p>
   </div>
 `;

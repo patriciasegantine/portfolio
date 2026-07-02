@@ -20,8 +20,8 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Patricia Segantine — Senior Frontend Developer',
-  description: 'Senior Frontend Developer building reliable, maintainable interfaces for B2B and B2C SaaS with React, TypeScript, and Next.js.',
+  title: 'Patricia Segantine| Senior Frontend Engineer',
+  description: 'Senior Frontend Engineer building reliable, maintainable interfaces for B2B and B2C SaaS with React, TypeScript, and Next.js.',
 }
 
 export default function RootLayout({

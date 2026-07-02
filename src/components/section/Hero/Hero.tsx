@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           <div className="order-1 flex min-w-0 flex-col items-start text-left">
             <div className="eyebrow flex items-center gap-3" data-testid="hero-intro">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
-              <span>Senior Frontend Developer · England, UK</span>
+              <span>Senior Frontend Engineer</span>
             </div>
 
             <h1 className="hero-heading mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.94] tracking-[-0.065em] text-primary sm:text-6xl md:text-7xl xl:text-[5.5rem]">
