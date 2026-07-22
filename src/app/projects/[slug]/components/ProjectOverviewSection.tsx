@@ -7,10 +7,9 @@ interface ProjectOverviewSectionProps {
 
 const ProjectOverviewSection = ({ caseStudy }: ProjectOverviewSectionProps) => {
   const hasOverview = hasText(caseStudy.projectOverview);
-  const hasPurpose = hasText(caseStudy.problemPurpose);
   const hasStack = hasItems(caseStudy.techStack);
 
-  if (!hasOverview && !hasPurpose && !hasStack) {
+  if (!hasOverview && !hasStack) {
     return null;
   }
 
@@ -29,15 +28,6 @@ const ProjectOverviewSection = ({ caseStudy }: ProjectOverviewSectionProps) => {
             <p className="text-xl leading-relaxed text-primary md:text-2xl">
               {caseStudy.projectOverview}
             </p>
-          )}
-
-          {hasPurpose && (
-            <div className="mt-10 border-t border-line pt-7">
-              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-accent-strong">The challenge</h3>
-              <p className="mt-4 max-w-4xl text-base leading-relaxed text-secondary md:text-lg">
-                {caseStudy.problemPurpose}
-              </p>
-            </div>
           )}
 
           {hasStack && (

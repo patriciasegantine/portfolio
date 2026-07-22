@@ -25,8 +25,6 @@ const generateMockProjects = () => {
       },
       caseStudy: {
         projectOverview: "",
-        problemPurpose: "",
-        myFocus: [],
         techStack: [],
         whyThisStack: [],
         keyFeatures: [],
@@ -50,8 +48,6 @@ const generateMockProjects = () => {
       },
       caseStudy: {
         projectOverview: "",
-        problemPurpose: "",
-        myFocus: [],
         techStack: [],
         whyThisStack: [],
         keyFeatures: [],
