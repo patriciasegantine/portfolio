@@ -25,6 +25,11 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
       items: caseStudy.challengesTradeoffs,
     },
     {
+      label: "Learnings",
+      title: "What I learned",
+      items: caseStudy.whatILearned,
+    },
+    {
       label: "Next",
       title: "Where it goes next",
       items: caseStudy.nextSteps,

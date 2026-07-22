@@ -12,8 +12,6 @@ export interface ProjectLinks {
 
 export interface ProjectCaseStudy {
   projectOverview: string;
-  problemPurpose: string;
-  myFocus: string[];
   techStack: string[];
   whyThisStack: string[];
   keyFeatures: string[];
