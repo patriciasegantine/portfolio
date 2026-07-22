@@ -25,11 +25,16 @@ const ProjectDetailsSection = ({ caseStudy }: ProjectDetailsSectionProps) => {
       items: caseStudy.challengesTradeoffs,
     },
     {
-      label: "Next",
-      title: "Where it goes next",
-      items: caseStudy.nextSteps,
-      columns: true,
-    },
+    label: "Learnings",
+    title: "What I learned",
+    items: caseStudy.whatILearned,
+  },
+  {
+    label: "Next",
+    title: "Where it goes next",
+    items: caseStudy.nextSteps,
+    columns: true,
+  }
   ].filter(({ items }) => hasItems(items));
 
   const hasProjectDetails = sections.length > 0;
