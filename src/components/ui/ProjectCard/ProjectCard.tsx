@@ -7,6 +7,7 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ArrowRight, ImageIcon, Loader2, Maximize2 } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
 import { getProjectStackIcon } from "@/data/projectStackIcons";
+import { PROJECT_STATUS_BADGE_STYLE, PROJECT_STATUS_DOT_STYLES } from "@/data/projectStatusStyles";
 import ImageLightbox from "@/components/ui/ImageLightbox/ImageLightbox";
 
 interface ProjectCardProps {
@@ -121,7 +122,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {category && <span className="eyebrow text-[0.65rem]">{category}</span>}
           {category && status && <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />}
           {status && (
-            <span className="whitespace-nowrap rounded-full border border-line bg-canvas px-2.5 py-1 text-[0.65rem] font-medium text-secondary">
+            <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[0.65rem] font-medium ${PROJECT_STATUS_BADGE_STYLE}`}>
+              <span className={`h-1.5 w-1.5 rounded-full ${PROJECT_STATUS_DOT_STYLES[status]}`} aria-hidden="true" />
               {status}
             </span>
           )}
