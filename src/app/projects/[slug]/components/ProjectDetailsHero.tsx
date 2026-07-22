@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ExternalLink, ImageIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { ProjectStatus } from "@/types/project";
+import { PROJECT_STATUS_BADGE_STYLE, PROJECT_STATUS_DOT_STYLES } from "@/data/projectStatusStyles";
 
 interface ProjectDetailsHeroProps {
   title: string;
@@ -48,7 +49,8 @@ const ProjectDetailsHero = ({ title, category, description, status, image, githu
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">Case study · {category}</span>
           {status && (
-              <span className="rounded-full border border-line bg-surface px-2.5 py-1 text-[0.68rem] font-medium text-secondary">
+              <span className={`rounded-full px-2.5 py-1 text-[0.68rem] font-medium ${PROJECT_STATUS_BADGE_STYLE}`}>
+              <span className={`h-1.5 w-1.5 rounded-full ${PROJECT_STATUS_DOT_STYLES[status]}`} aria-hidden="true" />
               {status}
             </span>
           )}

@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
             className="flex flex-col items-center justify-center gap-2 text-sm text-secondary md:flex-row">
             <span>© {currentYear} All rights reserved</span>
             <span className="hidden md:inline">•</span>
-            <span> Developed with ❤️ by <strong>Patricia Segantine</strong></span>
+            <span>Designed &amp; built by <strong>Patricia Segantine</strong></span>
             <span className="hidden md:inline">•</span>
             
             <a

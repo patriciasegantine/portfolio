@@ -1,4 +1,4 @@
-export type ProjectStatus = 'Completed' | 'In Progress' | 'Planned';
+export type ProjectStatus = 'Completed' | 'In Progress' | 'Ongoing' | 'Planned';
 
 export interface ProjectTechnology {
   icon: string;
