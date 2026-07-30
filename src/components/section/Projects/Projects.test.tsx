@@ -88,6 +88,7 @@ describe("Projects Component", () => {
       expect(detailsLinks).toHaveLength(2);
       expect(detailsLinks[0]).toHaveAttribute("href", "/projects/first-project");
       expect(detailsLinks[1]).toHaveAttribute("href", "/projects/second-project");
+      expect(screen.getByRole("link", {name: /view all projects/i})).toHaveAttribute("href", "/all-projects");
     });
   });
   

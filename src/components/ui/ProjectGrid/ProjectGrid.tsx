@@ -12,6 +12,7 @@ const ProjectGrid = ({ projects }: ProjectGridProps) => (
       <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
         <ProjectCard
           imagePosition={index % 2 === 0 ? "left" : "right"}
+          source="all-projects"
           slug={project.slug}
           image={project.image}
           title={project.title}

@@ -29,19 +29,34 @@ const ImagePlaceholder = () => (
 
 const ProjectDetailsHero = ({ title, category, description, status, image, github, liveDemo }: ProjectDetailsHeroProps) => {
   const [showImage, setShowImage] = useState(Boolean(image));
+  const [backLink, setBackLink] = useState({
+    href: "/#projects",
+    label: "Back to selected work",
+  });
 
   useEffect(() => {
     setShowImage(Boolean(image));
   }, [image]);
 
+  useEffect(() => {
+    const source = new URLSearchParams(window.location.search).get("from");
+
+    if (source === "all-projects") {
+      setBackLink({
+        href: "/all-projects",
+        label: "Back to all projects",
+      });
+    }
+  }, []);
+
   return (
     <header>
       <Link
-        href="/#projects"
+        href={backLink.href}
         className="group inline-flex items-center gap-2 rounded-control text-sm text-secondary transition-colors hover:text-accent-strong focus-ring"
       >
         <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-        <span>Back to projects</span>
+        <span>{backLink.label}</span>
       </Link>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">

@@ -12,6 +12,7 @@ import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge/ProjectStatus
 
 interface ProjectCardProps {
   imagePosition?: 'left' | 'right';
+  source?: 'all-projects';
   slug: string;
   image?: string | null;
   title: string;
@@ -41,6 +42,7 @@ const ImagePlaceholder = ({ className = "" }: { className?: string }) => (
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
                                                    imagePosition = 'left',
+                                                   source,
                                                    slug,
                                                    image,
                                                    title,
@@ -54,7 +56,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const [showImage, setShowImage] = React.useState(Boolean(image));
   const [isLightboxOpen, setIsLightboxOpen] = React.useState(false);
   const [isNavigatingToDetails, setIsNavigatingToDetails] = React.useState(false);
-  const detailsHref = `/projects/${slug}`;
+  const detailsHref = source === 'all-projects'
+    ? `/projects/${slug}?from=all-projects`
+    : `/projects/${slug}`;
 
   React.useEffect(() => {
     setShowImage(Boolean(image));
