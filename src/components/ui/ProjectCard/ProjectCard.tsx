@@ -7,8 +7,8 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ArrowRight, ImageIcon, Loader2, Maximize2 } from "lucide-react";
 import { ProjectStatus } from "@/types/project";
 import { getProjectStackIcon } from "@/data/projectStackIcons";
-import { PROJECT_STATUS_BADGE_STYLE, PROJECT_STATUS_DOT_STYLES } from "@/data/projectStatusStyles";
 import ImageLightbox from "@/components/ui/ImageLightbox/ImageLightbox";
+import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge/ProjectStatusBadge";
 
 interface ProjectCardProps {
   imagePosition?: 'left' | 'right';
@@ -121,12 +121,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex flex-wrap items-center gap-3">
           {category && <span className="eyebrow text-[0.65rem]">{category}</span>}
           {category && status && <span className="h-1 w-1 rounded-full bg-line" aria-hidden="true" />}
-          {status && (
-            <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[0.65rem] font-medium ${PROJECT_STATUS_BADGE_STYLE}`}>
-              <span className={`h-1.5 w-1.5 rounded-full ${PROJECT_STATUS_DOT_STYLES[status]}`} aria-hidden="true" />
-              {status}
-            </span>
-          )}
+          {status && <ProjectStatusBadge status={status} />}
         </div>
 
         <h3 className="mt-4 break-words font-display text-4xl font-semibold tracking-[-0.045em] text-primary">
