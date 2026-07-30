@@ -18,6 +18,8 @@ const generateMockProjects = () => {
       image: null,
       stackPreview: ["React", "Next.js"],
       status: "Completed",
+      featured: true,
+      featuredOrder: 1,
       technologies: [{icon: "SiReact", name: "React"}],
       links: {
         github: "https://github.com/example/first-project",
@@ -40,7 +42,9 @@ const generateMockProjects = () => {
       description: "Second Project is designed for teamwork...",
       image: null,
       stackPreview: ["Vue.js", "Nuxt.js"],
-      status: "In Progress",
+      status: "InProgress",
+      featured: true,
+      featuredOrder: 2,
       technologies: [{icon: "SiVue", name: "Vue.js"}],
       links: {
         github: "https://github.com/example/second-project",
@@ -63,14 +67,23 @@ describe("Projects Component", () => {
   beforeEach(() => fetchMock.enableMocks());
   afterEach(() => fetchMock.resetMocks());
   
-  it("fetches and renders all projects", async () => {
-    fetchMock.mockResponseOnce(JSON.stringify(generateMockProjects()));
+  it("renders featured projects in their configured order", async () => {
+    const projects = generateMockProjects();
+    projects.push({
+      ...projects[0],
+      slug: "archived-project",
+      title: "Archived Project",
+      featured: false,
+      featuredOrder: 3,
+    });
+    fetchMock.mockResponseOnce(JSON.stringify(projects.reverse()));
     
     render(<Projects/>);
     
     await waitFor(() => {
       expect(screen.getByText("First Project - Task Dashboard")).toBeInTheDocument();
       expect(screen.getByText("Second Project - Collaboration Hub")).toBeInTheDocument();
+      expect(screen.queryByText("Archived Project")).not.toBeInTheDocument();
       const detailsLinks = screen.getAllByRole("link", {name: /View details for/i});
       expect(detailsLinks).toHaveLength(2);
       expect(detailsLinks[0]).toHaveAttribute("href", "/projects/first-project");

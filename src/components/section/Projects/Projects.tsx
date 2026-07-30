@@ -10,11 +10,20 @@ import { useRemoteContent } from "@/hook/useRemoteContent";
 import { Project } from "@/types/project";
 import RevealOnScroll from "@/components/ui/RevealOnScroll/RevealOnScroll";
 
+const HOME_PROJECTS_LIMIT = 3;
+
 const Projects: React.FC = () => {
   const { data, isLoading, error } = useRemoteContent<Project[]>(
     contentClientService.getProjectsContent
   );
   const projects = data ?? [];
+  const selectedProjects = projects
+    .filter((project) => project.featured)
+    .sort((firstProject, secondProject) =>
+      (firstProject.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
+      (secondProject.featuredOrder ?? Number.MAX_SAFE_INTEGER)
+    )
+    .slice(0, HOME_PROJECTS_LIMIT);
   
   return (
     <Section
@@ -43,7 +52,7 @@ const Projects: React.FC = () => {
         {error && <ErrorComponent message={error}/>}
         
         <div className="mx-auto grid max-w-7xl gap-10 lg:gap-14">
-          {projects.map((project, index) => (
+          {selectedProjects.map((project, index) => (
             <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
               <ProjectCard
                 imagePosition={index % 2 === 0 ? 'left' : 'right'}
