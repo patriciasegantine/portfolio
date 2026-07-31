@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
           <div className="mt-12 flex justify-center lg:mt-16">
             <Link
               href="/all-projects"
-              className="group inline-flex items-center gap-2 rounded-control border border-line bg-surface px-5 py-2.5 font-medium text-primary shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent-strong hover:shadow-lift focus-ring"
+              className="group inline-flex items-center gap-2 rounded-control px-2 py-1 text-sm font-medium text-secondary transition-colors duration-300 hover:text-accent-strong focus-ring"
             >
               View all projects
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
