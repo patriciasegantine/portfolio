@@ -1,6 +1,8 @@
 'use client'
 
 import React from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import ProjectCard from "@/components/ui/ProjectCard/ProjectCard";
 import LoadingComponent from "@/components/ui/LoadingComponent/LoadingComponent";
 import ErrorComponent from "@/components/ui/ErrorComponent/ErrorComponent";
@@ -10,11 +12,20 @@ import { useRemoteContent } from "@/hook/useRemoteContent";
 import { Project } from "@/types/project";
 import RevealOnScroll from "@/components/ui/RevealOnScroll/RevealOnScroll";
 
+const HOME_PROJECTS_LIMIT = 3;
+
 const Projects: React.FC = () => {
   const { data, isLoading, error } = useRemoteContent<Project[]>(
     contentClientService.getProjectsContent
   );
   const projects = data ?? [];
+  const selectedProjects = projects
+    .filter((project) => project.featured)
+    .sort((firstProject, secondProject) =>
+      (firstProject.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
+      (secondProject.featuredOrder ?? Number.MAX_SAFE_INTEGER)
+    )
+    .slice(0, HOME_PROJECTS_LIMIT);
   
   return (
     <Section
@@ -42,23 +53,35 @@ const Projects: React.FC = () => {
         
         {error && <ErrorComponent message={error}/>}
         
-        <div className="mx-auto grid max-w-7xl gap-10 lg:gap-14">
-          {projects.map((project, index) => (
-            <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
-              <ProjectCard
-                imagePosition={index % 2 === 0 ? 'left' : 'right'}
-                slug={project.slug}
-                image={project.image}
-                title={project.title}
-                category={project.category}
-                description={project.description}
-                stackPreview={project.stackPreview}
-                status={project.status}
-                github={project.links.github}
-                liveDemo={project.links.liveDemo}
-              />
-            </RevealOnScroll>
-          ))}
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:gap-14">
+            {selectedProjects.map((project, index) => (
+              <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
+                <ProjectCard
+                  imagePosition={index % 2 === 0 ? "left" : "right"}
+                  slug={project.slug}
+                  image={project.image}
+                  title={project.title}
+                  category={project.category}
+                  description={project.description}
+                  stackPreview={project.stackPreview}
+                  status={project.status}
+                  github={project.links.github}
+                  liveDemo={project.links.liveDemo}
+                />
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center lg:mt-16">
+            <Link
+              href="/all-projects"
+              className="group inline-flex items-center gap-2 rounded-control px-2 py-1 text-sm font-medium text-secondary transition-colors duration-300 hover:text-accent-strong focus-ring"
+            >
+              View all projects
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </div>
     </Section>

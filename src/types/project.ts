@@ -1,4 +1,4 @@
-export type ProjectStatus = 'Completed' | 'In Progress' | 'Ongoing' | 'Planned';
+export type ProjectStatus = 'Completed' | 'InProgress' | 'Ongoing' | 'Paused' | 'Planned';
 
 export interface ProjectTechnology {
   icon: string;
@@ -28,6 +28,8 @@ export interface Project {
   image: string | null;
   stackPreview: string[];
   status: ProjectStatus;
+  featured: boolean;
+  featuredOrder?: number | null;
   technologies: ProjectTechnology[];
   links: ProjectLinks;
   caseStudy: ProjectCaseStudy;

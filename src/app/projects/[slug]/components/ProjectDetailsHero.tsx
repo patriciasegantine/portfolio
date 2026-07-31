@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ExternalLink, ImageIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { ProjectStatus } from "@/types/project";
-import { PROJECT_STATUS_BADGE_STYLE, PROJECT_STATUS_DOT_STYLES } from "@/data/projectStatusStyles";
+import ProjectStatusBadge from "@/components/ui/ProjectStatusBadge/ProjectStatusBadge";
 
 interface ProjectDetailsHeroProps {
   title: string;
@@ -29,32 +29,42 @@ const ImagePlaceholder = () => (
 
 const ProjectDetailsHero = ({ title, category, description, status, image, github, liveDemo }: ProjectDetailsHeroProps) => {
   const [showImage, setShowImage] = useState(Boolean(image));
+  const [backLink, setBackLink] = useState({
+    href: "/#projects",
+    label: "Back to selected work",
+  });
 
   useEffect(() => {
     setShowImage(Boolean(image));
   }, [image]);
 
+  useEffect(() => {
+    const source = new URLSearchParams(window.location.search).get("from");
+
+    if (source === "all-projects") {
+      setBackLink({
+        href: "/all-projects",
+        label: "Back to all projects",
+      });
+    }
+  }, []);
+
   return (
     <header>
       <Link
-        href="/#projects"
+        href={backLink.href}
         className="group inline-flex items-center gap-2 rounded-control text-sm text-secondary transition-colors hover:text-accent-strong focus-ring"
       >
         <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-        <span>Back to projects</span>
+        <span>{backLink.label}</span>
       </Link>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
         <div>
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">Case study · {category}</span>
-          {status && (
-              <span className={`rounded-full px-2.5 py-1 text-[0.68rem] font-medium ${PROJECT_STATUS_BADGE_STYLE}`}>
-              <span className={`h-1.5 w-1.5 rounded-full ${PROJECT_STATUS_DOT_STYLES[status]}`} aria-hidden="true" />
-              {status}
-            </span>
-          )}
-        </div>
+            {status && <ProjectStatusBadge status={status} />}
+          </div>
           <h1 className="mt-5 font-display text-6xl font-semibold leading-[0.9] tracking-[-0.065em] text-primary sm:text-7xl md:text-8xl">
             {title}
           </h1>
