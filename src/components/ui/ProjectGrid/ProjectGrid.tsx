@@ -1,5 +1,5 @@
 import type { Project } from "@/types/project";
-import ProjectCard from "@/components/ui/ProjectCard/ProjectCard";
+import CompactProjectCard from "@/components/ui/CompactProjectCard/CompactProjectCard";
 import RevealOnScroll from "@/components/ui/RevealOnScroll/RevealOnScroll";
 
 interface ProjectGridProps {
@@ -7,22 +7,10 @@ interface ProjectGridProps {
 }
 
 const ProjectGrid = ({ projects }: ProjectGridProps) => (
-  <div className="grid gap-10 lg:gap-14">
+  <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3 xl:gap-8">
     {projects.map((project, index) => (
       <RevealOnScroll key={project.slug} delay={index * 0.08} className="h-full">
-        <ProjectCard
-          imagePosition={index % 2 === 0 ? "left" : "right"}
-          source="all-projects"
-          slug={project.slug}
-          image={project.image}
-          title={project.title}
-          category={project.category}
-          description={project.description}
-          stackPreview={project.stackPreview}
-          status={project.status}
-          github={project.links.github}
-          liveDemo={project.links.liveDemo}
-        />
+        <CompactProjectCard {...project} />
       </RevealOnScroll>
     ))}
   </div>
